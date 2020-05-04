@@ -1,6 +1,48 @@
-import Head from 'next/head'
+import React, { useEffect, useContext } from 'react';
+import Head from 'next/head';
+import Link from 'next/link';
+import gql from 'graphql-tag';
+import { UserContext } from '../context/user-context';
+import { withApollo } from '../lib/apollo';
+import { useQuery } from '@apollo/react-hooks';
+import firebase from '../lib/firebase-client';
+import 'isomorphic-unfetch';
 
-export default function Home() {
+const ALL_LINKS = gql`
+  query ALL_LINKS($offset: Int) {
+    links(limit: 1, offset: $offset) {
+      __typename
+      id
+      title
+      url
+      likes_count: likes_aggregate(where: { is_like: { _eq: true }}) {
+        aggregate {
+          count
+        }
+      }
+      dislikes_count: likes_aggregate(where: { is_like:{ _eq:false }}) {
+        aggregate {
+          count
+        }
+      }
+    }
+  }
+`;
+
+function Home(props) {
+  const user = useContext(UserContext);
+  const { loading, error, data } = useQuery(ALL_LINKS, { variables: { offset: 0 } })
+    
+  useEffect(() => {
+    if (loading) {
+      console.log('the data is loading...')
+    }else if (error) {
+      console.log(error)
+    } else {
+      console.log({ data });
+    }
+  }, [loading, data, error])
+
   return (
     <div className="container">
       <Head>
@@ -45,6 +87,42 @@ export default function Home() {
               Instantly deploy your Next.js site to a public URL with Vercel.
             </p>
           </a>
+          {user
+            ? (
+              <>
+                <a
+                  onClick={e => {
+                    e.preventDefault();
+                    firebase.auth().signOut()
+                  }}
+                  className="card"
+                >
+                  <h3>Log out &rarr;</h3>
+                  <p>
+                    Log Out :(
+                  </p>
+                </a>
+                <Link
+                  href="/me"
+                >
+                  <a className="card">
+                    <h3>Me &rarr;</h3>
+                    <p>This is my profile</p>
+                  </a>
+                </Link>
+              </>
+            ) : (
+              <Link
+                href="/signin"
+              >
+                <a className="card">
+                  <h3>Signin page &rarr;</h3>
+
+                </a>
+              </Link>
+            )
+          }
+
         </div>
       </main>
 
@@ -207,3 +285,21 @@ export default function Home() {
     </div>
   )
 }
+
+// Home.getInitialProps = async ({ req }) => {
+//   const user = req && req.session ? req.session.decodedToken : null;
+//   // if (req) {
+//   //   console.log('this is the session', req.session);
+//   //   console.log('this is the session decoded token', req.session.decodedToken);
+//   //   console.log('this is the session token', req.session.token);
+//   // }
+//   // console.log('running getServerSideProps');
+//   // don't fetch anything from firebase if the user is not found
+//   // const snap = user && await req.firebaseServer.database().ref('messages').once('value')
+//   // const messages = snap && snap.val()
+//   return {
+//     user,
+//   }
+// }
+
+export default withApollo({ ssr: true })(Home);
