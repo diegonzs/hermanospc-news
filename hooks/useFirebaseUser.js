@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import 'isomorphic-unfetch';
 import firebase from "../lib/firebase-client";
 
 export const useFirebaseUser = (initialUser, createUser) => {

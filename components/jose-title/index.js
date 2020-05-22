@@ -1,0 +1,1 @@
+export { JoseTitleContainer as JoseTitle } from './jose-title.container';

@@ -1,0 +1,1 @@
+export { Button, name } from './button';
