@@ -1,5 +1,6 @@
+//@ts-nocheck
 import App from 'next/app';
-import { UserContext, useState } from '../context/user-context';
+import { UserContext } from '../context/user-context';
 import { useFirebaseUser } from '../hooks/useFirebaseUser';
 import { Header } from '../components/header';
 import '../styles/style.scss'

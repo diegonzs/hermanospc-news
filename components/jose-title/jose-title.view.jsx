@@ -1,4 +1,5 @@
 import React from 'react';
+//@ts-ignore
 import styles from './jose-title.module.scss';
 
 export const JoseTitleView = ({ username }) => {

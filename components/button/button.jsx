@@ -1,11 +1,31 @@
 import React from 'react';
-import styles from './button.scss';
+import PropTypes from 'prop-types';
+//@ts-ignore
+import styles from './button.module.scss';
 
-export const Button = ({ children }) => {
+/**
+ * @typedef {Object} Props
+ * @property {string} text
+ */
+
+/**
+ * This buttons is used all over the place
+ * @param {Props} props
+ */
+
+export const Button = ({ text }) => {
   return (
-    <button className={styles.button}>{children}</button>
+    <div>
+      <button className={styles.button}>{text}</button>
+    </div>
   )
 }
 
-export const name = 'diego';
+Button.propTypes = {
+  text: PropTypes.string.isRequired
+}
+
+Button.defaultProps ={
+  text: 'Diego',
+}
 

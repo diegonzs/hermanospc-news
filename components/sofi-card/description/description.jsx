@@ -1,4 +1,5 @@
 import React from 'react';
+//@ts-ignore
 import styles from './description.module.scss';
 
 export const Description = () => {

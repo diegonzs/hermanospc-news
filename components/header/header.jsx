@@ -1,7 +1,8 @@
 import React from 'react';
-import styles from './header.module.scss';
 import { Logo } from './logo';
 import { Nav } from './nav';
+// @ts-ignore
+import styles from './header.module.scss';
 
 export const Header = () => {
   return (

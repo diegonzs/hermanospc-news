@@ -1,4 +1,5 @@
 import React from 'react';
+// @ts-ignore
 import styles from './nav.module.scss';
 
 export const Nav = () => {
