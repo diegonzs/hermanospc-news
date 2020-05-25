@@ -4,25 +4,34 @@ import PropTypes from 'prop-types';
 import styles from './button.module.scss';
 
 /**
- * @typedef {Object} Props
- * @property {string} text
+ * @typedef {Object} ButtonProps
+ * @property {string} text - the text that would be insie de button
+ * @property {User} user - the user
  */
 
 /**
  * This buttons is used all over the place
- * @param {Props} props
+ * @param {ButtonProps} props
  */
 
-export const Button = ({ text }) => {
+export const Button = ({ text, user }) => {
   return (
     <div>
-      <button className={styles.button}>{text}</button>
+      <button className={styles.button}>{text} / {user.name}</button>
     </div>
   )
 }
 
 Button.propTypes = {
-  text: PropTypes.string.isRequired
+  /** the text that would be inside the button */
+  text: PropTypes.string.isRequired,
+  /** The user */
+  user: PropTypes.shape({
+    /** name of the user */
+    name: PropTypes.string,
+    /** age of the user */
+    age: PropTypes.number
+  }).isRequired
 }
 
 Button.defaultProps ={
