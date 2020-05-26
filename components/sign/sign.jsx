@@ -11,13 +11,14 @@ import { Form } from './form';
  */
 export const Sign = ({ title, buttonText, handleSubmit, changeFormText, changeFormPath }) => {
   return (
-    <div>
+    <div className={styles.container}>
       <h1 className={styles.title}>{title}</h1>
-      <ul>
+      <ul className={styles.socialList}>
         <li>Google</li>
         <li>Facebook</li>
         <li>Twitter</li>
       </ul>
+      <div className={styles.separator}><span>or continue with email</span></div>
       <Form
         buttonText={buttonText}
         handleSubmit={handleSubmit}

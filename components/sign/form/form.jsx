@@ -5,6 +5,7 @@ import { Row } from 'components/row';
 
 // @ts-ignore
 import styles from './form.module.scss';
+import { Input } from '../input';
 
 
 /**
@@ -17,18 +18,31 @@ export const Form = ({ buttonText, handleSubmit, changeFormText, changeFormPath 
   const [isPasswordVisible, setPasswordVisibility] = React.useState(false);
 
   return (
-    <form action="post" onSubmit={e => {
+    <form className={styles.form} action="post" onSubmit={e => {
       e.preventDefault();
       e.stopPropagation();
       handleSubmit({ email, password });
     }}>
-      <input type="text" value={email} onChange={e => setEmail(e.target.value)} />
-      <input type={isPasswordVisible ? 'text' : 'password'} value={password} onChange={e => setPassword(e.target.value)} />
+      <Input
+        id="email"
+        label="Email Address"
+        value={email}
+        onChangeHandler={(value) => setEmail(value)}
+      />
+      <Input
+        id="password"
+        label="Password"
+        value={password}
+        type={isPasswordVisible ? 'text' : 'password'}
+        onChangeHandler={(value) => setPassword(value)}
+        toggleTypeHandler={() => setPasswordVisibility(!isPasswordVisible)}
+      />
+      <span className={styles.forgotPassword}>I forgot the password</span>
       <Row>
         <Link href={changeFormPath}>
           <a href={changeFormPath}>{changeFormText}</a>
         </Link>
-        <button>{buttonText}</button>
+        <button className={styles.submitButton}>{buttonText}</button>
       </Row>
     </form>
   )
