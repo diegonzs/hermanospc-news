@@ -1,0 +1,30 @@
+@import 'variables.scss';
+@import 'fonts.scss';
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%; // 1rem > 10px  
+    @media only screen and (max-width: $bp-large) {
+      font-size: 50%;
+    }
+  }
+
+body {
+  font-family: 'Poppins', 'sans-serif';
+  font-weight: 400;
+  background-color: $color-background;
+  color: $color-text-95;
+  font-size: $font-size-medium;
+  line-height: 1.6;
+}

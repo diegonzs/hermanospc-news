@@ -3,7 +3,7 @@ import App from 'next/app';
 import { UserContext } from '../context/user-context';
 import { useFirebaseUser } from '../hooks/useFirebaseUser';
 import { Header } from '../components/header';
-import '../styles/style.scss'
+import '../styles/main.scss'
 
 function MyApp({ Component, pageProps, sessionUser }) {
   const user = useFirebaseUser(sessionUser);
