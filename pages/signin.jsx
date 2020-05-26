@@ -1,21 +1,25 @@
-import React, { useState, useEffect, useContext } from 'react';
-import firebase from '../lib/firebase-client';
+import React, { useEffect, useContext } from 'react';
+import firebase from 'lib/firebase-client';
 import Router from 'next/router';
-import { useFirebaseUser } from '../hooks/useFirebaseUser';
-import { UserContext } from '../context/user-context';
+import { UserContext } from 'context/user-context';
+import { Sign } from 'components/sign';
 
+/** Signin Page */
 const Signin = () => {
   const user = useContext(UserContext);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   
+  /** Redirect the user to home if he/she is logged in */
   useEffect(() => {
     if (user) {
       Router.push('/')
     }
   }, [user])
 
-  const handleSignIn = () => {
+  /**
+   * Function for handling user sign in with email and password
+   * @param {handleSubmitParams} handleSinginParams 
+   */
+  const handleSignIn = ({ email, password }) => {
     firebase.auth()
       .signInWithEmailAndPassword(email, password)
       .catch(function(error) {
@@ -27,18 +31,13 @@ const Signin = () => {
   }
 
   return (
-    <div>
-      <h1>Welcome again</h1>
-      <form onSubmit={e => {
-        e.preventDefault();
-        e.stopPropagation();
-        handleSignIn();
-      }}>
-        <input placeholder="email..." type="text" value={email} onChange={e => setEmail(e.target.value)} />
-        <input placeholde="password..." type="password" value={password} onChange={e => setPassword(e.target.value)} />
-        <button>sign in</button>
-      </form>
-    </div>
+    <Sign
+      title="Welcome back"
+      buttonText="sign in"
+      handleSubmit={handleSignIn}
+      changeFormText="I do not have an accont"
+      changeFormPath="signup"
+    />
   )
 }
 
