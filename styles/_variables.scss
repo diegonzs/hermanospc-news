@@ -1,1 +1,28 @@
-$background: #fff;
+// RESPONSIVE BREAKPOINTS
+$bp-largest: 75em; //1200px
+$bp-large: 68.75em; //1100px
+$bp-medium: 56.25em; //900px
+$bp-small: 37.5em; //600px
+$bp-smallest: 31.25em; //500px
+// COLORS
+$color-background: rgb(0, 0, 0);
+$color-darker: rgb(14, 15, 19);
+$color-dark: rgb(25, 28, 37);
+$color-dark-shadow: rgba(0, 0, 0, 0.5);
+$color-light-shadow: rgba(0, 0, 0, 0.161);
+
+$color-text-100: rgb(255, 255, 255);
+$color-text-95: rgba(255, 255, 255, .95);
+$color-text-60: rgba(255, 255, 255, .6);
+$color-text-40: rgba(255, 255, 255, .4);
+$color-grey: rgb(239, 239, 239);
+
+$color-primary: rgb(14, 255, 163);
+$color-primary-80: rgba(14, 255, 163, .8);
+$color-primary-70: rgba(14, 255, 163, .7);
+$color-primary-40: rgba(14, 255, 163, 0.4);
+
+
+
+
+

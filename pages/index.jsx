@@ -6,7 +6,6 @@ import { UserContext } from '../context/user-context';
 import { withApollo } from '../lib/apollo';
 import { useQuery } from '@apollo/react-hooks';
 import firebase from '../lib/firebase-client';
-import 'isomorphic-unfetch';
 
 const ALL_LINKS = gql`
   query ALL_LINKS($offset: Int) {
