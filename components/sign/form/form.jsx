@@ -6,6 +6,7 @@ import { Row } from 'components/row';
 // @ts-ignore
 import styles from './form.module.scss';
 import { Input } from '../input';
+import { Button } from 'components/button';
 
 
 /**
@@ -42,6 +43,11 @@ export const Form = ({ buttonText, handleSubmit, changeFormText, changeFormPath 
         <Link href={changeFormPath}>
           <a href={changeFormPath}>{changeFormText}</a>
         </Link>
+        <Button
+          text="sign in"
+          onClickHandler={() => { return }}
+          isDisabled={!email || !password}
+        />
         <button className={styles.submitButton}>{buttonText}</button>
       </Row>
     </form>
