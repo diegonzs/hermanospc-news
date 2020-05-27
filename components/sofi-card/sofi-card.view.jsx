@@ -10,7 +10,7 @@ export const SofiCardView = ({ user }) => {
     <div className={styles.container}>
       <Name name={user.username} />
       <Description />
-      <Button>CLICK ME :P</Button>
+      <Button text="CLICK ME" user={{ name: 'diego', age: 25 }} />
     </div>
   )
 }

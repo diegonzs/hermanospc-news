@@ -13,7 +13,7 @@ const CSSModuleLoader = {
 const SCSSLoader = {
   loader: 'sass-loader',
   options: {
-    prependData: `@import 'style.scss';`,
+    prependData: `@import 'main.scss';`,
     sassOptions: {
       includePaths: [path.resolve(__dirname, '../styles')],
     },
