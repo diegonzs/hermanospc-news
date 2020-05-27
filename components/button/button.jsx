@@ -5,8 +5,14 @@ import styles from './button.module.scss';
 
 /**
  * @typedef {Object} ButtonProps
- * @property {string} text - the text that would be insie de button
- * @property {User} user - the user
+ * @property {string} text - The text that would be insie de button.
+ * @property {function} onClickHandler - The on click handler.
+ * @property {boolean} [isDisabled] - FLag to determine if the button has to be disabled.
+ * @property {string} [color] - HEX value to change the default text color.
+ * @property {string} [bgColor] - HEX value to change the default bg-color.
+ * @property {string} [hoverColor] - HEX value to change the default bg-color when hovered.
+ * @property {boolean} [isFilled] - Flat to determine if the button is filled or empty bg.
+ * @property {"small" | "normal" | "big"} [size] - It defines the button size.
  */
 
 /**
@@ -14,27 +20,65 @@ import styles from './button.module.scss';
  * @param {ButtonProps} props
  */
 
-export const Button = ({ text, user }) => {
+export const Button = ({ text, onClickHandler, isDisabled=false, color=styles.colorDark, bgColor=styles.colorPrimary, hoverColor="blue", isFilled=true, size="normal" }) => {
+  const [isHover, setIsHover] = React.useState(false);
+  let customStyles = {};
+  customStyles.color = color;
+  if (isFilled) {
+    customStyles.border = 'none';
+    if (isHover) {
+      customStyles.backgroundColor = hoverColor;
+    } else {
+      customStyles.backgroundColor = bgColor;
+    }
+  } else {
+    customStyles.backgroundColor = 'transparent';
+    if (isHover) {
+      customStyles.border = `2px solid ${hoverColor}`;
+      customStyles.color = hoverColor;
+    } else {
+      customStyles.color = bgColor;
+      customStyles.border = `2px solid ${bgColor}`;
+    }
+  }
   return (
-    <div>
-      <button className={styles.button}>{text} / {user.name}</button>
-    </div>
+    <button
+      className={styles[`button-${size}`]}
+      onClick={() => onClickHandler()}
+      disabled={isDisabled}
+      style={customStyles}
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
+    >
+      {text}
+    </button>
   )
 }
 
 Button.propTypes = {
-  /** the text that would be inside the button */
+  /** The text that would be inside the button */
   text: PropTypes.string.isRequired,
-  /** The user */
-  user: PropTypes.shape({
-    /** name of the user */
-    name: PropTypes.string,
-    /** age of the user */
-    age: PropTypes.number
-  }).isRequired
+  /** The on click handler */
+  onClickHandler: PropTypes.func.isRequired,
+  /** FLag to determine if the button has to be disabled */
+  isDisabled: PropTypes.bool,
+  /** HEX value to change the default text color. */
+  color: PropTypes.string,
+  /** HEX value to change the default bg-color. */
+  bgColor: PropTypes.string,
+  /** HEX value to change the default bg-color when hovered. */
+  hoverColor: PropTypes.string,
+  /** Flat to determine if the button is filled or empty bg. */
+  isFilled: PropTypes.bool,
+  /** It defines the button size. */
 }
 
-Button.defaultProps ={
-  text: 'Diego',
+Button.defaultProps = {
+  isDisabled: false,
+  isFilled: true,
+  color: styles.colorDark,
+  bgColor: styles.colorPrimary,
+  hoverColor: 'rgb(74, 255, 186)',
+  size: 'normal',
 }
 
