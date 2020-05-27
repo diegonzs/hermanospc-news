@@ -29,6 +29,7 @@ export const Input = ({ label, value, onChangeHandler, type="text", toggleTypeHa
           onChange={e => onChangeHandler(e.target.value)}
           onFocus={() => setIsActive(true)}
           onBlur={() => setIsActive(false)}
+          required={true}
         />
         {toggleTypeHandler && (
           <button className={styles.button} onClick={toggleTypeHandler}>toggle</button>

@@ -1,3 +1,5 @@
+@import 'variables.scss';
+
 .container {
   display: flex;
   align-items: center;
@@ -6,15 +8,13 @@
 
 .inputWrapper {
   width: 100%;
-  border: 1px solid gray;
+  border: 1px solid $color-text-60;
   border-radius: 4px;
   position: relative;
   padding: 8px 16px;
   height: 60px;
-  box-sizing: border-box;
   margin-bottom: 24px;
   label {
-    font-size: 16px;
     font-weight: 600;
     position: absolute;
     left: 16px;
@@ -23,12 +23,14 @@
     z-index: 2;
   }
   input {
-    font-size: 16px;
+    font-size: $font-size-medium;
     border: none;
     outline: 0;
-    width: 100%;
+    width: calc(100% - 32px);
     position: absolute;
+    background-color: transparent;
     bottom: 8px;
+    color: $color-text-60;
   }
 }
 
@@ -41,4 +43,5 @@
   right: 15px;
   height: 26px;
   top: calc(50% - 13px);
+  cursor: pointer;
 }
