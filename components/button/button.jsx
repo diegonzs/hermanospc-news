@@ -20,7 +20,7 @@ import styles from './button.module.scss';
  * @param {ButtonProps} props
  */
 
-export const Button = ({ text, onClickHandler, isDisabled=false, color=styles.colorDark, bgColor=styles.colorPrimary, hoverColor="blue", isFilled=true, size="normal" }) => {
+export const Button = ({ text, onClickHandler, isDisabled=false, color="rgb(25, 28, 37)", bgColor="rgb(14, 255, 163)", hoverColor="blue", isFilled=true, size="normal" }) => {
   const [isHover, setIsHover] = React.useState(false);
   let customStyles = {};
   customStyles.color = color;
@@ -76,8 +76,8 @@ Button.propTypes = {
 Button.defaultProps = {
   isDisabled: false,
   isFilled: true,
-  color: styles.colorDark,
-  bgColor: styles.colorPrimary,
+  color: 'rgb(25, 28, 37)',
+  bgColor: 'rgb(14, 255, 163)',
   hoverColor: 'rgb(74, 255, 186)',
   size: 'normal',
 }
