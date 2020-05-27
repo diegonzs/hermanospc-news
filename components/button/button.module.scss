@@ -1,7 +1,25 @@
 @import 'variables.scss';
 
-.button {
-  background-color: black;
-  color: #fff;
-  color: red;
+:export {
+  colorDark: $color-dark;
+  colorPrimary: $color-primary;
+}
+
+.button-small,
+.button-normal,
+.button-big {
+  border-radius: 4px;
+  height: 48px;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: $font-size-medium;
+  transition: all .3s ease-in-out;
+  text-transform: uppercase;
+  cursor: pointer;
+  &:disabled {
+    cursor: not-allowed;
+    opacity: .5;
+  }
 }
