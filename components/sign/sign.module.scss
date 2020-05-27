@@ -12,9 +12,11 @@
 
 .title {
   color: $color-text-95;
+  font-size: $font-size-huge;
   margin: 0;
   padding: 0;
   margin-bottom: 20px;
+  text-transform: uppercase;
 }
 
 .socialList {
@@ -32,6 +34,7 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    text-transform: capitalize;
   }
 }
 

@@ -5,18 +5,24 @@ import PropTypes from 'prop-types';
 import styles from './sign.module.scss';
 import { Form } from './form';
 
+const providers = {
+  google: 'google',
+  facebook: 'facebook',
+  twitter: 'twitter',
+}
+
 /**
  * Sign Form it can be used as Sign-In and Sign-Up forms.
  * @param {SignProps} props - Props
  */
-export const Sign = ({ title, buttonText, handleSubmit, changeFormText, changeFormPath }) => {
+export const Sign = ({ title, buttonText, handleSubmit, changeFormText, changeFormPath, handleSigninProvider }) => {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>{title}</h1>
       <ul className={styles.socialList}>
-        <li>Google</li>
-        <li>Facebook</li>
-        <li>Twitter</li>
+        {['google', 'facebook', 'twitter'].map(p => (
+          <li key={p} onClick={() => handleSigninProvider(providers[p])}>{p}</li>
+        ))}
       </ul>
       <div className={styles.separator}><span>or continue with email</span></div>
       <Form

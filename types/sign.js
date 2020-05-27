@@ -15,6 +15,7 @@
  /**
  * @typedef {Object} signInnerProps
  * @property {string} title - Title to be display at the top of the component
+ * @property {(provider: "google" | "twitter" | "facebook") => void} handleSigninProvider - Function to signin with a provider
  * 
  * @typedef {shareProps & signInnerProps} SignProps
  */

@@ -32,7 +32,7 @@ export const Input = ({ label, value, onChangeHandler, type="text", toggleTypeHa
           required={true}
         />
         {toggleTypeHandler && (
-          <button className={styles.button} onClick={toggleTypeHandler}>toggle</button>
+          <span className={styles.button} onClick={toggleTypeHandler}>toggle</span>
         )}
       </div>
   )
