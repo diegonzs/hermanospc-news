@@ -15,7 +15,7 @@ const providers = {
  * Sign Form it can be used as Sign-In and Sign-Up forms.
  * @param {SignProps} props - Props
  */
-export const Sign = ({ title, buttonText, handleSubmit, changeFormText, changeFormPath, handleSigninProvider }) => {
+export const Sign = ({ title, buttonText, handleSubmit, changeFormText, changeFormPath, handleSigninProvider, hasTick }) => {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>{title}</h1>
@@ -30,6 +30,7 @@ export const Sign = ({ title, buttonText, handleSubmit, changeFormText, changeFo
         handleSubmit={handleSubmit}
         changeFormPath={changeFormPath}
         changeFormText={changeFormText}
+        hasTick={hasTick}
       />
     </div>
   )

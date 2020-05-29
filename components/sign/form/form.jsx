@@ -2,21 +2,23 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { Row } from 'components/row';
+import { Input } from '../input';
+import { Button } from 'components/button';
 
 // @ts-ignore
 import styles from './form.module.scss';
-import { Input } from '../input';
-import { Button } from 'components/button';
+import { Checkbox } from '../checkbox';
 
 
 /**
  * This is the form to sign-in or sign-up in the app
  * @param {FormProps} props
  */
-export const Form = ({ buttonText, handleSubmit, changeFormText, changeFormPath }) => {
+export const Form = ({ buttonText, handleSubmit, changeFormText, changeFormPath, hasTick }) => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [isLoading, setIsloading] = React.useState(false);
+  const [isChecked, setIsChecked] = React.useState(false);
   const [isPasswordVisible, setPasswordVisibility] = React.useState(false);
 
   return (
@@ -40,15 +42,27 @@ export const Form = ({ buttonText, handleSubmit, changeFormText, changeFormPath 
         onChangeHandler={(value) => setPassword(value)}
         toggleTypeHandler={() => setPasswordVisibility(!isPasswordVisible)}
       />
-      <span className={styles.forgotPassword}>I forgot the password</span>
-      <Row>
+      {hasTick && (
+        <Checkbox
+          id="tick"
+          onChangeHandler={() => setIsChecked(!isChecked)}
+          label="I Agree with Hermanos PC terms of service and privacy police."
+          isChecked={isChecked}
+        />
+      )}
+      {!hasTick && (
+        <span className={styles.forgotPassword}>I forgot the password</span>
+      )}
+      <Row customStyles={hasTick ? {
+        marginTop: '78px',
+      }: {}}>
         <Link href={changeFormPath}>
           <a href={changeFormPath}>{changeFormText}</a>
         </Link>
         <Button
-          text="sign in"
+          text={buttonText}
           onClickHandler={() => { return }}
-          isDisabled={!email || !password || isLoading}
+          isDisabled={!email || !password || isLoading || (hasTick && !isChecked)}
         />
       </Row>
     </form>

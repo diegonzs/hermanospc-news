@@ -16,12 +16,12 @@ const Signin = () => {
   }, [user])
 
   /**
-   * Function for handling user sign in with email and password
+   * Function for handling user sign up with email and password
    * @param {handleSubmitParams} handleSinginParams
    */
-  const handleSignIn = ({ email, password }) => {
+  const handleSignUp = ({ email, password }) => {
     firebase.auth()
-      .signInWithEmailAndPassword(email, password)
+      .createUserWithEmailAndPassword(email, password)
       .catch(function(error) {
         const errorCode = error.code;
         const errorMessage = error.message;
@@ -56,13 +56,13 @@ const Signin = () => {
 
   return (
     <Sign
-      title="Welcome back"
-      buttonText="sign in"
-      handleSubmit={handleSignIn}
+      title="Hermanos PC news"
+      buttonText="Create account"
+      handleSubmit={handleSignUp}
       handleSigninProvider={handleSigninProvider}
-      changeFormText="I do not have an accont"
-      changeFormPath="signup"
-      hasTick={false}
+      changeFormText="I already have an account"
+      changeFormPath="signin"
+      hasTick={true}
     />
   )
 }

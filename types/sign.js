@@ -9,6 +9,7 @@
  * @property {string} buttonText - Text that would go inside the submit button
  * @property {string} changeFormText - Text to show in the chanche form link
  * @property {string} changeFormPath - Path to redirect the user
+ * @property {boolean} hasTick = Determinies if the form has a tick
  * @property {(params: handleSubmitParams) => void} handleSubmit - handle for the submit event on the form
  */
 
