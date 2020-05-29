@@ -16,12 +16,14 @@ import { Button } from 'components/button';
 export const Form = ({ buttonText, handleSubmit, changeFormText, changeFormPath }) => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [isLoading, setIsloading] = React.useState(false);
   const [isPasswordVisible, setPasswordVisibility] = React.useState(false);
 
   return (
     <form className={styles.form} action="post" onSubmit={e => {
       e.preventDefault();
       e.stopPropagation();
+      setIsloading(true);
       handleSubmit({ email, password });
     }}>
       <Input
@@ -46,9 +48,8 @@ export const Form = ({ buttonText, handleSubmit, changeFormText, changeFormPath 
         <Button
           text="sign in"
           onClickHandler={() => { return }}
-          isDisabled={!email || !password}
+          isDisabled={!email || !password || isLoading}
         />
-        <button className={styles.submitButton}>{buttonText}</button>
       </Row>
     </form>
   )
