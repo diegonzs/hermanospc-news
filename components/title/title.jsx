@@ -10,13 +10,13 @@ import styles from './title.module.scss';
  */
 
 /**
- * 
+ * This is the title component for the news welcome screen
  * @param {TitleProps} props
  */
 
 export const Title = ({ text, emoji }) => {
   return (
-    <h1 className={styles.title}>{text} {emoji}</h1>
+    <h1 className={styles.title}>{text} <span className={styles.emoji}>{emoji}</span></h1>
   )
 }
 
@@ -27,7 +27,4 @@ Title.propTypes = {
     emoji: PropTypes.string,
   }
 
-Title.defaultProps ={
-    text: "WHAT'S HAPPENING",
-  }
   
