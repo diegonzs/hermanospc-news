@@ -2,23 +2,49 @@ import * as React from 'react';
 import { Button } from './button';
 
 export default {
-  title: 'Button XD',
+  title: 'Button',
   component: Button,
   parameters: {
     componentSubtitle: 'This button does something',
   }
 }
+
 /**
  * @type {import('./button').ButtonProps}
  */
 const mainButtonProps = {
   text: 'Default Button',
-  user: {
-    name: 'diego',
-    age: 25
-  }
+  onClickHandler: () => { return; },
+}
+
+/**
+ * @type {import('./button').ButtonProps}
+ */
+const disabledButtonProps = {
+  text: 'Disabled Button',
+  onClickHandler: () => { return; },
+  isDisabled: true,
+}
+
+/**
+ * @type {import('./button').ButtonProps}
+ */
+const emptyButtonProps = {
+  text: 'Empty Button',
+  onClickHandler: () => { return; },
+  isFilled: false,
+}
+/**
+ * @type {import('./button').ButtonProps}
+ */
+const disabledEmptyButtonProps = {
+  text: 'Disabled Empty Button',
+  onClickHandler: () => { return; },
+  isFilled: false,
+  isDisabled: true,
 }
 
 export const mainButton = () => <Button {...mainButtonProps} />
-export const hoverButton = () => <Button text="Hover Button" user={mainButtonProps.user}/>
-export const defaultButton = () => <Button user={mainButtonProps.user}/>
+export const emptyButtom = () => <Button {...emptyButtonProps} />
+export const disabledButton = () => <Button {...disabledButtonProps} />
+export const disabledEmptyButton = () => <Button {...disabledEmptyButtonProps} />
