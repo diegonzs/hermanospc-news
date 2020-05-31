@@ -1,0 +1,1 @@
+export { ListNewsCard } from './list-news-card';
