@@ -13,6 +13,6 @@ const mainTitleProps = {
     emoji: '😝',
   }
 
-export const titleEmoji = () => <Title{...mainTitleProps} />
+export const titleEmoji = () => <Title {...mainTitleProps} />
 export const titleSimple = () => <Title text={mainTitleProps.text}/>
 
