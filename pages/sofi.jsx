@@ -6,9 +6,8 @@ const Sofi  = () => {
   return (
     <>
       <h1>Hola soy Sofi!!</h1>
-      <SofiCard />
     </>
   )
 }
 
-export default withApollo({ ssr: false })(Sofi);
+export default Sofi;
