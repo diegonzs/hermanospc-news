@@ -2,21 +2,14 @@
 
 .nav {
   display: flex;
-  padding: 10px;
-
-  ul {
-    padding-top: 2px;
-  }
 }
 
 .list {
   display: flex;
   list-style: none;
-  padding: 0 10px;
   font-size: $font-size-small;
 
   a {
-    padding: 0 10px;
     text-decoration: none;
 
     &,
@@ -25,11 +18,24 @@
       color: $color-text-100;
     }
 
-    &:hover {
-      color: $color-text-60;
+    span {
+      color: $color-primary;
     }
 
   }
 
 }
 
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  padding: 15px 0px;
+  margin: 0px 20px;
+
+  &:hover {
+    border-bottom: solid 1px $color-primary;
+  }
+
+}

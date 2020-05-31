@@ -27,6 +27,7 @@
     "next-offline": "^5.0.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-inlinesvg": "^1.2.0",
     "session-file-store": "^1.4.0"
   },
   "devDependencies": {

@@ -1,16 +1,16 @@
 @import 'variables.scss';
 
 .container {
-  width: 100%;
-  background-color: $color-background;
-  height: 60px;
+  width: 1921px;
+  background-color: $color-background-header;
+  height: 50px;
   display: flex;
-  align-items: center;
+  box-shadow: 0px 3px 8px #00000080;
 }
 
 .content {
   display: flex;
   width: 100%;
   max-width: 1640px;
-  height: 40px;
+  height: 50px;
 }

@@ -1,13 +1,6 @@
 @import 'variables.scss';
 
-.social {
-  display: flex;
-  align-items: center;
 
-  ul {
-    padding-top: 2px;
-  }
-}
 .list {
   list-style: none;
   display: flex;
@@ -15,7 +8,7 @@
 
   a{
     text-decoration: none;
-    padding: 0 10px;
+    font-size: $font-size-small;
 
     &,
     &:link,
@@ -27,6 +20,20 @@
       color: $color-primary;
     }
 
+  }
+
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin-right: 24px;
+  border-bottom: solid 1px transparent;
+
+  &:hover {
+    border-bottom: solid 1px $color-primary;
   }
 
 }
