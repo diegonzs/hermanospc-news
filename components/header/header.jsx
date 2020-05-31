@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Logo } from './logo';
 import { Nav } from './nav';
 // @ts-ignore

@@ -4,13 +4,19 @@ import { UserContext } from '../context/user-context';
 import { useFirebaseUser } from '../hooks/useFirebaseUser';
 import { Header } from '../components/header';
 import '../styles/main.scss'
+import { Footer } from 'components/footer';
 
 function MyApp({ Component, pageProps, sessionUser }) {
   const user = useFirebaseUser(sessionUser);
   return (
     <UserContext.Provider value={user}>
-      <Header />
-      <Component {...pageProps} />
+      <div className="container">
+        <Header />
+        <div className="content">
+          <Component {...pageProps} />
+        </div>
+        <Footer />
+      </div>
     </UserContext.Provider>
   )
 }
