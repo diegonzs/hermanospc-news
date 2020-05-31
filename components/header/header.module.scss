@@ -1,14 +1,16 @@
+@import 'variables.scss';
+
 .container {
   width: 100%;
-  background-color: green;
-  height: 80px;
+  background-color: $color-background;
+  height: 60px;
   display: flex;
-  justify-content: center;
-  .content {
-    display: flex;
-    width: 100%;
-    max-width: 1640px;
-    background-color: red;
-    height: 80px;
-  }
+  align-items: center;
+}
+
+.content {
+  display: flex;
+  width: 100%;
+  max-width: 1640px;
+  height: 40px;
 }
