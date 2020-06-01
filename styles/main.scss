@@ -34,11 +34,15 @@ body {
   height: 100%;
   min-height: 100vh;
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: 50px 1fr auto;
   grid-column: 1fr;
+  grid-template-areas: "header" 
+                       "content"
+                       "footer";
 }
 
 .content {
 display: flex;
 justify-content: center;
+grid-area: content;
 }

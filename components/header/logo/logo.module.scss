@@ -1,8 +1,8 @@
 @import 'variables.scss';
 
 .logo {
+  grid-area: logo;
   height: 28px;
-  padding-left: 140.01px;
-  padding-right: 21.9px;
+  width: 140px;
   padding-top: 10.77px;
 }

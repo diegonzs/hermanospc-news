@@ -3,37 +3,37 @@
 
 .list {
   list-style: none;
-  display: flex;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: repeat(7, 1fr);
+  grid-column-gap: 24px;
   align-items: center;
-
-  a{
-    text-decoration: none;
-    font-size: $font-size-small;
-
-    &,
-    &:link,
-    &:visited {
-      color: $color-text-100;
-    }
-
-    &:hover {
-      color: $color-primary;
-    }
-
-  }
-
+  grid-area: social;
 }
 
 .item {
+  padding-top: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
-  margin-right: 24px;
   border-bottom: solid 1px transparent;
+  transition: all .3s ease;
+  path {
+    transition: all .3s ease;
+  }
 
   &:hover {
     border-bottom: solid 1px $color-primary;
+    path{
+      fill: $color-primary;
+    }
+    
   }
+}
 
+.icon {
+  height: 18px;
+  width: auto;
+  fill: $color-text-100;
 }
