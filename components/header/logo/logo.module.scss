@@ -1,7 +1,8 @@
+@import 'variables.scss';
+
 .logo {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  color: yellow;
-  background-color: pink;
+  grid-area: logo;
+  height: 28px;
+  width: 140px;
+  padding-top: 10.77px;
 }
