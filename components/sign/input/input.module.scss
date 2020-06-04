@@ -1,0 +1,47 @@
+@import 'variables.scss';
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.inputWrapper {
+  width: 100%;
+  border: 1px solid $color-text-60;
+  border-radius: 4px;
+  position: relative;
+  padding: 8px 16px;
+  height: 60px;
+  margin-bottom: 24px;
+  label {
+    font-weight: 600;
+    position: absolute;
+    left: 16px;
+    transform: translate(0, calc(50% - 2px)) scale(1);
+    transition: all .1s ease-in-out;
+    z-index: 2;
+  }
+  input {
+    font-size: $font-size-medium;
+    border: none;
+    outline: 0;
+    width: calc(100% - 32px);
+    position: absolute;
+    background-color: transparent;
+    bottom: 8px;
+    color: $color-text-60;
+  }
+}
+
+.active {
+  transform: translate(-14px, 0) scale(.75) !important;
+}
+
+.button {
+  position: absolute;
+  right: 15px;
+  height: 26px;
+  top: calc(50% - 13px);
+  cursor: pointer;
+}
