@@ -1,0 +1,11 @@
+@import 'variables.scss';
+.tag{
+  color: #191C25;
+  font-size: $font-size-smallest;
+  list-style-type: none;
+  background-color: $color-primary;
+  border-radius: 16px;
+  padding-left: 18px;
+  padding-right: 18px;
+  text-align: center;
+}
