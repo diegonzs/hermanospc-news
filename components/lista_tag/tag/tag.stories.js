@@ -8,6 +8,6 @@ export default {
  * @type {import('./tag').TagProps}
  */
 const mainTagsProps = {
-    text: "uno",
+    text: "AMD",
   }
 export const tagSimple = () => <Tag text={mainTagsProps.text}/>
