@@ -22,6 +22,12 @@ export const ListTag = ({ tags, gap }) => {
     )
   }
 ListTag.propTypes = {
-    /** the text that would be in the tag */
+    /**  List of tags to be render */
     tags: PropTypes.array.isRequired,
+    /**  Space between the tags */
+    gap: PropTypes.string.isRequired,
+  }
+
+  ListTag.defaultProps = {
+    gap: '10',
   }

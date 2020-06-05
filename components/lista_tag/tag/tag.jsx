@@ -15,7 +15,7 @@ import { tagSimple } from './tag.stories';
  */ 
 export const Tag = ({ text }) => {
   return (
-    <li className={styles.tags}>{text}</li>
+    <li className={styles.tag}>{text}</li>
   )
 }
 

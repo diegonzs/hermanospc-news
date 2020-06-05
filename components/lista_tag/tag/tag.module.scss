@@ -1,6 +1,11 @@
 @import 'variables.scss';
-.tags{
-  color: $color-text-95;
+.tag{
+  color: #191C25;
   font-size: $font-size-huge;
   list-style-type: none;
+  background-color: $color-primary;
+  border-radius: 16px;
+  padding-left: 18px;
+  padding-right: 18px;
+  text-align: center;
 }

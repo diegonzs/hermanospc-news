@@ -9,8 +9,9 @@ export default {
  * @type {import('./list-tag').ListTagProps}
  */
 const mainListTagProps = {
-   tags : [{text:'uno'},{text:'dos'},{text:'tres'},{text:'cuatro'}],
-    gap: '10',
+   tags : [{text:'AMD'},{text:'Graphic Card'}],
+   gap: '20',
   }
 
-export const ListTagSimple = () => <ListTag {...mainListTagProps } />
+export const ListTagDefaultGap = () => <ListTag tags={mainListTagProps.tags} />
+export const ListTagCustomGap = () => <ListTag {...mainListTagProps } />
