@@ -4,24 +4,42 @@ import PropTypes from 'prop-types';
 
 /**
  * @typedef {Object} rowProps
- * @property {('center' | 'space-between' | 'space-around')} [justify] - value for justify-content property
- * @property {('center' | 'space-between' | 'space-around')} [align] - value for align-items property
- * @property {object} [customStyles] - custom styles
- * @property {any} children
+ * @property {('center' | 'space-between' | 'space-around')} [justify] - value for justify-content property.
+ * @property {('center' | 'space-between' | 'space-around')} [align] - value for align-items property.
+ * @property {boolean} [isGrid] - Determine if the elements inside would be grid items.
+ * @property {string} [gap] - If isGrid is true this property is used to separate the elements between them.
+ * @property {React.CSSProperties} [customStyles] - custom styles
+ * @property {any} [children]
  */
 
 /**
  * Useful component to align elements in one single row
  * @param {rowProps} props 
  */
-export const Row = ({ children, justify="space-between", align="center", customStyles }) => {
-  return <div style={{
+export const Row = ({ children, justify="space-between", align="center", isGrid=false, gap='0', customStyles }) => {
+  /**
+   * @type {React.CSSProperties}
+  */
+  const styles = isGrid ? {
+    display: 'grid',
+    gridTemplateRows: '1fr',
+    gridAutoFlow: 'column',
+    gridAutoColumns: 'auto',
+    gridColumnGap: `${gap}px`,
+    width: '100%',
+    ...customStyles,
+  } : {
     display: 'flex',
     justifyContent: justify,
     alignItems: align,
     width: '100%',
     ...customStyles,
-  }}>{children}</div>
+  }
+  return (
+    <div style={styles}>
+      {children}
+    </div>
+  )
 }
 
 Row.propTypes = {
@@ -31,4 +49,15 @@ Row.propTypes = {
   align: PropTypes.oneOf(['center', 'space-between', 'space-around']),
   /** Custom styles */
   customStyles: PropTypes.object,
+  /** If isGrid is true this property is used to separate the elements between them. */
+  gap: PropTypes.string,
+  /**  */
+  isGrid: PropTypes.bool
+}
+
+Row.defaultProps = {
+  justify: 'space-between',
+  align: 'center',
+  isGrid: false,
+  gap: '0',
 }
