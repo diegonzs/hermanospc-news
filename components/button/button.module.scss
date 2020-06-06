@@ -12,6 +12,8 @@
   font-size: $font-size-medium;
   transition: all .3s ease-in-out;
   text-transform: uppercase;
+  text-decoration: none;
+  width: fit-content;
   cursor: pointer;
   &:disabled {
     cursor: not-allowed;

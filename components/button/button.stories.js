@@ -48,3 +48,10 @@ export const mainButton = () => <Button {...mainButtonProps} />
 export const emptyButtom = () => <Button {...emptyButtonProps} />
 export const disabledButton = () => <Button {...disabledButtonProps} />
 export const disabledEmptyButton = () => <Button {...disabledEmptyButtonProps} />
+export const anchorMainButton = () => (
+  <Button
+    text= "Default Button"
+    onClickHandler= {() => { return; }}
+    isAnchor
+  />
+)
