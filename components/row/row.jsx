@@ -51,7 +51,7 @@ Row.propTypes = {
   customStyles: PropTypes.object,
   /** If isGrid is true this property is used to separate the elements between them. */
   gap: PropTypes.string,
-  /**  */
+  /** Determine if the elements inside would be grid items. */
   isGrid: PropTypes.bool
 }
 
