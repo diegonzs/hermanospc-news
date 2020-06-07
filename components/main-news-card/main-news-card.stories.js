@@ -1,38 +1,19 @@
 import * as React from 'react';
 import { MainNewsCard } from './main-news-card';
-//@ts-ignore
-import exampleimage from '/images/example/220200125114027.jpg';
-export default 
-    {
-        title: 'Main News Card',
-        component: MainNewsCard,
-    };
-/**
- * @type  {import('components/list-tag/list-tag').ListTagProps}
- */
 
-const mainListTagProps = 
-    {
-        tags : [
-                {text:'AMD'},
-                {text:'Graphic Card'}
-               ],
-        gap: '20',
-    }
-    
-/**
- * @type {import('./main-news-card').mainNewsCardProps}
-*/
-   const mainNewsCardStory = {
-    mainImage:exampleimage,
-    tags : [
-        mainListTagProps,
-      ],
-    title:'AMD Launch the Radeon VII: The next power product against Nvidia',
-    link: 'https://github.com/diegonzs/hermanospc-news/tree/main-new-card',
-    source: 'Reactions Section',
-    createdAt: '1 day ago',
-  }
+export default {
+    title: 'Main News Card',
+    component: MainNewsCard,
+};
   
 
-export const mainNewsCardSimple = () => <MainNewsCard {...mainNewsCardStory} />
+export const mainNewsCardSimple = () => (
+    <MainNewsCard 
+        mainImage="https://scontent-lax3-1.xx.fbcdn.net/v/t1.0-0/p640x640/58654697_10159049832938084_1241544564167147520_o.jpg?_nc_cat=101&_nc_sid=8024bb&_nc_ohc=T3slQCEd0jkAX81nm02&_nc_ht=scontent-lax3-1.xx&_nc_tp=6&oh=82675925a86e837cf013f3eb97454214&oe=5F0227AC"
+        tags={[{ text: 'AMD'}, {text: 'Grphic Card' }]}
+        title="AMD Launch the Radeon VII: The next power product against Nvidia"
+        link="https://github.com/diegonzs/hermanospc-news/tree/main-new-card"
+        source="Reactions Section"
+        howLong="1 day ago"
+    />
+)

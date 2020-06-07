@@ -39,6 +39,12 @@ module.exports = {
       },
     })
 
+    config.module.rules.push({
+      test: /\.(png|jpe?g|gif)$/i,
+      use: ['file-loader'],
+      include: path.resolve(__dirname, '../public'),
+    })
+
     config.resolve.alias = {
       ...config.resolve.alias,
       'components': path.resolve(__dirname, '../components'),

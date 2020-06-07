@@ -6,7 +6,7 @@
     "dev": "NODE_ENV=development node server.js",
     "build": "next build",
     "start": "NODE_ENV=production node server.js",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -s ./public -p 6006",
     "build-storybook": "build-storybook"
   },
   "dependencies": {
@@ -27,8 +27,8 @@
     "next-offline": "^5.0.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-inlinesvg": "^1.2.0",
     "react-infinite-scroll-component": "^5.0.4",
+    "react-inlinesvg": "^1.2.0",
     "react-visibility-sensor": "^5.1.1",
     "session-file-store": "^1.4.0"
   },
@@ -43,6 +43,7 @@
     "babel-loader": "^8.1.0",
     "babel-plugin-graphql-tag": "^2.5.0",
     "css-loader": "^3.5.3",
+    "file-loader": "^6.0.0",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
     "style-loader": "^1.2.1"
