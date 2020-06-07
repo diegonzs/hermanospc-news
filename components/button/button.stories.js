@@ -9,49 +9,39 @@ export default {
   }
 }
 
-/**
- * @type {import('./button').ButtonProps}
- */
-const mainButtonProps = {
-  text: 'Default Button',
-  onClickHandler: () => { return; },
-}
-
-/**
- * @type {import('./button').ButtonProps}
- */
-const disabledButtonProps = {
-  text: 'Disabled Button',
-  onClickHandler: () => { return; },
-  isDisabled: true,
-}
-
-/**
- * @type {import('./button').ButtonProps}
- */
-const emptyButtonProps = {
-  text: 'Empty Button',
-  onClickHandler: () => { return; },
-  isFilled: false,
-}
-/**
- * @type {import('./button').ButtonProps}
- */
-const disabledEmptyButtonProps = {
-  text: 'Disabled Empty Button',
-  onClickHandler: () => { return; },
-  isFilled: false,
-  isDisabled: true,
-}
-
-export const mainButton = () => <Button {...mainButtonProps} />
-export const emptyButtom = () => <Button {...emptyButtonProps} />
-export const disabledButton = () => <Button {...disabledButtonProps} />
-export const disabledEmptyButton = () => <Button {...disabledEmptyButtonProps} />
+export const mainButton = () => (
+  <Button
+    text="Default Button"
+    onClickHandler={() => {return}}
+  />
+)
+export const emptyButtom = () => (
+  <Button
+    text="Empty Button"
+    onClickHandler={() => {return}}
+    isFilled={false}
+  />
+)
+export const disabledButton = () => (
+  <Button
+    text="Disabled Button"
+    onClickHandler={() => {return}}
+    isDisabled={true}
+  />
+)
+export const disabledEmptyButton = () => (
+  <Button
+    text="Disabled Empty Button"
+    onClickHandler={() => {return}}
+    isDisabled={true}
+    isFilled={false}
+  />
+)
 export const anchorMainButton = () => (
   <Button
-    text= "Default Button"
+    text= "Anchor Button"
     onClickHandler= {() => { return; }}
     isAnchor
+    href="/"
   />
 )
