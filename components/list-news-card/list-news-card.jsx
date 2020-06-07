@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { NewsCard } from 'components/news-card/news-card';
+import { NewsCard } from 'components/news-card';
 
 //@ts-ignore
 import styles from './list-news-card.module.scss';

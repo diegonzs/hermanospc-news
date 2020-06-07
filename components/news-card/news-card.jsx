@@ -1,9 +1,9 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import Link from 'next/link';
 
 // @ts-ignore
 import styles from './news-card.module.scss';
-import Link from 'next/link';
 
 /**
  * Use to show tthe preview of a new
