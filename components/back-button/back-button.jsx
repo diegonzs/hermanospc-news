@@ -7,7 +7,13 @@ import leftArrow from "/images/chevron-left.svg";
 import PropsType from "prop-types";
 
 /**
+ * @typedef {Object} BackButtonProps
  * @property {string} text - The text that would be insie de button.
+ */
+
+/**
+ * This buttons is used to return to the root of the page
+ * @param {BackButtonProps} props
  */
 
 export const BackButton = ({ text }) => {
