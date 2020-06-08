@@ -28,5 +28,6 @@ export const BackButton = ({ text }) => {
 };
 
 BackButton.PropsType = {
+  /*The text that would be insie de button*/
   text: PropsType.string.isRequired,
 };

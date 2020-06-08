@@ -9,4 +9,4 @@ export default {
   },
 };
 
-export const backButton = () => <BackButton text={"All News"} />;
+export const backButton = () => <BackButton text="All News" />;
