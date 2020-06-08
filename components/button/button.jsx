@@ -6,6 +6,8 @@ import styles from './button.module.scss';
 /**
  * @typedef {Object} ButtonProps
  * @property {string} text - The text that would be insie de button.
+ * @property {boolean} [isAnchor] - Flag use to defined if the element is an anchor or a button
+ * @property {string} [href] - Path where the user will be taken after cliked (only worked if isAnchor = true).
  * @property {function} onClickHandler - The on click handler.
  * @property {boolean} [isDisabled] - FLag to determine if the button has to be disabled.
  * @property {string} [color] - HEX value to change the default text color.
@@ -20,7 +22,7 @@ import styles from './button.module.scss';
  * @param {ButtonProps} props
  */
 
-export const Button = ({ text, onClickHandler, isDisabled=false, color="rgb(25, 28, 37)", bgColor="rgb(14, 255, 163)", hoverColor="blue", isFilled=true, size="normal" }) => {
+export const Button = ({ text, onClickHandler, isDisabled=false, color="rgb(25, 28, 37)", bgColor="rgb(14, 255, 163)", hoverColor="blue", isFilled=true, size="normal", isAnchor=false, href="/" }) => {
   const [isHover, setIsHover] = React.useState(false);
   let customStyles = {};
   customStyles.color = color;
@@ -41,6 +43,20 @@ export const Button = ({ text, onClickHandler, isDisabled=false, color="rgb(25, 
       customStyles.border = `2px solid ${bgColor}`;
     }
   }
+  if (isAnchor) {
+    return (
+      <a
+        href={href}
+        className={styles[`button-${size}`]}
+        onClick={() => onClickHandler()}
+        style={customStyles}
+        onMouseEnter={() => setIsHover(true)}
+        onMouseLeave={() => setIsHover(false)}
+      >
+      {text}
+    </a>
+    )
+  }
   return (
     <button
       className={styles[`button-${size}`]}
@@ -60,6 +76,10 @@ Button.propTypes = {
   text: PropTypes.string.isRequired,
   /** The on click handler */
   onClickHandler: PropTypes.func.isRequired,
+  /** Flag use to defined if the element is an anchor or a button */
+  isAnchor: PropTypes.bool,
+  /** Path where the user will be taken after cliked. (only worked if isAnchor = true) */
+  href: PropTypes.string,
   /** FLag to determine if the button has to be disabled */
   isDisabled: PropTypes.bool,
   /** HEX value to change the default text color. */
@@ -75,10 +95,12 @@ Button.propTypes = {
 
 Button.defaultProps = {
   isDisabled: false,
+  isAnchor: false,
   isFilled: true,
   color: 'rgb(25, 28, 37)',
   bgColor: 'rgb(14, 255, 163)',
   hoverColor: 'rgb(74, 255, 186)',
   size: 'normal',
+  href: '/',
 }
 

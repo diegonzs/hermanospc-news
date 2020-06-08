@@ -9,18 +9,6 @@ export default {
   }
 }
 
-/**
- * @type {NewsCardProps}
- */
-const newsCardProps = {
-  id: 'asdasda',
-  image: '',
-  title: 'AMD Launch the Radeon VII: The next power product against Nvidia',
-  source: 'TomsHardware',
-  howLong: '1 day ago',
-  link: '/'
-}
-
 export const newsCard = () => (
   <div style={{
     width: '100%',
@@ -29,6 +17,13 @@ export const newsCard = () => (
     alignItems: 'center',
     justifyContent: 'center',
   }}>
-    <NewsCard {...newsCardProps} />
+    <NewsCard
+      id="asdasda"
+      image= ""
+      title="AMD Launch the Radeon VII: The next power product against Nvidia"
+      source="TomsHardware"
+      howLong="1 day ago"
+      link="/"
+    />
   </div>
 )
