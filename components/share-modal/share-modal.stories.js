@@ -1,5 +1,5 @@
 import React from "react";
-import ShareModal from "./share-modal";
+import { ShareModal } from "./share-modal";
 
 export default {
   title: "Share Modal",

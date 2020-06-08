@@ -1,5 +1,6 @@
 import React from "react";
-import "./share-modal.css";
+// @ts-ignore
+import styles from "./share-modal.module.scss";
 import SVG from "react-inlinesvg";
 // @ts-ignore
 import facebookIcon from "../../public/images/social/facebook.svg";
@@ -12,49 +13,56 @@ import emailIcon from "../../public/images/social/envelope-open-text.svg";
 // @ts-ignore
 import linkedinIcon from "../../public/images/social/linkedin.svg";
 
-const ShareModal = () => {
+const SocialLinks = [
+  {
+    link: "https://facebook.com/hermanospc",
+    icon: facebookIcon,
+    text: "Facebook",
+  },
+  {
+    link: "#",
+    icon: whatsappIcon,
+    text: "Whatsapp",
+  },
+  {
+    link: "https://twitter.com/hermanospc",
+    icon: twitterIcon,
+    text: "Twitter",
+    text2Style: true,
+  },
+  {
+    link: "#",
+    icon: emailIcon,
+    text: "Email",
+  },
+  {
+    link: "#",
+    icon: linkedinIcon,
+    text: "LinkedIn",
+  },
+];
+
+export const ShareModal = () => {
   return (
-    <div className="ShareModalCont">
-      <div className="title">
-        <span className="share">Share</span>
+    <div className={styles.ShareModalCont}>
+      <div className={styles.title}>
+        <span className={styles.share}>Share</span>
         <a href="#">
-          <span className="cancel">Cancel</span>
+          <span className={styles.cancel}>Cancel</span>
         </a>
       </div>
       <div className="center">
-        <div className="margin-botton">
-          <SVG src={facebookIcon} />
-          <a href="https://facebook.com/hermanospc">
-            <span className="text">Facebook</span>
-          </a>
-        </div>
-        <div className="margin-botton">
-          <SVG src={whatsappIcon} />
-          <a href="#">
-            <span className="text">Whatsapp</span>
-          </a>
-        </div>
-        <div className="margin-botton">
-          <SVG src={twitterIcon} />
-          <a href="https://twitter.com/hermanospc">
-            <span className="text text2">Twitter</span>
-          </a>
-        </div>
-        <div className="margin-botton">
-          <SVG src={emailIcon} />
-          <a href="#">
-            <span className="text">Email</span>
-          </a>
-        </div>
-        <div className="margin-botton">
-          <SVG src={linkedinIcon} />
-          <a href="#">
-            <span className="text">LinkedIn</span>
-          </a>
-        </div>
+        {SocialLinks.map((value) => (
+          <div className={styles.MarginBotton}>
+            <SVG src={value.icon} />
+            <a href={value.link}>
+              <span className={value.text2Style ? styles.text2 : styles.text}>
+                {value.text}
+              </span>
+            </a>
+          </div>
+        ))}
       </div>
     </div>
   );
 };
-
-export default ShareModal;
