@@ -12,10 +12,7 @@ import twitterIcon from "/images/social/twitter.svg";
 import emailIcon from "/images/social/envelope-open-text.svg";
 // @ts-ignore
 import linkedinIcon from "/images/social/linkedin.svg";
-
-/**
- * This Modal displays a list of social links, so the user can share the content
- */
+import { Row } from "components/row";
 
 const SocialLinks = [
   {
@@ -46,6 +43,10 @@ const SocialLinks = [
   },
 ];
 
+/**
+ * This Modal displays a list of social links, so the user can share the content
+ */
+
 export const ShareModal = () => {
   return (
     <div className={styles.ShareModalCont}>
@@ -58,12 +59,14 @@ export const ShareModal = () => {
       <div className={styles.center}>
         {SocialLinks.map((value) => (
           <div className={styles.MarginBotton}>
-            <SVG src={value.icon} />
-            <a href={value.link}>
-              <span className={value.text2Style ? styles.text2 : styles.text}>
-                {value.text}
-              </span>
-            </a>
+            <Row isGrid={true}>
+              <SVG src={value.icon} />
+              <a href={value.link}>
+                <span className={value.text2Style ? styles.text2 : styles.text}>
+                  {value.text}
+                </span>
+              </a>
+            </Row>
           </div>
         ))}
       </div>
