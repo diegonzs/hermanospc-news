@@ -12,13 +12,6 @@ const Ball = () => {
   )
 }
 
-/**
- * @type {import('./row').rowProps}
- */
-const mainRowProps = {
-  
-}
-
 export const defaultRow = () => (
   <div style={{ width: '100px', border: '1px solid yellow' }}>
     <Row>

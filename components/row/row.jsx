@@ -26,7 +26,8 @@ export const Row = ({ children, justify="space-between", align="center", isGrid=
     gridAutoFlow: 'column',
     gridAutoColumns: 'auto',
     gridColumnGap: `${gap}px`,
-    width: '100%',
+    width: 'fit-content',
+    alignItems: 'center',
     ...customStyles,
   } : {
     display: 'flex',
