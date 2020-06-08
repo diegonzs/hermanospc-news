@@ -6,6 +6,10 @@ import SVG from "react-inlinesvg";
 import leftArrow from "/images/chevron-left.svg";
 import PropsType from "prop-types";
 
+/**
+ * @property {string} text - The text that would be insie de button.
+ */
+
 export const BackButton = ({ text }) => {
   return (
     <div className={styles.BackButtonContainer}>
