@@ -3,15 +3,19 @@ import React from "react";
 import styles from "./share-modal.module.scss";
 import SVG from "react-inlinesvg";
 // @ts-ignore
-import facebookIcon from "../../public/images/social/facebook.svg";
+import facebookIcon from "/images/social/facebook.svg";
 // @ts-ignore
-import whatsappIcon from "../../public/images/social/whatsapp.svg";
+import whatsappIcon from "/images/social/whatsapp.svg";
 // @ts-ignore
-import twitterIcon from "../../public/images/social/twitter.svg";
+import twitterIcon from "/images/social/twitter.svg";
 // @ts-ignore
-import emailIcon from "../../public/images/social/envelope-open-text.svg";
+import emailIcon from "/images/social/envelope-open-text.svg";
 // @ts-ignore
-import linkedinIcon from "../../public/images/social/linkedin.svg";
+import linkedinIcon from "/images/social/linkedin.svg";
+
+/**
+ * This Modal displays a list of social links, so the user can share the content
+ */
 
 const SocialLinks = [
   {
@@ -51,7 +55,7 @@ export const ShareModal = () => {
           <span className={styles.cancel}>Cancel</span>
         </a>
       </div>
-      <div className="center">
+      <div className={styles.center}>
         {SocialLinks.map((value) => (
           <div className={styles.MarginBotton}>
             <SVG src={value.icon} />

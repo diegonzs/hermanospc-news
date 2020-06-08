@@ -13,7 +13,7 @@
     color: #d8d8d8;
     opacity: 1;
     text-align: left;
-    font-size: 18px;
+    font-size: $font-size-biggest;
     font-weight: 600;
     margin-right: 13.5rem;
   }
@@ -21,7 +21,7 @@
     color: #7c838a;
     opacity: 1;
     text-align: right;
-    font-size: 12px;
+    font-size: $font-size-medium;
     font-weight: 600;
   }
   .title a {
@@ -31,7 +31,7 @@
     margin-bottom: 5rem;
   }
   .text {
-    font-size: 14px;
+    font-size: $font-size-big;
     color: #d8d8d8;
     opacity: 1;
     text-align: left;
@@ -39,7 +39,7 @@
   }
   .text2 {
     padding-left: 3.5rem !important;
-    font-size: 14px;
+    font-size: $font-size-big;
     color: #d8d8d8;
     opacity: 1;
     text-align: left;
@@ -47,7 +47,7 @@
   }
   .center {
     text-align: justify;
-    padding-left: 6rem;
+    padding-left: 5rem;
   }
   a {
     text-decoration: none;
