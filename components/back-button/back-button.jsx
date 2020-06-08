@@ -1,17 +1,22 @@
 import React from "react";
-import "./back-button.css";
+// @ts-ignore
+import styles from "./back-button.module.scss";
 import SVG from "react-inlinesvg";
-import leftArrow from "../../public/chevron-left.svg";
+// @ts-ignore
+import leftArrow from "/images/chevron-left.svg";
+import PropsType from "prop-types";
 
-const BackButton = ({ text }) => {
+export const BackButton = ({ text }) => {
   return (
-    <div className="BackButtonContainer">
+    <div className={styles.BackButtonContainer}>
       <a href="/">
-        <SVG className="svg" src={leftArrow} />
+        <SVG className={styles.svg} src={leftArrow} />
         <span>{text}</span>
       </a>
     </div>
   );
 };
 
-export default BackButton;
+BackButton.PropsType = {
+  text: PropsType.string.isRequired,
+};
