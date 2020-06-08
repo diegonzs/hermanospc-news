@@ -1,0 +1,26 @@
+@import 'variables.scss';
+
+.value {
+  color: $color-text-95;
+  font-size: $font-size-biggest;
+}
+
+.toggle {
+  color: $color-text-40;
+  font-size: $font-size-small;
+  cursor: pointer;
+  transition: color .2s ease;
+  &:hover {
+    color: $color-primary;
+  }
+}
+
+.input {
+  background-color: transparent;
+  color: $color-text-95;
+  font-size: $font-size-biggest;
+  border: none;
+  &:focus {
+    outline: none;
+  }
+}

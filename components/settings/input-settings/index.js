@@ -1,0 +1,1 @@
+export { inputSettingsContainer as InputSettings } from './input-settings.container';

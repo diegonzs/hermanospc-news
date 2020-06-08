@@ -27,8 +27,8 @@
     "next-offline": "^5.0.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-inlinesvg": "^1.2.0",
     "react-infinite-scroll-component": "^5.0.4",
+    "react-inlinesvg": "^1.2.0",
     "react-visibility-sensor": "^5.1.1",
     "session-file-store": "^1.4.0"
   },
@@ -40,6 +40,7 @@
     "@storybook/addon-links": "^5.3.18",
     "@storybook/addons": "^5.3.18",
     "@storybook/react": "^5.3.18",
+    "@storybook/theming": "^5.3.19",
     "babel-loader": "^8.1.0",
     "babel-plugin-graphql-tag": "^2.5.0",
     "css-loader": "^3.5.3",
