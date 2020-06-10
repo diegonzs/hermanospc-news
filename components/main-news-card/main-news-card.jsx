@@ -1,11 +1,17 @@
 import React from 'react';
 import { ListTag } from 'components/list-tag/list-tag';
+import { Row } from 'components/row/row' 
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 //@ts-ignore
 import styles from './main-news-card.module.scss';
 //@ts-ignore
 import imageExample from '/images/example/20200125114027.jpg';
+//@ts-ignore
+import bookmarkIcon from "/images/svgs/bookmark.svg";
+//@ts-ignore
+import shareIcon from "/images/svgs/share.svg";
+
 
 /**
  * @typedef {Object} mainNewsCardProps
@@ -24,11 +30,23 @@ export const MainNewsCard = ({ mainImage, tags, title, link, source, howLong }) 
     return (
         <div className={styles.columns}>
             <div><img src={mainImage} className={styles.mainImage}/></div>
-            <div>
+            <div className={styles.leftColumn}>
                 <ListTag tags={tags} gap="20"/>
                 <Link href={link}><h2>{title}</h2></Link>
-                <span>{source}</span>
-                <p className="p">{howLong}</p>
+                <Row>
+                    <span className={styles.likeSection}>
+                            <img src={bookmarkIcon} alt=""/>
+                            <img className={styles.icons} src={shareIcon} alt=""/>
+                    </span>
+                    <span className={styles.likeSection}>
+                        <img src="/images/example/thumbs-up.png" alt=""/>
+                        <img className={styles.like} src="/images/example/thumbs-down.png" alt=""/>
+                    </span>
+                </Row>
+                <Row>
+                    <span className={styles.source}>: {source}</span>
+                    <p className={styles.howLong}>{howLong}</p>
+                </Row>
             </div>
         </div>
     )
