@@ -42,6 +42,7 @@ module.exports = {
     config.resolve.alias = {
       ...config.resolve.alias,
       'components': path.resolve(__dirname, '../components'),
+      'context': path.resolve(__dirname, '../context'),
       '/images': path.resolve(__dirname, '../public/images'),
     }
 

@@ -7,12 +7,6 @@ import styles from './user-settings.module.scss';
 import { AvatarSettings } from '../avatar-settings';
 import { Row } from 'components/row';
 
-/**
- * @typedef {Object} UserSettingsProps
- * @property {string} username - This is the current username
- * @property {string} email - This is the current email
- * @property {string} [avatar] - This is the current user avatar 
- */
 
 /**
  * Component to show and give the posibility to the user to change all its personal data.

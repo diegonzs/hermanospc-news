@@ -1,1 +1,1 @@
-export { userSettings } from './user-settings';
+export { UserSettings } from './user-settings';

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-
 /**
  * @typedef {Object} rowProps
  * @property {('flex-end' | 'flex-start' | 'center' | 'space-between' | 'space-around')} [justify] - value for justify-content property.
