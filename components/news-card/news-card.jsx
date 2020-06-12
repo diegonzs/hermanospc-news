@@ -9,10 +9,10 @@ import styles from './news-card.module.scss';
  * Use to show tthe preview of a new
  * @param {NewsCardProps} props
  */
-export const NewsCard = ({ title, image, source, howLong, link }) => {
+export const NewsCard = ({ title, image, source, howLong, link, isBig }) => {
   return (
     <Link href={link}>
-      <a href={link} className={styles.container}>
+      <a className={isBig ? styles.containerBigger : styles.container}>
         <img src={image} alt=""className={styles.image} />
         <h3 className={styles.title}>{title}</h3>
         <div className={styles.row}>
@@ -35,4 +35,10 @@ NewsCard.propTypes = {
   howLong: PropTypes.string.isRequired,
   /** Where it sends the user when clicked. */
   link: PropTypes.string.isRequired,
+  /**  */
+  isBig: PropTypes.bool,
+}
+
+NewsCard.defaultProps = {
+  isBig: false,
 }

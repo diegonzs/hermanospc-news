@@ -35,7 +35,7 @@ export const ListNewsCard = ({ isInfinity=false, scroll="horizontal", newsCards,
           >
             {newsCards.map(newsCard => (
               <li key={newsCard.id} className={styles.list}>
-                <NewsCard {...newsCard} />
+                <NewsCard {...newsCard} isBig />
               </li>
             ))}
           </InfiniteScroll>

@@ -91,7 +91,26 @@ export const HorizontalWithOutInfinityScroll = () => (
       alignItems: 'center',
       justifyContent: 'center',
     }}>
-      <ListNewsCard {...listNewsHorizontalCardProps} />
+      <ListNewsCard
+        newsCards={[
+          {
+            id: 'asdasda',
+            image: '',
+            title: 'AMD Launch the Radeon VII: The next power product against Nvidia',
+            source: 'TomsHardware',
+            howLong: '1 day ago',
+            link: '/'
+          },
+          {
+            id: 'fsdfsdf',
+            image: '',
+            title: 'AMD Launch the Radeon VII: The next power product against Nvidia',
+            source: 'TomsHardware',
+            howLong: '1 day ago',
+            link: '/'
+          },
+        ]}
+      />
     </div>
   </div>
 )
@@ -102,6 +121,17 @@ export const verticalWithInfinityScroll = () => (
     alignItems: 'center',
     justifyContent: 'center',
   }}>
-    <ListNewsCard {...listNewsVerticalWithInfinityScroll} />
+    <ListNewsCard
+      newsCards={[
+        ...newsCards,
+        newCard,
+        newCard,
+        newCard,
+      ]}
+      isInfinity
+      scroll="vertical"
+      hasMore
+      fetchMoreHandler={() => { fetchMore() }}
+    />
   </div>
 )

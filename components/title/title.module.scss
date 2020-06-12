@@ -1,8 +1,16 @@
 @import 'variables.scss';
-.title{
+
+.title {
   color: $color-text-95;
   font-size: $font-size-huge;
 }
-.emoji{
-    margin-left: 24px;
+
+.emoji {
+  margin-left: 24px;
+}
+
+.image {
+  width: 32px;
+  height: 32px;
+  margin-left: 24px;
 }

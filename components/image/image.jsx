@@ -17,7 +17,7 @@ import PropTypes from 'prop-types';
  */
 export const Image = ({ srcOriginal, srcWebp, type, alt="", pictureClassName, imgClassName }) => {
   return (
-    <picture className={pictureClassName}>
+    <picture className={pictureClassName} style={{ display: 'flex' }}>
       <source srcSet={srcWebp} type="image/wepb"/>
       <source srcSet={srcOriginal} type={`image/${type}`}/>
       <img srcSet={srcOriginal} alt={alt} className={imgClassName} />

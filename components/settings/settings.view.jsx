@@ -20,7 +20,7 @@ import styles from './settings.module.scss';
 export const SettingsView = ({ userSettings, notificationSettings }) => {
   return (
     <div className={styles.container}>
-      <Column gap="81">
+      <Column gap="81" justify="center">
         <UserSettings {...userSettings} />
         <NotificationSettings {...notificationSettings} />
       </Column>

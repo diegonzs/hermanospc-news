@@ -1,5 +1,7 @@
 .list {
   display: grid;
+  width: 100%;
+  justify-content: center;
 }
 
 .horizontal {
@@ -10,12 +12,19 @@
   width: 100%;
   grid-gap: 33px;
 }
+
 .vertical {
-  grid-template-columns: repeat(4, max-content);
-  grid-auto-flow: row;
+  grid-template-columns: repeat(3, 349px);
+  // grid-auto-flow: auto;
   grid-auto-rows: max-content;
-  grid-gap: 33px;
+  grid-gap: 46px;
   width: 100%;
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(2, 349px);
+  }
+  @media (max-width: 784px) {
+    grid-template-columns: repeat(1, 349px);
+  }
 }
 
 .horizontal.infinity {

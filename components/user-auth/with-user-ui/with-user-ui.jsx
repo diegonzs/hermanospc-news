@@ -27,12 +27,12 @@ import styles from './with-user-ui.module.scss';
 export const WithUserUI = ({ avatar, username, signout }) => {
   return (
     <Row isGrid={true} gap="26">
-      <Link href="/" passHref>
+      <Link href="/favorites" passHref>
         <a className={styles.iconContainer}>
           <SVG className={styles.icon} src={thumbsUpIcon} />
         </a>
       </Link>
-      <Link href="/" passHref>
+      <Link href="/saved" passHref>
         <a className={styles.iconContainer}>
           <SVG className={styles.icon} src={bookmarkIcon} />
         </a>
@@ -40,7 +40,7 @@ export const WithUserUI = ({ avatar, username, signout }) => {
       <div className={styles.iconContainer} onClick={() => signout()}>
         <SVG className={styles.icon} src={signoutIcon} />
       </div>
-      <Link href="/">
+      <Link href="/settings">
         <div className={styles.avatarPic}>
           <img src={avatar} /> 
         </div>

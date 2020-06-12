@@ -9,9 +9,17 @@
   text-decoration: none;
 }
 
+.containerBigger {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 215px 1fr auto;
+  width: 349px;
+  height: 359px;
+}
+
 .image {
   width: 100%;
-  height: 160px;
+  height: 100%;
   background-color: $color-text-40;
   border-radius: 4px;
   margin-bottom: 12px;
