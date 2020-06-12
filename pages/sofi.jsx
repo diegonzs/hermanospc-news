@@ -1,6 +1,4 @@
 import React from 'react';
-import { SofiCard } from '../components/sofi-card';
-import { withApollo } from '../lib/apollo';
 
 const Sofi  = () => {
   return (
