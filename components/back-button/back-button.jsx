@@ -1,10 +1,13 @@
 import React from "react";
-// @ts-ignore
-import styles from "./back-button.module.scss";
+import Link from "next/link";
+import PropsType from "prop-types";
 import SVG from "react-inlinesvg";
+import { Row } from "components/row";
+
 // @ts-ignore
 import leftArrow from "/images/chevron-left.svg";
-import PropsType from "prop-types";
+// @ts-ignore
+import styles from "./back-button.module.scss";
 
 /**
  * @typedef {Object} BackButtonProps
@@ -19,10 +22,14 @@ import PropsType from "prop-types";
 export const BackButton = ({ text }) => {
   return (
     <div className={styles.BackButtonContainer}>
-      <a href="/">
-        <SVG className={styles.svg} src={leftArrow} />
-        <span>{text}</span>
-      </a>
+      <Link href="/">
+        <a>
+          <Row justify="flex-start">
+            <SVG className={styles.svg} src={leftArrow} />
+            <span>{text}</span>
+          </Row>
+        </a>
+      </Link>
     </div>
   );
 };

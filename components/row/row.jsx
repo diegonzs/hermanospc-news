@@ -1,11 +1,10 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-
 /**
  * @typedef {Object} rowProps
- * @property {('center' | 'space-between' | 'space-around')} [justify] - value for justify-content property.
- * @property {('center' | 'space-between' | 'space-around')} [align] - value for align-items property.
+ * @property {('flex-end' | 'flex-start' | 'center' | 'space-between' | 'space-around')} [justify] - value for justify-content property.
+ * @property {('flex-end' | 'flex-start' | 'center' | 'space-between' | 'space-around')} [align] - value for align-items property.
  * @property {boolean} [isGrid] - Determine if the elements inside would be grid items.
  * @property {string} [gap] - If isGrid is true this property is used to separate the elements between them.
  * @property {React.CSSProperties} [customStyles] - custom styles
@@ -27,7 +26,7 @@ export const Row = ({ children, justify="space-between", align="center", isGrid=
     gridAutoColumns: 'auto',
     gridColumnGap: `${gap}px`,
     width: 'fit-content',
-    alignItems: 'center',
+    alignItems: align,
     ...customStyles,
   } : {
     display: 'flex',
@@ -45,9 +44,9 @@ export const Row = ({ children, justify="space-between", align="center", isGrid=
 
 Row.propTypes = {
   /** value for justify-content property */
-  justify: PropTypes.oneOf(['center', 'space-between', 'space-around']),
+  justify: PropTypes.oneOf(['center', 'space-between', 'space-around', 'flex-start', 'flex-end']),
   /** value for align-items property */
-  align: PropTypes.oneOf(['center', 'space-between', 'space-around']),
+  align: PropTypes.oneOf(['center', 'space-between', 'space-around', 'flex-start', 'flex-end']),
   /** Custom styles */
   customStyles: PropTypes.object,
   /** If isGrid is true this property is used to separate the elements between them. */

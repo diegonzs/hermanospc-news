@@ -10,9 +10,9 @@ function MyApp({ Component, pageProps, sessionUser }) {
   const user = useFirebaseUser(sessionUser);
   return (
     <UserContext.Provider value={user}>
-      <div className="container">
+      <div className="mainContainer">
         <Header />
-        <div className="content">
+        <div className="mainContent">
           <Component {...pageProps} />
         </div>
         <Footer />

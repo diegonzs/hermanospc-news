@@ -1,5 +1,7 @@
-const path = require('path')
+const path = require('path');
+const withPlugins = require('next-compose-plugins');
 const withOffline = require('next-offline');
+const optimizedImages = require('next-optimized-images');
 
 
 const nextConfig = {
@@ -33,6 +35,16 @@ const nextConfig = {
       ]
     },
   },
+  webpack(config) {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '/images': path.resolve(__dirname, 'public/images'),
+    }
+    return config;
+  },
 };
 
-module.exports = withOffline(nextConfig);
+module.exports = withPlugins([
+  [optimizedImages, {}],
+  [withOffline, {}],
+], nextConfig);

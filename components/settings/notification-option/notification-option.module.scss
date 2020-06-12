@@ -1,0 +1,19 @@
+@import 'variables.scss';
+
+.contentContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: $font-size-medium;
+  color: $color-text-90;
+  margin: 0;
+  margin-bottom: 4px;
+}
+
+.description {
+  font-size: $font-size-small;
+  color: $color-text-60;
+  margin: 0;
+}

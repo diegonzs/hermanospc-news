@@ -1,0 +1,1 @@
+export { AvatarSettingsContainer as AvatarSettings } from './avatar-settings.container';
