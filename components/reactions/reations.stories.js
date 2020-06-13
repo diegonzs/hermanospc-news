@@ -2,12 +2,12 @@ import * as React from 'react';
 import { Reactions } from './reactions';
 
 export default {
-    data: '0',
-    icon: '/images/example/thumbs-up.png'
+    title: 'Reactions',
+    component: Reactions
 };
   
 
-export const reactions = () => (
+export const reactionsSingle = () => (
     <Reactions 
     data= '0'
     icon= '/images/example/thumbs-up.png'

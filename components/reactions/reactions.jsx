@@ -1,8 +1,9 @@
 import React from 'react';
 import { Row } from 'components/row/row' 
+import { Column } from 'components/column/column';
 import PropTypes from 'prop-types';
 //@ts-ignore
-import styles from './main-news-card.module.scss';
+import styles from './reactions.module.scss';
 /**
  * @typedef {Object} reactionsProps
  * @property {string} data - number of likes/dislikes
@@ -15,22 +16,18 @@ import styles from './main-news-card.module.scss';
 export const Reactions = ({ data, icon }) => {
     return (
         <div>
-            <ul>
-                <li>
-                    <p>{data}</p>
-                </li>
-                <li>
-                    <img src={icon} alt=""/>
-                </li>
-            </ul>
-        </div>   
+            <Column gap="8" justify="center" width="35px">
+            <p>{data}</p>
+            <img src={icon}/>
+            </Column>
+        </div>
     )
 }
   Reactions.propTypes = {
     /**  number of likes/dislikes */
-    data: PropTypes.string.isRequired,
+    data: PropTypes.string,
     /**  like/dislike icon */
-    icon: PropTypes.string.isRequired,
+    icon: PropTypes.string,
   }
 
   Reactions.defaultProps = {

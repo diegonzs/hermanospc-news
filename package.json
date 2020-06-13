@@ -45,14 +45,10 @@
     "babel-loader": "^8.1.0",
     "babel-plugin-graphql-tag": "^2.5.0",
     "css-loader": "^3.5.3",
-<<<<<<< HEAD
-    "file-loader": "^6.0.0",
-=======
     "imagemin-mozjpeg": "^9.0.0",
     "imagemin-optipng": "^8.0.0",
     "imagemin-svgo": "^8.0.0",
     "next-optimized-images": "^2.6.1",
->>>>>>> cb3d467610dd70a51d679419bcd015f607a35538
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
     "style-loader": "^1.2.1",

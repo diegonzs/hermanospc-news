@@ -1,6 +1,7 @@
 import React from 'react';
 import { ListTag } from 'components/list-tag/list-tag';
-import { Row } from 'components/row/row' 
+import { Row } from 'components/row/row';
+import { Reactions } from 'components/reactions/reactions'; 
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 //@ts-ignore
@@ -33,16 +34,19 @@ export const MainNewsCard = ({ mainImage, tags, title, link, source, howLong }) 
             <div className={styles.leftColumn}>
                 <ListTag tags={tags} gap="20"/>
                 <Link href={link}><h2>{title}</h2></Link>
-                <Row>
-                    <span className={styles.likeSection}>
-                            <img src={bookmarkIcon} alt=""/>
-                            <img className={styles.icons} src={shareIcon} alt=""/>
-                    </span>
-                    <span className={styles.likeSection}>
-                        <img src="/images/example/thumbs-up.png" alt=""/>
-                        <img className={styles.like} src="/images/example/thumbs-down.png" alt=""/>
-                    </span>
-                </Row>
+                <div className={styles.likeSection}>
+                    <Row >
+                    
+                        <Row isGrid={true} gap="16"> 
+                            <img src={bookmarkIcon} style={{paddingTop:"32px"}}/>
+                            <img className={styles.icons} src={shareIcon} style={{paddingTop:"32px"}}/>
+                        </Row>
+                        <Row isGrid={true} gap="32"> 
+                            <Reactions data="230" icon="/images/example/thumbs-up.png"/>
+                            <Reactions data="10" icon="/images/example/thumbs-down.png"/>
+                        </Row>
+                    </Row>
+                </div>
                 <Row>
                     <span className={styles.source}>: {source}</span>
                     <p className={styles.howLong}>{howLong}</p>
