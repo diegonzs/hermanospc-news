@@ -1,0 +1,40 @@
+@import 'variables.scss';
+.columns{
+    display: grid;
+    grid-template-columns: .7fr .3fr;
+}
+.leftColumn {
+    padding-left: 32px;
+    padding-right: 32px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    h2{
+        padding-top: 24px;
+        font-size: 32px;
+        padding-bottom: 75px;
+    }
+}
+.howLong{
+    color: $color-text-40;
+    font-size: $font-size-smallest;
+}
+.mainImage{
+    width: 100%;
+    height: 100%;
+}
+.icons{
+    padding-left: 16px;
+}
+.like{
+    padding-left: 32px;
+
+}
+.likeSection{
+    padding-top: 75px;
+    padding-bottom: 24px;
+}
+.source {
+    color: $color-primary-70;
+    font-size: $font-size-smallest;
+  }
+  

@@ -1,0 +1,1 @@
+export { MainNewsCard } from './main-news-card';
