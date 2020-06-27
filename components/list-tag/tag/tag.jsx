@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 //@ts-ignore
 import styles from './tag.module.scss';
-import { tagSimple } from './tag.stories';
-
 
 /**
  * @typedef {Object} TagProps
@@ -20,8 +19,8 @@ export const Tag = ({ text }) => {
 }
 
 Tag.propTypes = {
-    /** the text that would be in the tag */
-    text: PropTypes.string.isRequired,
-  }
+  /** the text that would be in the tag */
+  text: PropTypes.string.isRequired,
+}
 
  
