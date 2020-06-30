@@ -2,29 +2,15 @@ import * as React from 'react';
 // @ts-ignore
 import styles from './menu-toggle.module.scss';
 
-export class MenuToggle extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {isToggleOn: true};
-
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick() {
-    this.setState(prevState => ({
-      isToggleOn: !prevState.isToggleOn
-    }));
-  }
-
-  render() {
+export const MenuToggle = ({ isMenuOn, toggleIsMenuOn })=> {
+ 
     return (
       <div 
-        onClick={this.handleClick} 
+        onClick={toggleIsMenuOn} 
         className={`
           ${styles.menuBtn} 
-          ${this.state.isToggleOn ? styles.menuBtnOn : styles.menuBtnOff} 
+          ${isMenuOn ? styles.menuBtnOff : styles.menuBtnOn} 
         `}>
       </div>
     );
-  }
 }

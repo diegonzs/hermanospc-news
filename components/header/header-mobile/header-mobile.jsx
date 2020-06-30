@@ -5,9 +5,9 @@ import { NavMobile } from './nav-mobile';
 import { SocialMobile } from './social-mobile';
 import { ContactMobile } from './contact-mobile';
 
-export const HeaderMobile = () => {
+export const HeaderMobile = ({ isMenuOn }) => {
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${isMenuOn ? styles.menuOn : ''}`}>
       <NavMobile />
       <div className={styles.bottom}>
         <SocialMobile />

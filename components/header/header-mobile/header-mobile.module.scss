@@ -7,8 +7,8 @@
   position: fixed;
   top: 0;
   left: 0;
-  transform: translateX(0px);
-  opacity: 1;
+  transform: translateX(-100vw);
+  opacity: 0;
   width: 100vw;
   height: 100vh;
   z-index: 4;
@@ -16,9 +16,9 @@
   padding: 10px 20px;
 }
 
-.menuOff {
-  transform: translateX(-100vw);
-  opacity: 0;
+.menuOn {
+  transform: translateX(0);
+  opacity: 1;
 }
 .bottom {
   display: flex;

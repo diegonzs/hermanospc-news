@@ -9,13 +9,11 @@ import { MenuToggle } from './menu-toggle';
 import { HeaderDesktop } from './header-desktop/header-desktop';
 import { HeaderMobile } from './header-mobile';
 
-
-export const HeaderView = () => {
+export const HeaderView = ({ isMenuOn, toggleIsMenuOn }) => {
   return (
-
     <>
-      <HeaderDesktop />
-      <HeaderMobile />
+      <HeaderDesktop isMenuOn={isMenuOn} toggleIsMenuOn={toggleIsMenuOn} />
+      <HeaderMobile isMenuOn={isMenuOn} />
     </>
   )
 }

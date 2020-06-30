@@ -8,15 +8,15 @@ import { MenuToggle } from '../menu-toggle';
 import styles from './header-desktop.module.scss';
 
 
-export const HeaderDesktop = () => {
+export const HeaderDesktop = ({ isMenuOn, toggleIsMenuOn }) => {
   return (
-    <header className={styles.container}>
+    <header className={`${styles.container} ${isMenuOn && styles.menuOn}`}>
         <div className={styles.content}>
-          <Logo />
+          <Logo isMenuOn={isMenuOn} />
           <Nav />
           <SocialMedia />
           <Contact />
-          <MenuToggle />
+          <MenuToggle isMenuOn={isMenuOn} toggleIsMenuOn={toggleIsMenuOn} />
         </div>
       </header>
   )

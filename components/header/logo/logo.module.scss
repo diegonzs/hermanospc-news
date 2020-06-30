@@ -11,7 +11,7 @@
   display: none;
 }
 
-@media only screen and (max-width: $bp-largest) {
+@include respond(desktop) {
   .logo {
     display: none;
   }
@@ -26,6 +26,9 @@
   .icon {
     height: 30px;
     width: auto;
-    
   }
+}
+
+.menuOn {
+  display: none;
 }
