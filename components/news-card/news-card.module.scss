@@ -15,6 +15,7 @@
   grid-template-rows: 215px 1fr auto;
   width: 349px;
   height: 359px;
+  text-decoration: none;
 }
 
 .image {
@@ -40,6 +41,7 @@
 .source {
   color: $color-primary-70;
   font-size: $font-size-smallest;
+  text-decoration: none;
 }
 
 .howLong {
