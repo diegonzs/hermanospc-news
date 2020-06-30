@@ -36,6 +36,7 @@ const socialMediaList = [
 
 export const SocialMobile = () => {
   return (
+    <div className={styles.social}>
       <ul className={styles.list}>
         {socialMediaList.map((value) => (
           <li className={styles.item}>
@@ -43,5 +44,6 @@ export const SocialMobile = () => {
           </li>
         ))}
       </ul>
+    </div>
   )
 }

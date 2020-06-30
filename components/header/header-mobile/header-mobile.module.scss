@@ -2,13 +2,8 @@
 
 .container {
   background-color: $color-dark;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr .125fr .125fr;
-  grid-template-areas: "nav-"
-                       "social-"
-                       "contact-";
-  justify-content: center;
-  align-items: center;
+  display: flex;
+  flex-direction: column;
   position: fixed;
   top: 0;
   left: 0;
@@ -21,7 +16,15 @@
   padding: 10px 20px;
 }
 
-.menuOn {
+.menuOff {
   transform: translateX(-100vw);
   opacity: 0;
+}
+.bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100vh;
+  margin-bottom: 7rem;
+  
 }

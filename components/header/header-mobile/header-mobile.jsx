@@ -9,8 +9,10 @@ export const HeaderMobile = () => {
   return (
     <div className={styles.container}>
       <NavMobile />
-      <SocialMobile />
-      <ContactMobile />
+      <div className={styles.bottom}>
+        <SocialMobile />
+        <ContactMobile />
+      </div>
     </div>
   )
 }
