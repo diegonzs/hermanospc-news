@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 // @ts-ignore
 import styles from './logo.module.scss';
 import Link from 'next/link';

@@ -11,7 +11,7 @@
   display: none;
 }
 
-@media only screen and (max-width: $bp-small) {
+@media only screen and (max-width: $bp-largest) {
   .logo {
     display: none;
   }
@@ -24,7 +24,8 @@
   }
 
   .icon {
-    height: 25px;
+    height: 30px;
     width: auto;
+    
   }
 }

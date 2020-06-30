@@ -1,7 +1,7 @@
 import React from 'react';
 import SVG from 'react-inlinesvg';
 // @ts-ignore
-import styles from './social-media.module.scss';
+import styles from './social-mobile.module.scss';
 
 const socialMediaList = [
   {
@@ -34,7 +34,7 @@ const socialMediaList = [
   },
 ] 
 
-export const SocialMedia = () => {
+export const SocialMobile = () => {
   return (
       <ul className={styles.list}>
         {socialMediaList.map((value) => (

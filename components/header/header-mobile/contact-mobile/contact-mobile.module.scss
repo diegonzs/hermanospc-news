@@ -2,7 +2,7 @@
 
 .contact {
   font-size: $font-size-small;
-  grid-area: contact;
+  grid-area: contact-;
   text-decoration: none;
   color: $color-text-100;
   display: flex;
@@ -13,10 +13,6 @@
 
   &:hover {
     border-bottom: solid 1px $color-primary;
-  }
-
-  @media only screen and (max-width: $bp-largest) {
-    display: none;
   }
 
 }

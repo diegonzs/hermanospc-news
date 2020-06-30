@@ -27,6 +27,10 @@
 
   }
 
+  @media only screen and (max-width: $bp-largest) {
+    display: none;
+  }
+
 }
 
 .item {

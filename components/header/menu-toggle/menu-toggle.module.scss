@@ -1,0 +1,41 @@
+@import 'variables.scss';
+
+.menuBtn {
+  grid-area: menu-toggle;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 20px;
+  height: 10px;
+  margin-top: 20px;
+  margin-right: 20px;
+  cursor: pointer;
+  display: none;
+  z-index: 100;
+
+  &::before,
+  &::after {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 2px;
+    background-color: $color-primary;
+    transition: all .2s ease;
+    transform-origin: 50% 50%;
+  }
+
+  @media only screen and (max-width: $bp-largest) {
+    display: flex;
+  }
+}
+
+.menuBtnOff {
+
+  &::before {
+    transform: translateY(4px) rotateZ(45deg);
+  }
+
+  &::after {
+    transform: translateY(-4px) rotateZ(-45deg);
+  }
+}
