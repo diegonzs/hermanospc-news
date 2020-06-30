@@ -16,8 +16,8 @@ import shareIcon from "/images/svgs/share.svg";
 
 /**
  * @typedef {Object} mainNewsCardProps
- * @property {string} mainImage - Main image of the article
- * @property {import('components/list-tag/tag/tag').TagProps[]} tags - List of tags to be render
+ * @property {string} image - Main image of the article
+ * @property {import('components/list-tag/tag/tag').TagProps[]} [tags] - List of tags to be render
  * @property {string} title - title of the new
  * @property {string} link - url link to show the detail of the new
  * @property {string} source - Reactions section
@@ -27,12 +27,12 @@ import shareIcon from "/images/svgs/share.svg";
  * This is the main news card component for the news section
  * @param {mainNewsCardProps} props
  */
-export const MainNewsCard = ({ mainImage, tags, title, link, source, howLong }) => {
+export const MainNewsCard = ({ image, tags, title, link, source, howLong }) => {
     return (
         <div className={styles.columns}>
-            <div><img src={mainImage} className={styles.mainImage}/></div>
+            <div><img src={image} className={styles.mainImage}/></div>
             <div className={styles.leftColumn}>
-                <ListTag tags={tags} gap="20"/>
+                {tags && <ListTag tags={tags} gap="20"/>}
                 <Link href={link}><h2>{title}</h2></Link>
                 <div className={styles.likeSection}>
                     <Row >
