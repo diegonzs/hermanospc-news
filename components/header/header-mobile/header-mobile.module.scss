@@ -1,0 +1,30 @@
+@import 'variables.scss';
+
+.container {
+  background-color: $color-dark;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translateX(-100vw);
+  opacity: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 4;
+  transition: all .3s ease-in-out 0s;
+  padding: 10px 20px;
+}
+
+.menuOn {
+  transform: translateX(0);
+  opacity: 1;
+}
+.bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100vh;
+  margin-bottom: 7rem;
+  
+}

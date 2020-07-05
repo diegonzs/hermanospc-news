@@ -1,5 +1,10 @@
 @import 'variables.scss';
 
+.social{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .list {
   list-style: none;
@@ -8,12 +13,7 @@
   grid-template-columns: repeat(7, 1fr);
   grid-column-gap: 24px;
   align-items: center;
-  grid-area: social;
-
-  @include respond(desktop) {
-    display: none;
-  }
-
+  width: min-content;
 }
 
 .item {
@@ -22,24 +22,17 @@
   align-items: center;
   justify-content: center;
   height: 100%;
+  width: min-content;
   border-bottom: solid 1px transparent;
   transition: all .3s ease;
-  path {
-    transition: all .3s ease;
-  }
-
-  &:hover {
-    border-bottom: solid 1px $color-primary;
-    path{
-      fill: $color-primary;
-    }
-    
-  }
 }
 
 .icon {
+  display: inline-block;
   height: 18px;
   width: auto;
-  fill: $color-text-100;
+  path{
+    fill: $color-primary;
+  }
 }
 

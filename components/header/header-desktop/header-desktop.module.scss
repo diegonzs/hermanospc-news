@@ -1,0 +1,37 @@
+@import 'variables.scss';
+
+.container {
+  grid-area: header;
+  width: 100%;
+  background-color: $color-background-header;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0px 3px 8px #00000080;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.content {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: min-content auto 1fr auto auto;
+  grid-template-areas: "logo nav . social contact menu-toggle";
+  grid-column-gap: 40px;
+  width: 100%;
+  max-width: 1640px;
+  height: 50px;
+  padding: 0 20px;
+
+  @include respond(desktop) {
+    grid-template-areas: "menu-toggle nav . social contact logo";
+  }
+}
+
+.menuOn {
+  background-color: transparent;
+  box-shadow: none;
+  z-index: 100;
+  
+}

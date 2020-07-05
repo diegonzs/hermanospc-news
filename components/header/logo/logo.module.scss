@@ -5,4 +5,32 @@
   height: 28px;
   width: 140px;
   padding-top: 10.77px;
+  
+}
+
+.logoResponsive {
+  display: none;
+  transition: all ease-in-out .4s;
+}
+
+@include respond(desktop) {
+  .logo {
+    display: none;
+  }
+
+  .logoResponsive {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-area: logo;
+  }
+
+  .icon {
+    height: 30px;
+    width: auto;
+  }
+}
+
+.menuOn {
+  opacity: 0;
 }

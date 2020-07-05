@@ -14,4 +14,9 @@
   &:hover {
     border-bottom: solid 1px $color-primary;
   }
+
+  @include respond(desktop) {
+    display: none;
+  }
 }
+
