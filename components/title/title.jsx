@@ -18,29 +18,35 @@ import styles from './title.module.scss';
  * @param {TitleProps} props
  */
 
-export const Title = ({ text, emoji="", icon }) => {
-  return (
-    <h1 className={styles.title}>
-      <Row>
-        {text}
-        {icon
-          ? <Image imgClassName={styles.image} srcOriginal={icon} srcWebp={icon} type="png" />
-          : <span className={styles.emoji}>{emoji}</span>
-        }
-      </Row>
-    </h1>
-  )
-}
+export const Title = ({ text, emoji = '', icon }) => {
+	return (
+		<h1 className={styles.title}>
+			<Row justify="flex-start">
+				{text}
+				{icon ? (
+					<Image
+						imgClassName={styles.image}
+						srcOriginal={icon}
+						srcWebp={icon}
+						type="png"
+					/>
+				) : (
+					<span className={styles.emoji}>{emoji}</span>
+				)}
+			</Row>
+		</h1>
+	);
+};
 
 Title.propTypes = {
-  /** the text that would be in the title */
-  text: PropTypes.string.isRequired,
-  /** Emoji to animate the title */
-  emoji: PropTypes.string,
-  /** Icon to animate the title */
-  icon: PropTypes.string,
-}
+	/** the text that would be in the title */
+	text: PropTypes.string.isRequired,
+	/** Emoji to animate the title */
+	emoji: PropTypes.string,
+	/** Icon to animate the title */
+	icon: PropTypes.string,
+};
 
 Title.defaultProps = {
-  emoji: '',
-}
+	emoji: '',
+};
