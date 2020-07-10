@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Propstype from 'prop-types';
 // @ts-ignore
 import styles from './content.module.scss';
 
@@ -15,4 +16,8 @@ export const Content = ({ content }) => {
 			dangerouslySetInnerHTML={createContent(content)}
 		/>
 	);
+};
+
+Content.prototype = {
+	content: Propstype.string.isRequired,
 };
