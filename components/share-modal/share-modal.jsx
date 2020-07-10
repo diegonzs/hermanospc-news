@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import SVG from 'react-inlinesvg';
 import { Row } from 'components/row';
+import { Column } from 'components/column';
+import { ShareSwitch } from './share-switch';
 
 // @ts-ignore
 import styles from './share-modal.module.scss';
@@ -15,7 +17,6 @@ import twitterIcon from '/images/social/twitter.svg';
 import emailIcon from '/images/social/envelope-open-text.svg';
 // @ts-ignore
 import linkedinIcon from '/images/social/linkedin.svg';
-import { Column } from 'components/column';
 
 const SocialLinks = [
 	{
@@ -69,11 +70,11 @@ export const ShareModal = ({ closeModalHandler }) => {
 				{SocialLinks.map((value) => (
 					<Row isGrid={true} gap="24" key={value.text}>
 						<SVG src={value.icon} />
-						<a href={value.link}>
+						<ShareSwitch url={value.link} platform={value.text}>
 							<span className={value.text2Style ? styles.text2 : styles.text}>
 								{value.text}
 							</span>
-						</a>
+						</ShareSwitch>
 					</Row>
 				))}
 			</Column>

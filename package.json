@@ -31,6 +31,7 @@
 		"react-dom": "16.13.1",
 		"react-infinite-scroll-component": "^5.0.4",
 		"react-inlinesvg": "^1.2.0",
+		"react-share": "^4.2.1",
 		"react-visibility-sensor": "^5.1.1",
 		"session-file-store": "^1.4.0"
 	},

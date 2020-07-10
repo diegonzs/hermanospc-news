@@ -16,10 +16,6 @@
 		align-items: center;
 		justify-content: space-between;
 		margin-bottom: 44px;
-		a {
-			text-decoration: none;
-			font-weight: 600;
-		}
 		.cancel {
 			color: #7c838a;
 			text-align: right;
@@ -41,8 +37,5 @@
 	}
 	.center {
 		width: fit-content !important;
-	}
-	a {
-		text-decoration: none;
 	}
 }
