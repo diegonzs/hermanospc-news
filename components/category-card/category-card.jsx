@@ -6,6 +6,7 @@ import { Title } from 'components/title/title';
 import PropTypes from 'prop-types';
 //@ts-ignore
 import styles from './category-card.module.scss';
+import Link from 'next/link';
 
 /**
  * @typedef {Object} title
@@ -15,21 +16,32 @@ import styles from './category-card.module.scss';
 /**
 /**
  * @typedef {Object} categoryCardProps  
- * @property {News[]} [news] - List of card to be displayed under the main card
- * @property {title} title - title of section
+ * @property {News[]} news - List of card to be displayed under the main card
+ * @property {title} [title] - title of section
  */
 /**
  * This is the category card component for the news section
  * @param {categoryCardProps} props
  */
 export const CategoryCard = ({ title, news }) => {
-	//const firstNew = news[0];
-	//const moreNews = news.slice(1);
+	const firstNews = news[0];
+	const moreNews = news.slice(1);
 	return (
 		<div className={styles.container}>
-			<Title text={title.text} emoji={title.emoji} />
-			<MainNewsCard {...news[0]} />
-			<ListNewsCard newsCards={news} />
+			{title && <Title text={title.text} emoji={title.emoji} />}
+			<MainNewsCard {...firstNews} />
+			<ListNewsCard newsCards={moreNews} />
+			<Link href="/news-category/[slug]" as="/news-category/hello-world">
+				<a className={styles.showMoreLink}>Show more</a>
+			</Link>
 		</div>
 	);
+};
+
+CategoryCard.propTypes = {
+	title: PropTypes.shape({
+		text: PropTypes.string,
+		emoji: PropTypes.string,
+	}),
+	news: PropTypes.array.isRequired,
 };

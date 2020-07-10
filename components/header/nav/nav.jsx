@@ -3,45 +3,51 @@ import React from 'react';
 import styles from './nav.module.scss';
 
 const navigationList = [
-  {
-    link: 'https://hermanospc.co/',
-    name: 'News',
-  },
-  {
-    link: 'https://hermanospc.co/calculator',
-    name: 'PC Calculator',
-  },
-  {
-    link: 'https://hermanospc.co/free-to-play',
-    name: 'F2P Games',
-  },
-  {
-    link: 'https://hermanospc.co/wallapers',
-    name: 'Wallpapers',
-  },
-  {
-    link: 'https://hermanospc.co/',
-    name: 'Shop',
-  },
-  {
-    link: 'https://hermanospc.co/',
-    name: 'Blog',
-  },
-]
+	{
+		link: 'https://hermanospc.co/',
+		name: 'News',
+		id: 'news',
+	},
+	{
+		link: 'https://hermanospc.co/calculator',
+		name: 'PC Calculator',
+		id: 'pc-calculator',
+	},
+	{
+		link: 'https://hermanospc.co/free-to-play',
+		name: 'F2P Games',
+		id: 'f2p-games',
+	},
+	{
+		link: 'https://hermanospc.co/wallapers',
+		name: 'Wallpapers',
+		id: 'wallpapers',
+	},
+	{
+		link: 'https://hermanospc.co/',
+		name: 'Shop',
+		id: 'shop',
+	},
+	{
+		link: 'https://hermanospc.co/',
+		name: 'Blog',
+		id: 'blog',
+	},
+];
 
 export const Nav = () => {
-  return (
-    <nav className={styles.nav}>
-      <ul className={styles.list}>
-        {navigationList.map((value) => (
-            <li className={styles.item}>
-              <a href={value.link}>
-                {value.name === 'PC Calculator' && <span>! </span>}{value.name}
-              </a>
-            </li>
-        ))}
-        
-      </ul>
-    </nav>
-  )
-}
+	return (
+		<nav className={styles.nav}>
+			<ul className={styles.list}>
+				{navigationList.map((value) => (
+					<li className={styles.item} key={value.id}>
+						<a href={value.link}>
+							{value.name === 'PC Calculator' && <span>! </span>}
+							{value.name}
+						</a>
+					</li>
+				))}
+			</ul>
+		</nav>
+	);
+};

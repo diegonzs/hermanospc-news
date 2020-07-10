@@ -12,43 +12,65 @@ const hasNumber = /\d/;
  * @property {string} [width] - Percentage value of the width or thing like fit-content
  * @property {('flex-end' | 'flex-start' | 'center' | 'space-between' | 'space-around')} [justify] - value for justify-content property.
  * @property {('flex-end' | 'flex-start' | 'center' | 'space-between' | 'space-around')} [align] - value for align-items property.
+ * @property {string} [customClass] - custom class
  * @property {any} children
  */
 
 /**
  * Useful component to align elements in one single column
- * @param {ColumnProps} props 
+ * @param {ColumnProps} props
  */
-export const Column = ({ children, gap, justify="flex-start", align="flex-start", width="100" }) => {
-    /**
-   * @type {React.CSSProperties}
-  */
-  const inLineStyles = {
-    gap: `${gap}px`,
-    justifyItems: justify,
-    alignItems: align,
-    width: `${width}${hasNumber.test(width) ? '%' : '' }`
-  }
-  return (
-    <div className={styles.column} style={inLineStyles}>
-      {children}
-    </div>
-  )
-}
+export const Column = ({
+	children,
+	gap,
+	justify = 'flex-start',
+	align = 'flex-start',
+	width = '100',
+	customClass,
+}) => {
+	/**
+	 * @type {React.CSSProperties}
+	 */
+	const inLineStyles = {
+		gap: `${gap}px`,
+		justifyItems: justify,
+		alignItems: align,
+		width: `${width}${hasNumber.test(width) ? '%' : ''}`,
+	};
+	return (
+		<div className={`${styles.column} ${customClass}`} style={inLineStyles}>
+			{children}
+		</div>
+	);
+};
 
 Column.propTypes = {
-  /** value for the separation between elements. */
-  gap: PropTypes.string.isRequired,
-  /** With value in percentage. */
-  width: PropTypes.string,
-  /** value for justify-content property */
-  justify: PropTypes.oneOf(['center', 'space-between', 'space-around', 'flex-start', 'flex-end']),
-  /** value for align-items property */
-  align: PropTypes.oneOf(['center', 'space-between', 'space-around', 'flex-start', 'flex-end']),
-}
+	/** value for the separation between elements. */
+	gap: PropTypes.string.isRequired,
+	/** With value in percentage. */
+	width: PropTypes.string,
+	/** value for justify-content property */
+	justify: PropTypes.oneOf([
+		'center',
+		'space-between',
+		'space-around',
+		'flex-start',
+		'flex-end',
+	]),
+	/** value for align-items property */
+	align: PropTypes.oneOf([
+		'center',
+		'space-between',
+		'space-around',
+		'flex-start',
+		'flex-end',
+	]),
+	/** Custom styles */
+	customStyles: PropTypes.object,
+};
 
 Column.defaultProps = {
-  justify: 'flex-start',
-  align: 'flex-start',
-  width: '100'
-}
+	justify: 'flex-start',
+	align: 'flex-start',
+	width: '100',
+};

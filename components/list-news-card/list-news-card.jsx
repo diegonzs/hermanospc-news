@@ -51,7 +51,7 @@ export const ListNewsCard = ({
 			) : (
 				<>
 					{newsCards.map((news) => (
-						<li key={news.id} className={styles.list}>
+						<li key={news.id} className={`${styles.list} ${styles.horizontal}`}>
 							<NewsCard news={news} />
 						</li>
 					))}

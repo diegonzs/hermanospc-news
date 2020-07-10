@@ -20,40 +20,42 @@ import styles from './with-user-ui.module.scss';
  * @property {() => void} signout - Function to signout the user.
  */
 
- /**
-  * This componente is use to give the user some nav options.
-  * @param {WithUserUIProps} props 
-  */
+/**
+ * This componente is use to give the user some nav options.
+ * @param {WithUserUIProps} props
+ */
 export const WithUserUI = ({ avatar, username, signout }) => {
-  return (
-    <Row isGrid={true} gap="26">
-      <Link href="/favorites" passHref>
-        <a className={styles.iconContainer}>
-          <SVG className={styles.icon} src={thumbsUpIcon} />
-        </a>
-      </Link>
-      <Link href="/saved" passHref>
-        <a className={styles.iconContainer}>
-          <SVG className={styles.icon} src={bookmarkIcon} />
-        </a>
-      </Link>
-      <div className={styles.iconContainer} onClick={() => signout()}>
-        <SVG className={styles.icon} src={signoutIcon} />
-      </div>
-      <Link href="/settings">
-        <div className={styles.avatarPic}>
-          <img src={avatar} /> 
-        </div>
-      </Link>
-    </Row>
-  )
-}
+	return (
+		<Row isGrid={true} gap="26" customClass={styles.container}>
+			<Row isGrid={true} gap="26">
+				<Link href="/favorites" passHref>
+					<a className={styles.iconContainer}>
+						<SVG className={styles.icon} src={thumbsUpIcon} />
+					</a>
+				</Link>
+				<Link href="/saved" passHref>
+					<a className={styles.iconContainer}>
+						<SVG className={styles.icon} src={bookmarkIcon} />
+					</a>
+				</Link>
+				<div className={styles.iconContainer} onClick={() => signout()}>
+					<SVG className={styles.icon} src={signoutIcon} />
+				</div>
+			</Row>
+			<Link href="/settings">
+				<div className={styles.avatarPic}>
+					<img src={avatar} />
+				</div>
+			</Link>
+		</Row>
+	);
+};
 
 WithUserUI.propTypes = {
-  /** URL Path to the user avatar image. */
-  avatar: PropTypes.string.isRequired,
-  /** the user's username. */
-  username: PropTypes.string.isRequired,
-  /** Function to signout the user. */
-  signout: PropTypes.func.isRequired
-}
+	/** URL Path to the user avatar image. */
+	avatar: PropTypes.string.isRequired,
+	/** the user's username. */
+	username: PropTypes.string.isRequired,
+	/** Function to signout the user. */
+	signout: PropTypes.func.isRequired,
+};

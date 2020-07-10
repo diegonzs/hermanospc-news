@@ -1,3 +1,11 @@
+@import 'variables.scss';
+.container {
+	@include respond(phone) {
+		grid-template-columns: 1fr !important;
+		grid-auto-flow: row !important;
+		grid-row-gap: 20px !important;
+	}
+}
 .userInfoContainer {
-  padding-top: 5px;
+	padding-top: 5px;
 }

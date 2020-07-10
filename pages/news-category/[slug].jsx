@@ -3,13 +3,12 @@ import { PageContainer } from 'components/page-container';
 import { Column } from 'components/column';
 import { HeadPage } from 'components/head-page/head-page';
 import { ListNewsCard } from 'components/list-news-card';
-import { OnlyUsers } from 'components/only-users';
+import { MainNewsCard } from 'components/main-news-card';
 
-/** @type News[] */
 const newsCardsDefault = [
 	{
 		id: 'asdasda',
-		image: '',
+		image: 'https://i.redd.it/1um8uengwo331.jpg',
 		title: 'AMD Launch the Radeon VII: The next power product against Nvidia',
 		source: 'TomsHardware',
 		created_at: '1 day ago',
@@ -17,7 +16,7 @@ const newsCardsDefault = [
 	},
 	{
 		id: 'fsdfsdf',
-		image: '',
+		image: 'https://i.redd.it/1um8uengwo331.jpg',
 		title: 'AMD Launch the Radeon VII: The next power product against Nvidia',
 		source: 'TomsHardware',
 		created_at: '1 day ago',
@@ -25,7 +24,7 @@ const newsCardsDefault = [
 	},
 	{
 		id: 'asdasda',
-		image: '',
+		image: 'https://i.redd.it/1um8uengwo331.jpg',
 		title: 'AMD Launch the Radeon VII: The next power product against Nvidia',
 		source: 'TomsHardware',
 		created_at: '1 day ago',
@@ -33,7 +32,7 @@ const newsCardsDefault = [
 	},
 	{
 		id: 'fsdfsdf',
-		image: '',
+		image: 'https://i.redd.it/1um8uengwo331.jpg',
 		title: 'AMD Launch the Radeon VII: The next power product against Nvidia',
 		source: 'TomsHardware',
 		created_at: '1 day ago',
@@ -41,7 +40,7 @@ const newsCardsDefault = [
 	},
 	{
 		id: 'asdasda',
-		image: '',
+		image: 'https://i.redd.it/1um8uengwo331.jpg',
 		title: 'AMD Launch the Radeon VII: The next power product against Nvidia',
 		source: 'TomsHardware',
 		created_at: '1 day ago',
@@ -49,7 +48,7 @@ const newsCardsDefault = [
 	},
 	{
 		id: 'fsdfsdf',
-		image: '',
+		image: 'https://i.redd.it/1um8uengwo331.jpg',
 		title: 'AMD Launch the Radeon VII: The next power product against Nvidia',
 		source: 'TomsHardware',
 		created_at: '1 day ago',
@@ -57,17 +56,16 @@ const newsCardsDefault = [
 	},
 ];
 
-/** @type News */
 const newCard = {
 	id: 'asdasdasgf',
-	image: '',
+	image: 'https://i.redd.it/1um8uengwo331.jpg',
 	title: 'AMD Launch the Radeon VII: The next power product against Nvidia',
 	source: 'TomsHardware',
 	created_at: '1 day ago',
 	original_link: '/',
 };
 
-const Favorites = ({ isServer }) => {
+const CategoryPage = () => {
 	const [newsCards, setNewsCards] = React.useState(newsCardsDefault);
 	const fetchMore = () => {
 		setTimeout(() => {
@@ -75,21 +73,28 @@ const Favorites = ({ isServer }) => {
 		}, 3000);
 	};
 	return (
-		<OnlyUsers isServer={isServer}>
-			<PageContainer>
-				<Column gap="46" align="center">
-					<HeadPage title="Favorites" emoji="👍" />
-					<ListNewsCard
-						newsCards={newsCards}
-						scroll="vertical"
-						isInfinity
-						hasMore
-						fetchMoreHandler={() => fetchMore()}
-					/>
-				</Column>
-			</PageContainer>
-		</OnlyUsers>
+		<PageContainer>
+			<Column gap="46" align="center">
+				<HeadPage title="Featured" emoji="🔥" />
+				<MainNewsCard
+					id="fsdfnsdfm"
+					image="https://i.redd.it/1um8uengwo331.jpg"
+					tags={[{ text: 'AMD' }, { text: 'Graphic Card' }]}
+					title="AMD Launch the Radeon VII: The next power product against Nvidia"
+					original_link="/"
+					source="TomsHardware"
+					created_at="1 day ago"
+				/>
+				<ListNewsCard
+					newsCards={newsCards}
+					scroll="vertical"
+					isInfinity
+					hasMore
+					fetchMoreHandler={() => fetchMore()}
+				/>
+			</Column>
+		</PageContainer>
 	);
 };
 
-export default Favorites;
+export default CategoryPage;

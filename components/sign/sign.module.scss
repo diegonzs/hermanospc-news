@@ -1,58 +1,89 @@
 @import 'variables.scss';
 
 .container {
-  display: flex;
-  width: 90%;
-  max-width: 517px;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 auto;
-  margin-top: 133px;
-  margin-bottom: 100px;
+	display: flex;
+	width: 100%;
+	max-width: 517px;
+	flex-direction: column;
+	align-items: center;
+	margin: 0 auto;
+	margin-top: 133px;
+	margin-bottom: 100px;
+	@include respond(phone) {
+		margin: 32px 0;
+	}
 }
 
 .title {
-  color: $color-text-95;
-  font-size: $font-size-huge;
-  margin: 0;
-  padding: 0;
-  margin-bottom: 20px;
-  text-transform: uppercase;
+	color: $color-text-95;
+	font-size: $font-size-huge;
+	margin: 0;
+	padding: 0;
+	margin-bottom: 20px;
+	text-transform: uppercase;
+}
+
+.description {
+	font-size: $font-size-big;
+	color: $color-text-80;
+	margin: 0;
+	margin-bottom: 23px;
+	text-align: center;
+	@include respond(tabLand) {
+		max-width: 260px;
+	}
 }
 
 .socialList {
-  display: flex;
-  margin: 0;
-  width: 100%;
-  justify-content: space-evenly;
-  padding: 0;
-  margin-bottom: 32px;
-  li {
-    list-style: none;
-    width: 159px;
-    height: 56px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    text-transform: capitalize;
-  }
+	display: flex;
+	margin: 0;
+	width: 100%;
+	justify-content: space-evenly;
+	padding: 0;
+	margin-bottom: 32px;
+	li {
+		list-style: none;
+		width: 159px;
+		height: 56px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		text-transform: capitalize;
+		span {
+			margin-left: 17px;
+		}
+		@include respond(tabLand) {
+			width: 83px;
+			height: 47px;
+			span {
+				display: none;
+			}
+		}
+	}
 }
 
 .separator {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 38px;
-  &:before,
-  &:after {
-    content: '';
-    width: 140px;
-    height: 1.5px;
-    background-color: $color-text-60;
-  }
-  span {
-    color: $color-text-60;
-  }
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	align-items: center;
+	width: 100%;
+	margin-bottom: 38px;
+	grid-column-gap: 28.5px;
+	&:before,
+	&:after {
+		content: '';
+		width: 100%;
+		height: 1.5px;
+		background-color: $color-text-60;
+	}
+	&:after {
+		justify-self: end;
+	}
+	@include respond(phone) {
+		grid-column-gap: 10px;
+	}
+	span {
+		color: $color-text-60;
+	}
 }

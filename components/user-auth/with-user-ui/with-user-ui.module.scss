@@ -1,21 +1,32 @@
+@import 'variables.scss';
+
+.container {
+	@include respond(desktop) {
+		display: flex !important;
+		flex-direction: row-reverse;
+		justify-content: space-between;
+		width: 100% !important;
+	}
+}
+
 .iconContainer {
-  width: fit-content;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  text-decoration: none;
+	width: fit-content;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	text-decoration: none;
 }
 
 .icons {
-  width: auto;
-  height: 24.08px;
+	width: auto;
+	height: 24.08px;
 }
 
 .avatarPic {
-  width: 40px;
-  height: 40px;
-  border-radius: 5px;
-  background-color: #AAACAF;
-  cursor: pointer;
+	width: 40px;
+	height: 40px;
+	border-radius: 5px;
+	background-color: #aaacaf;
+	cursor: pointer;
 }

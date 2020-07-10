@@ -1,0 +1,16 @@
+@import 'variables.scss';
+
+.container {
+	a {
+		text-decoration: none;
+	}
+	@include respond(desktop) {
+		grid-column-gap: 16px !important;
+		width: 100% !important;
+		max-width: 350px;
+		grid-template-columns: 1fr 1fr;
+		a {
+			width: 100% !important;
+		}
+	}
+}

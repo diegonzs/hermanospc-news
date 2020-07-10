@@ -13,26 +13,28 @@ import bookmarkIcon from '/images/svgs/bookmark.svg';
 import shareIcon from '/images/svgs/share.svg';
 
 /**
- * This is the main news card component for the news section
- * @param {News} props
+ * @typedef {Object} MainNewsCardViewProps
+ * @property {News} news
+ * @property {(value: boolean) => void} openModalHandler
  */
-export const MainNewsCard = ({
-	image,
-	tags,
-	title,
-	original_link,
-	source,
-	howLong,
+
+/**
+ * This is the main news card component for the news section
+ * @param {MainNewsCardViewProps} props
+ */
+export const MainNewsCardView = ({
+	news: { image, tags, title, original_link, source, created_at },
+	openModalHandler,
 }) => {
 	return (
 		<div className={styles.columns}>
-			<div>
+			<div className={styles.imageContainer}>
 				<img src={image} className={styles.mainImage} />
 			</div>
 			<div className={styles.leftColumn}>
 				{tags && <ListTag tags={tags} gap="20" />}
 				<a href={original_link} target="_blank">
-					<h2>{title}</h2>
+					{title}
 				</a>
 				<div className={styles.likeSection}>
 					<Row>
@@ -41,7 +43,8 @@ export const MainNewsCard = ({
 							<img
 								className={styles.icons}
 								src={shareIcon}
-								style={{ paddingTop: '32px' }}
+								style={{ paddingTop: '32px', cursor: 'pointer' }}
+								onClick={() => openModalHandler(true)}
 							/>
 						</Row>
 						<Row isGrid={true} gap="32">
@@ -52,23 +55,27 @@ export const MainNewsCard = ({
 				</div>
 				<Row>
 					<span className={styles.source}>: {source}</span>
-					<p className={styles.howLong}>{howLong}</p>
+					<p className={styles.created_at}>{created_at}</p>
 				</Row>
 			</div>
 		</div>
 	);
 };
-MainNewsCard.propTypes = {
-	/**  Main image of the article */
-	image: PropTypes.string.isRequired,
-	/**  List of tags to be render */
-	tags: PropTypes.array.isRequired,
-	/**  title of the new */
-	title: PropTypes.string.isRequired,
-	/**  url link to show the detail of the new */
-	original_link: PropTypes.string.isRequired,
-	/**  Reactions section */
-	source: PropTypes.string.isRequired,
-	/**  date when the new was released */
-	howLong: PropTypes.string.isRequired,
+
+MainNewsCardView.propTypes = {
+	news: PropTypes.shape({
+		/**  Main image of the article */
+		image: PropTypes.string.isRequired,
+		/**  List of tags to be render */
+		tags: PropTypes.array.isRequired,
+		/**  title of the new */
+		title: PropTypes.string.isRequired,
+		/**  url link to show the detail of the new */
+		original_link: PropTypes.string.isRequired,
+		/**  Reactions section */
+		source: PropTypes.string.isRequired,
+		/**  date when the new was released */
+		created_at: PropTypes.string.isRequired,
+	}),
+	openModalHandler: PropTypes.func.isRequired,
 };

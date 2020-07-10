@@ -1,24 +1,52 @@
 @import 'variables.scss';
 
 .form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
 }
 
 .forgotPassword {
-  font-size: $font-size-small;
-  cursor: pointer;
-  margin-bottom: 78px;
-  color: $color-text-60;
-  width: fit-content;
+	font-size: $font-size-small;
+	cursor: pointer;
+	margin-bottom: 78px;
+	color: $color-text-60;
+	width: fit-content;
+}
+
+.changeFormText {
+	font-size: $font-size-medium;
+	color: $color-text-100;
+	text-decoration: none;
+	position: relative;
+	&:before {
+		content: '';
+		position: absolute;
+		top: calc(100% + 1px);
+		width: 100%;
+		left: 0;
+		height: 1px;
+		background-color: $color-text-100;
+	}
+}
+
+.submitContainer {
+	@include respond(phone) {
+		flex-direction: column-reverse;
+		button {
+			width: 100% !important;
+			justify-content: center;
+			padding: 0 !important;
+			margin-bottom: 24px;
+		}
+	}
 }
 
 .submitButton {
-  height: 48px;
-  padding: 0 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 4px;
+	height: 48px;
+	padding: 0 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 4px;
 }

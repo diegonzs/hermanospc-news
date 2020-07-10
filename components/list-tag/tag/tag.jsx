@@ -11,16 +11,13 @@ import styles from './tag.module.scss';
 /**
  * This is the tag component that will be used for the List Tag component
  * @param {TagProps} props
- */ 
+ */
+
 export const Tag = ({ text }) => {
-  return (
-    <li className={styles.tag}>{text}</li>
-  )
-}
+	return <li className={styles.tag}>{text}</li>;
+};
 
 Tag.propTypes = {
-  /** the text that would be in the tag */
-  text: PropTypes.string.isRequired,
-}
-
- 
+	/** the text that would be in the tag */
+	text: PropTypes.string.isRequired,
+};

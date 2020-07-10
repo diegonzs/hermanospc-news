@@ -1,1 +1,1 @@
-export { MainNewsCard } from './main-news-card';
+export { MainNewsCardContainer as MainNewsCard } from './main-news-card.container';

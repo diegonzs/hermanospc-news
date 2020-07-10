@@ -8,56 +8,79 @@ import PropTypes from 'prop-types';
  * @property {boolean} [isGrid] - Determine if the elements inside would be grid items.
  * @property {string} [gap] - If isGrid is true this property is used to separate the elements between them.
  * @property {React.CSSProperties} [customStyles] - custom styles
+ * @property {string} [customClass] - custom class
  * @property {any} [children]
  */
 
 /**
  * Useful component to align elements in one single row
- * @param {rowProps} props 
+ * @param {rowProps} props
  */
-export const Row = ({ children, justify="space-between", align="center", isGrid=false, gap='0', customStyles }) => {
-  /**
-   * @type {React.CSSProperties}
-  */
-  const styles = isGrid ? {
-    display: 'grid',
-    gridTemplateRows: '1fr',
-    gridAutoFlow: 'column',
-    gridAutoColumns: 'auto',
-    gridColumnGap: `${gap}px`,
-    width: 'fit-content',
-    alignItems: align,
-    ...customStyles,
-  } : {
-    display: 'flex',
-    justifyContent: justify,
-    alignItems: align,
-    width: '100%',
-    ...customStyles,
-  }
-  return (
-    <div style={styles}>
-      {children}
-    </div>
-  )
-}
+export const Row = ({
+	children,
+	justify = 'space-between',
+	align = 'center',
+	isGrid = false,
+	gap = '0',
+	customStyles,
+	customClass,
+}) => {
+	/**
+	 * @type {React.CSSProperties}
+	 */
+	const styles = isGrid
+		? {
+				display: 'grid',
+				gridTemplateRows: '1fr',
+				gridAutoFlow: 'column',
+				gridAutoColumns: 'auto',
+				gridColumnGap: `${gap}px`,
+				width: 'fit-content',
+				alignItems: align,
+				...customStyles,
+		  }
+		: {
+				display: 'flex',
+				justifyContent: justify,
+				alignItems: align,
+				width: '100%',
+				...customStyles,
+		  };
+	return (
+		<div style={styles} className={customClass}>
+			{children}
+		</div>
+	);
+};
 
 Row.propTypes = {
-  /** value for justify-content property */
-  justify: PropTypes.oneOf(['center', 'space-between', 'space-around', 'flex-start', 'flex-end']),
-  /** value for align-items property */
-  align: PropTypes.oneOf(['center', 'space-between', 'space-around', 'flex-start', 'flex-end']),
-  /** Custom styles */
-  customStyles: PropTypes.object,
-  /** If isGrid is true this property is used to separate the elements between them. */
-  gap: PropTypes.string,
-  /** Determine if the elements inside would be grid items. */
-  isGrid: PropTypes.bool
-}
+	/** value for justify-content property */
+	justify: PropTypes.oneOf([
+		'center',
+		'space-between',
+		'space-around',
+		'flex-start',
+		'flex-end',
+	]),
+	/** value for align-items property */
+	align: PropTypes.oneOf([
+		'center',
+		'space-between',
+		'space-around',
+		'flex-start',
+		'flex-end',
+	]),
+	/** Custom styles */
+	customStyles: PropTypes.object,
+	/** If isGrid is true this property is used to separate the elements between them. */
+	gap: PropTypes.string,
+	/** Determine if the elements inside would be grid items. */
+	isGrid: PropTypes.bool,
+};
 
 Row.defaultProps = {
-  justify: 'space-between',
-  align: 'center',
-  isGrid: false,
-  gap: '0',
-}
+	justify: 'space-between',
+	align: 'center',
+	isGrid: false,
+	gap: '0',
+};

@@ -1,15 +1,17 @@
 @import 'variables.scss';
-.tag{
-  color: #191C25;
-  font-size: $font-size-smallest;
-  list-style-type: none;
-  background-color: $color-primary;
-  border-radius: 16px;
-  padding-left: 18px;
-  padding-right: 18px;
-  text-align: center;
-  width: fit-content;
-  height: 24px;
-  display: flex;
-  align-items: center;
+
+.tag {
+	color: #191c25;
+	font-size: $font-size-smallest;
+	list-style-type: none;
+	background-color: $color-primary;
+	border-radius: 16px;
+	padding-left: 18px;
+	padding-right: 18px;
+	text-align: center;
+	width: fit-content;
+	height: 24px;
+	display: flex;
+	align-items: center;
+	font-weight: 600;
 }
