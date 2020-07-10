@@ -10,6 +10,7 @@ export default {
 };
 
 export const newDetailContent = () => (
+	// @ts-ignore
 	<NewsDetail
 		title="AMD Launch the Radeon VII: The next power product against Nvidia"
 		autor="TomsHardware"

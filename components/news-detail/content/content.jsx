@@ -3,17 +3,18 @@ import Propstype from 'prop-types';
 // @ts-ignore
 import styles from './content.module.scss';
 
-function createContent(content) {
+function createContent(newContent) {
 	return {
-		__html: `${content}`,
+		__html: newContent,
 	};
 }
 
 export const Content = ({ content }) => {
+	const newContent = content.replace('\n', '<br>');
 	return (
 		<div
 			className={styles.NewDetailContentContainer}
-			dangerouslySetInnerHTML={createContent(content)}
+			dangerouslySetInnerHTML={createContent(newContent)}
 		/>
 	);
 };

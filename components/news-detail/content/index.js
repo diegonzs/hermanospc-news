@@ -1,1 +1,1 @@
-export { NewDetailContent } from './content';
+export { Content } from './content';
