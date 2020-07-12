@@ -14,7 +14,9 @@ export const NewsCard = ({ news, isBig }) => {
 	const { setSelectedNews } = React.useContext(NewsContext);
 	return (
 		<div
-			onClick={() => setSelectedNews(news)}
+			onClick={() => {
+				setSelectedNews(news);
+			}}
 			className={isBig ? styles.containerBigger : styles.container}
 		>
 			<img src={image} alt="" className={styles.image} />

@@ -48,7 +48,7 @@ function MyApp({ Component, pageProps, sessionUser, isServer }) {
 									setIsOverlayActive(false);
 									setTimeout(() => {
 										setSelectedNews(null);
-									}, 300);
+									}, 250);
 								}}
 							/>
 						)}
