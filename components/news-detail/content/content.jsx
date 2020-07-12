@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Propstype from 'prop-types';
+import PropTypes from 'prop-types';
 // @ts-ignore
 import styles from './content.module.scss';
 
@@ -9,7 +9,7 @@ function createContent(newContent) {
 	};
 }
 
-export const Content = ({ content }) => {
+export const ContentComponent = ({ content }) => {
 	const newContent = content.replace('\n', '<br>');
 	return (
 		<div
@@ -19,6 +19,6 @@ export const Content = ({ content }) => {
 	);
 };
 
-Content.prototype = {
-	content: Propstype.string.isRequired,
+ContentComponent.propTypes = {
+	content: PropTypes.string.isRequired,
 };

@@ -5,7 +5,7 @@ import { NewsCard } from 'components/news-card';
 
 //@ts-ignore
 import styles from './list-news-card.module.scss';
-import { Loader } from './loader';
+import { Loader } from '../loader';
 
 /**
  * @typedef {Object} ListNewsCardProps
