@@ -3,7 +3,13 @@ import React from 'react';
 import styles from './contact.module.scss';
 
 export const Contact = () => {
-  return (
-    <a className={styles.contact} href="https://hermanospc.co/contact" target="_blank">Conctact</a>
-  )
-}
+	return (
+		<a
+			className={styles.contact}
+			href="https://hermanospc.co/contact"
+			target="_blank"
+		>
+			Contact
+		</a>
+	);
+};

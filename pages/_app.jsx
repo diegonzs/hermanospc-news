@@ -7,6 +7,7 @@ import { Header } from '../components/header';
 import { Footer } from 'components/footer';
 
 import '../styles/main.scss';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 function MyApp({ Component, pageProps, sessionUser, isServer }) {
 	const user = useFirebaseUser(sessionUser);

@@ -10,7 +10,7 @@ import styles from './settings.module.scss';
 /**
  * @typedef {Object} SettingsViewProps
  * @property {UserSettingsProps} userSettings
- * @property {NotificationSettingsProps} notificationSettings 
+ * @property {NotificationSettingsProps} notificationSettings
  */
 
 /**
@@ -18,19 +18,20 @@ import styles from './settings.module.scss';
  * @param {SettingsViewProps} props
  */
 export const SettingsView = ({ userSettings, notificationSettings }) => {
-  return (
-    <div className={styles.container}>
-      <Column gap="81" justify="center">
-        <UserSettings {...userSettings} />
-        <NotificationSettings {...notificationSettings} />
-      </Column>
-    </div>
-  )
-}
+	return (
+		<div className={styles.container}>
+			<Column gap="40" justify="center">
+				<UserSettings {...userSettings} />
+				<div className={styles.divider}></div>
+				<NotificationSettings {...notificationSettings} />
+			</Column>
+		</div>
+	);
+};
 
 SettingsView.propTypes = {
-  /** Check UserSettings Component to see the props. */
-  userSettings: PropTypes.object.isRequired,
-  /** Check NotificationSettings Component see to the props. */
-  notificationSettings: PropTypes.object.isRequired,
-}
+	/** Check UserSettings Component to see the props. */
+	userSettings: PropTypes.object.isRequired,
+	/** Check NotificationSettings Component see to the props. */
+	notificationSettings: PropTypes.object.isRequired,
+};

@@ -24,20 +24,15 @@ const socialMediaList = [
 		icon: '/images/social/tiktok.svg',
 		key: 'ticktok',
 	},
+	// {
+	// 	link: '#',
+	// 	icon: '/images/social/linkedin.svg',
+	// 	key: 'linkedin',
+	// },
 	{
-		link: '#',
-		icon: '/images/social/linkedin.svg',
-		key: 'linkedin',
-	},
-	{
-		link: 'https://discord.com/hermanospc',
+		link: 'https://discord.gg/PJTaMmn',
 		icon: '/images/social/discord.svg',
 		key: 'discord',
-	},
-	{
-		link: '#',
-		icon: '/images/social/telegram.svg',
-		key: 'telegram',
 	},
 ];
 

@@ -19,10 +19,10 @@ export const Form = ({
 	changeFormText,
 	changeFormPath,
 	hasTick,
+	isLoading,
 }) => {
 	const [email, setEmail] = React.useState('');
 	const [password, setPassword] = React.useState('');
-	const [isLoading, setIsloading] = React.useState(false);
 	const [isChecked, setIsChecked] = React.useState(false);
 	const [isPasswordVisible, setPasswordVisibility] = React.useState(false);
 
@@ -32,8 +32,6 @@ export const Form = ({
 			action="post"
 			onSubmit={(e) => {
 				e.preventDefault();
-				e.stopPropagation();
-				setIsloading(true);
 				handleSubmit({ email, password });
 			}}
 		>
@@ -55,9 +53,15 @@ export const Form = ({
 				<Checkbox
 					id="tick"
 					onChangeHandler={() => setIsChecked(!isChecked)}
-					label="I Agree with Hermanos PC terms of service and privacy police."
 					isChecked={isChecked}
-				/>
+				>
+					<label htmlFor="tick" className={styles.checkLabel}>
+						I Agree with Hermanos PC{' '}
+						<a href="https://hermanospc.co/legal">
+							terms of service and privacy police.
+						</a>
+					</label>
+				</Checkbox>
 			)}
 			{!hasTick && (
 				<span className={styles.forgotPassword}>I forgot the password</span>

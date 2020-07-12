@@ -9,19 +9,21 @@ import styles from './sign.module.scss';
 import googleIcon from 'public/images/svgs/google-icon.svg';
 //@ts-ignore
 import twitterIcon from 'public/images/svgs/twitter.svg';
+//@ts-ignore
+import facebookIcon from 'public/images/svgs/facebook.svg';
 
 const providers = {
 	google: {
 		provider: 'Google',
 		icon: googleIcon,
 	},
-	facebook: {
-		provider: 'Facebook',
-		icon: googleIcon,
-	},
 	twitter: {
 		provider: 'Twitter',
 		icon: twitterIcon,
+	},
+	facebook: {
+		provider: 'Facebook',
+		icon: facebookIcon,
 	},
 };
 
@@ -37,6 +39,8 @@ export const Sign = ({
 	changeFormPath,
 	handleSigninProvider,
 	hasTick,
+	errorMsg,
+	isLoading,
 }) => {
 	return (
 		<div className={styles.container}>
@@ -61,7 +65,13 @@ export const Sign = ({
 				changeFormPath={changeFormPath}
 				changeFormText={changeFormText}
 				hasTick={hasTick}
+				isLoading={isLoading}
 			/>
+			{!!errorMsg && (
+				<div className={styles.errorBox}>
+					<p>{errorMsg}</p>
+				</div>
+			)}
 		</div>
 	);
 };

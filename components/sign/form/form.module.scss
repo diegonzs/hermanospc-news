@@ -16,7 +16,7 @@
 
 .changeFormText {
 	font-size: $font-size-medium;
-	color: $color-text-100;
+	color: #999999;
 	text-decoration: none;
 	position: relative;
 	&:before {
@@ -26,7 +26,7 @@
 		width: 100%;
 		left: 0;
 		height: 1px;
-		background-color: $color-text-100;
+		background-color: #999999;
 	}
 }
 
@@ -49,4 +49,14 @@
 	align-items: center;
 	justify-content: center;
 	border-radius: 4px;
+}
+
+.checkLabel {
+	font-size: $font-size-small;
+	color: #999999;
+	a {
+		color: $color-primary-60;
+		text-decoration: none;
+		cursor: pointer;
+	}
 }

@@ -11,6 +11,7 @@ import imageExample from '/images/example/20200125114027.jpg';
 import bookmarkIcon from '/images/svgs/bookmark.svg';
 //@ts-ignore
 import shareIcon from '/images/svgs/share.svg';
+import { getSourceIco } from 'lib/get-source-ico';
 
 /**
  * @typedef {Object} MainNewsCardViewProps
@@ -33,9 +34,7 @@ export const MainNewsCardView = ({
 			</div>
 			<div className={styles.leftColumn}>
 				{tags && <ListTag tags={tags} gap="20" />}
-				<a href={original_link} target="_blank">
-					{title}
-				</a>
+				<span className={styles.title}>{title}</span>
 				<div className={styles.likeSection}>
 					<Row>
 						<Row isGrid={true} gap="16">
@@ -54,7 +53,14 @@ export const MainNewsCardView = ({
 					</Row>
 				</div>
 				<Row>
-					<span className={styles.source}>: {source}</span>
+					<span className={styles.source}>
+						<img
+							className={styles.sourceIco}
+							src={getSourceIco('muycomputer')}
+							alt=""
+						/>{' '}
+						{source}
+					</span>
 					<p className={styles.created_at}>{created_at}</p>
 				</Row>
 			</div>

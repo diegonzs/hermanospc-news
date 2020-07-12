@@ -6,6 +6,9 @@ import { Settings as SettingsComponent } from 'components/settings';
 import { OnlyUsers } from 'components/only-users';
 
 //@ts-ignore
+import smilyFaceIcon from '/images/icons/emoji-profile.png';
+
+//@ts-ignore
 import styles from 'styles/pages/settings.module.scss';
 
 const Settings = ({ isServer }) => {
@@ -13,7 +16,7 @@ const Settings = ({ isServer }) => {
 		<OnlyUsers isServer={isServer}>
 			<PageContainer>
 				<Column gap="90" justify="center" customClass={styles.columnContainer}>
-					<HeadPage title="Profile" emoji="😃" />
+					<HeadPage title="Profile" icon={smilyFaceIcon} />
 					<SettingsComponent
 						userSettings={{
 							email: 'diego.ags04@gmail.com',

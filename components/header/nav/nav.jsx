@@ -23,11 +23,11 @@ const navigationList = [
 		name: 'Wallpapers',
 		id: 'wallpapers',
 	},
-	{
-		link: 'https://hermanospc.co/',
-		name: 'Shop',
-		id: 'shop',
-	},
+	// {
+	// 	link: 'https://hermanospc.co/',
+	// 	name: 'Shop',
+	// 	id: 'shop',
+	// },
 	{
 		link: 'https://hermanospc.co/',
 		name: 'Blog',

@@ -5,6 +5,9 @@ import { HeadPage } from 'components/head-page/head-page';
 import { ListNewsCard } from 'components/list-news-card';
 import { OnlyUsers } from 'components/only-users';
 
+//@ts-ignore
+import thumbUpIcon from '/images/icons/emoji-favorites.png';
+
 /** @type News[] */
 const newsCardsDefault = [
 	{
@@ -78,7 +81,7 @@ const Favorites = ({ isServer }) => {
 		<OnlyUsers isServer={isServer}>
 			<PageContainer>
 				<Column gap="46" align="center">
-					<HeadPage title="Favorites" emoji="👍" />
+					<HeadPage title="Favorites" icon={thumbUpIcon} />
 					<ListNewsCard
 						newsCards={newsCards}
 						scroll="vertical"

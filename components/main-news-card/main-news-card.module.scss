@@ -2,6 +2,9 @@
 .columns {
 	display: grid;
 	grid-template-columns: 0.7fr 0.3fr;
+	background-color: $color-background-card;
+	border-radius: 4px;
+	overflow: hidden;
 	@include respond(desktop) {
 		display: flex;
 		flex-direction: column;
@@ -14,16 +17,17 @@
 	padding-bottom: 24px;
 	display: flex;
 	flex-direction: column;
-	a {
-		text-decoration: none;
-		color: white;
+	.title {
+		color: $color-text-100;
 		margin-top: 24px;
 		font-size: $font-size-huge;
 		flex: 1;
+		font-weight: 600;
+		cursor: pointer;
 	}
 	@include respond(desktop) {
 		padding: 16px;
-		a {
+		.title {
 			font-size: 3rem;
 			margin-bottom: 26px;
 		}
@@ -36,6 +40,7 @@
 .imageContainer {
 	max-height: 491px;
 	display: flex;
+	cursor: pointer;
 }
 .mainImage {
 	width: 100%;
@@ -53,4 +58,11 @@
 .source {
 	color: $color-primary-70;
 	font-size: $font-size-smallest;
+	display: flex;
+	align-items: center;
+}
+.sourceIco {
+	width: 12px;
+	height: 12px;
+	margin-right: 7px;
 }

@@ -5,6 +5,7 @@ import { NewsCard } from 'components/news-card';
 
 //@ts-ignore
 import styles from './list-news-card.module.scss';
+import { Loader } from './loader';
 
 /**
  * @typedef {Object} ListNewsCardProps
@@ -39,7 +40,7 @@ export const ListNewsCard = ({
 					// @ts-ignore
 					next={fetchMoreHandler}
 					hasMore={hasMore}
-					loader={<p>Loading...</p>}
+					loader={<Loader />}
 					endMessage={<p>There are no more</p>}
 				>
 					{newsCards.map((news) => (

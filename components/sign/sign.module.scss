@@ -35,10 +35,13 @@
 }
 
 .socialList {
-	display: flex;
+	display: grid;
+	grid-template-rows: 1fr;
+	grid-auto-columns: auto;
+	grid-auto-flow: column;
+	grid-column-gap: 20px;
 	margin: 0;
-	width: 100%;
-	justify-content: space-evenly;
+	width: fit-content;
 	padding: 0;
 	margin-bottom: 32px;
 	li {
@@ -50,6 +53,8 @@
 		justify-content: center;
 		cursor: pointer;
 		text-transform: capitalize;
+		background-color: $color-background-card;
+		border-radius: 4px;
 		span {
 			margin-left: 17px;
 		}
@@ -85,5 +90,22 @@
 	}
 	span {
 		color: $color-text-60;
+	}
+}
+
+.errorBox {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: $color-background-card;
+	border: 1px solid red;
+	border-radius: 4px;
+	margin-top: 32px;
+	width: 100%;
+	height: 60px;
+	padding: 0 20px;
+	p {
+		color: $color-text-60;
+		margin: 0;
 	}
 }

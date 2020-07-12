@@ -1,38 +1,38 @@
 @import 'variables.scss';
 
-.social{
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.social {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .list {
-  list-style: none;
-  display: grid;
-  grid-template-rows: 1fr;
-  grid-template-columns: repeat(7, 1fr);
-  grid-column-gap: 24px;
-  align-items: center;
-  width: min-content;
+	list-style: none;
+	display: grid;
+	grid-template-rows: 1fr;
+	grid-auto-flow: column;
+	grid-auto-columns: 1fr;
+	grid-column-gap: 24px;
+	align-items: center;
+	width: min-content;
 }
 
 .item {
-  padding-top: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: min-content;
-  border-bottom: solid 1px transparent;
-  transition: all .3s ease;
+	padding-top: 12px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	width: min-content;
+	border-bottom: solid 1px transparent;
+	transition: all 0.3s ease;
 }
 
 .icon {
-  display: inline-block;
-  height: 18px;
-  width: auto;
-  path{
-    fill: $color-primary;
-  }
+	display: inline-block;
+	height: 18px;
+	width: auto;
+	path {
+		fill: $color-primary;
+	}
 }
-

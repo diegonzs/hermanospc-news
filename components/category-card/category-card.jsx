@@ -31,9 +31,12 @@ export const CategoryCard = ({ title, news }) => {
 			{title && <Title text={title.text} emoji={title.emoji} />}
 			<MainNewsCard {...firstNews} />
 			<ListNewsCard newsCards={moreNews} />
-			<Link href="/news-category/[slug]" as="/news-category/hello-world">
-				<a className={styles.showMoreLink}>Show more</a>
-			</Link>
+			<div className={styles.showMoreContainer}>
+				<div className={styles.divider} />
+				<Link href="/news-category/[slug]" as="/news-category/hello-world">
+					<a className={styles.showMoreLink}>Show more</a>
+				</Link>
+			</div>
 		</div>
 	);
 };

@@ -81,7 +81,7 @@ const Saved = ({ isServer }) => {
 		<OnlyUsers isServer={isServer}>
 			<PageContainer>
 				<Column gap="46" align="center">
-					<HeadPage title="Saved" icon={savedIcon} />
+					<HeadPage title="For Later" icon={savedIcon} />
 					<ListNewsCard
 						newsCards={newsCards}
 						scroll="vertical"
