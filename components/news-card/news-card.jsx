@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import { NewsContext } from 'context/news-context';
 
 // @ts-ignore
 import styles from './news-card.module.scss';
@@ -8,14 +9,12 @@ import styles from './news-card.module.scss';
  * Use to show tthe preview of a new
  * @param {NewsCardProps} props
  */
-export const NewsCard = ({
-	news: { title, image, source, created_at, original_link },
-	isBig,
-}) => {
+export const NewsCard = ({ news, isBig }) => {
+	const { title, image, source, created_at, original_link } = news;
+	const { setSelectedNews } = React.useContext(NewsContext);
 	return (
-		<a
-			href={original_link}
-			target="_blank"
+		<div
+			onClick={() => setSelectedNews(news)}
 			className={isBig ? styles.containerBigger : styles.container}
 		>
 			<img src={image} alt="" className={styles.image} />
@@ -26,7 +25,7 @@ export const NewsCard = ({
 					<span className={styles.created_at}>{created_at}</span>
 				</div>
 			</div>
-		</a>
+		</div>
 	);
 };
 

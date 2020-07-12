@@ -28,7 +28,7 @@ const Settings = ({ isServer }) => {
 								{
 									title: 'Subscribe to Weekly Digest',
 									description: 'Our email summary every Monday',
-									id: 'sdasdasd',
+									id: 'fsdfsd',
 									isActive: true,
 								},
 								{

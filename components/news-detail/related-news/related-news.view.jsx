@@ -21,7 +21,7 @@ export const RelatedNewsView = ({ news }) => {
 			<Title text="Related News" icon={newspaperIcon} />
 			<ul className={styles.listOfNews}>
 				{news.map((n) => (
-					<NewsCard news={n} />
+					<NewsCard news={n} key={n.id} />
 				))}
 			</ul>
 		</div>

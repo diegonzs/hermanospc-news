@@ -1,4 +1,5 @@
 import React from 'react';
+import { NewsContext } from 'context/news-context';
 import { ListTag } from 'components/list-tag/list-tag';
 import { Row } from 'components/row/row';
 import { Reactions } from 'components/reactions/reactions';
@@ -23,18 +24,22 @@ import { getSourceIco } from 'lib/get-source-ico';
  * This is the main news card component for the news section
  * @param {MainNewsCardViewProps} props
  */
-export const MainNewsCardView = ({
-	news: { image, tags, title, original_link, source, created_at },
-	openModalHandler,
-}) => {
+export const MainNewsCardView = ({ news, openModalHandler }) => {
+	const { image, tags, title, original_link, source, created_at } = news;
+	const { setSelectedNews } = React.useContext(NewsContext);
 	return (
 		<div className={styles.columns}>
-			<div className={styles.imageContainer}>
+			<div
+				className={styles.imageContainer}
+				onClick={() => setSelectedNews(news)}
+			>
 				<img src={image} className={styles.mainImage} />
 			</div>
 			<div className={styles.leftColumn}>
 				{tags && <ListTag tags={tags} gap="20" />}
-				<span className={styles.title}>{title}</span>
+				<span className={styles.title} onClick={() => setSelectedNews(news)}>
+					{title}
+				</span>
 				<div className={styles.likeSection}>
 					<Row>
 						<Row isGrid={true} gap="16">

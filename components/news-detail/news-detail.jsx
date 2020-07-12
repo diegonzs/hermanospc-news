@@ -14,13 +14,13 @@ const mainListTagProps = {
 	gap: '20',
 };
 
-export const NewsDetail = ({ title, autor, image, content }) => {
+export const NewsDetail = ({ title, autor, image, content, onBack }) => {
 	return (
 		<div className={styles.container}>
 			<div className={styles.NewsDetailContainer}>
 				<div className={styles.header}>
 					<div className={styles.backbutton}>
-						<BackButton text="Back" />
+						<BackButton text="Back" handleClick={onBack} />
 					</div>
 					<div className={styles.tags}>
 						<ListTag tags={mainListTagProps.tags} />

@@ -4,6 +4,9 @@
 	display: grid;
 	grid-auto-flow: row;
 	grid-row-gap: 40px;
+	@include respond(desktop) {
+		margin-top: 53px !important;
+	}
 }
 
 .categories {

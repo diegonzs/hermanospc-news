@@ -24,6 +24,13 @@
 		flex: 1;
 		font-weight: 600;
 		cursor: pointer;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+		-webkit-tap-highlight-color: transparent;
 	}
 	@include respond(desktop) {
 		padding: 16px;
@@ -41,6 +48,13 @@
 	max-height: 491px;
 	display: flex;
 	cursor: pointer;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-tap-highlight-color: transparent;
 }
 .mainImage {
 	width: 100%;

@@ -7,6 +7,12 @@ import { NewsCard } from 'components/news-card';
 import styles from './list-news-card.module.scss';
 import { Loader } from '../loader';
 
+function getRandomInt(min, max) {
+	min = Math.ceil(min);
+	max = Math.floor(max);
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 /**
  * @typedef {Object} ListNewsCardProps
  * @property {boolean} [isInfinity] - Tells if the elements would have infinity scrollin
@@ -44,7 +50,7 @@ export const ListNewsCard = ({
 					endMessage={<p>There are no more</p>}
 				>
 					{newsCards.map((news) => (
-						<li key={news.id} className={styles.list}>
+						<li key={getRandomInt(0, 5000)} className={styles.list}>
 							<NewsCard news={news} isBig />
 						</li>
 					))}
@@ -52,7 +58,10 @@ export const ListNewsCard = ({
 			) : (
 				<>
 					{newsCards.map((news) => (
-						<li key={news.id} className={`${styles.list} ${styles.horizontal}`}>
+						<li
+							key={getRandomInt(0, 5000)}
+							className={`${styles.list} ${styles.horizontal}`}
+						>
 							<NewsCard news={news} />
 						</li>
 					))}

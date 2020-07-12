@@ -4,6 +4,9 @@
 	color: $color-text-95;
 	font-size: $font-size-biggest;
 	min-width: 280px;
+	@include respond(phone) {
+		min-width: 250px;
+	}
 }
 
 .toggle {
@@ -26,5 +29,8 @@
 	font-family: 'Poppins' !important;
 	&:focus {
 		outline: none;
+	}
+	@include respond(phone) {
+		min-width: 250px;
 	}
 }
