@@ -60,7 +60,7 @@ export const Button = ({
 		return (
 			<a
 				href={href}
-				className={styles[`button-${size}`]}
+				className={`${styles[`button-${size}`]} ${customClass}`}
 				onClick={() => onClickHandler()}
 				style={customStyles}
 				onMouseEnter={() => setIsHover(true)}
@@ -72,7 +72,7 @@ export const Button = ({
 	}
 	return (
 		<button
-			className={styles[`button-${size}`]}
+			className={`${styles[`button-${size}`]} ${customClass}`}
 			onClick={() => onClickHandler()}
 			disabled={isDisabled}
 			style={customStyles}

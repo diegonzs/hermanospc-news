@@ -12,7 +12,7 @@ import savedIcon from '/images/icons/bookmark.png';
 const newsCardsDefault = [
 	{
 		id: 'asdasda',
-		image: '',
+		image: 'https://i.redd.it/1um8uengwo331.jpg',
 		title: 'AMD Launch the Radeon VII: The next power product against Nvidia',
 		source: 'TomsHardware',
 		created_at: '1 day ago',
@@ -20,7 +20,7 @@ const newsCardsDefault = [
 	},
 	{
 		id: 'fsdfsdf',
-		image: '',
+		image: 'https://i.redd.it/1um8uengwo331.jpg',
 		title: 'AMD Launch the Radeon VII: The next power product against Nvidia',
 		source: 'TomsHardware',
 		created_at: '1 day ago',
@@ -28,7 +28,7 @@ const newsCardsDefault = [
 	},
 	{
 		id: 'asdasda',
-		image: '',
+		image: 'https://i.redd.it/1um8uengwo331.jpg',
 		title: 'AMD Launch the Radeon VII: The next power product against Nvidia',
 		source: 'TomsHardware',
 		created_at: '1 day ago',
@@ -36,7 +36,7 @@ const newsCardsDefault = [
 	},
 	{
 		id: 'fsdfsdf',
-		image: '',
+		image: 'https://i.redd.it/1um8uengwo331.jpg',
 		title: 'AMD Launch the Radeon VII: The next power product against Nvidia',
 		source: 'TomsHardware',
 		created_at: '1 day ago',
@@ -44,7 +44,7 @@ const newsCardsDefault = [
 	},
 	{
 		id: 'asdasda',
-		image: '',
+		image: 'https://i.redd.it/1um8uengwo331.jpg',
 		title: 'AMD Launch the Radeon VII: The next power product against Nvidia',
 		source: 'TomsHardware',
 		created_at: '1 day ago',
@@ -52,7 +52,7 @@ const newsCardsDefault = [
 	},
 	{
 		id: 'fsdfsdf',
-		image: '',
+		image: 'https://i.redd.it/1um8uengwo331.jpg',
 		title: 'AMD Launch the Radeon VII: The next power product against Nvidia',
 		source: 'TomsHardware',
 		created_at: '1 day ago',
@@ -63,7 +63,7 @@ const newsCardsDefault = [
 /** @type News */
 const newCard = {
 	id: 'asdasdasgf',
-	image: '',
+	image: 'https://i.redd.it/1um8uengwo331.jpg',
 	title: 'AMD Launch the Radeon VII: The next power product against Nvidia',
 	source: 'TomsHardware',
 	created_at: '1 day ago',

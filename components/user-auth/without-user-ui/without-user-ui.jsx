@@ -21,6 +21,7 @@ export const WithoutUserUI = () => {
 						}}
 						isFilled={false}
 						size="big"
+						customClass={styles.button}
 					/>
 				</a>
 			</Link>
@@ -32,6 +33,7 @@ export const WithoutUserUI = () => {
 							return;
 						}}
 						size="big"
+						customClass={styles.button}
 					/>
 				</a>
 			</Link>
