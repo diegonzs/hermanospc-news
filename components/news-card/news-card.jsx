@@ -1,6 +1,8 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { NewsContext } from 'context/news-context';
+//@ts-ignore
+import bookmarkIcon from '/images/svgs/bookmark.svg';
 
 // @ts-ignore
 import styles from './news-card.module.scss';
@@ -20,6 +22,7 @@ export const NewsCard = ({ news, isBig }) => {
 			className={isBig ? styles.containerBigger : styles.container}
 		>
 			<img src={image} alt="" className={styles.image} />
+			<img src={bookmarkIcon} className={styles.icon} />
 			<div className={styles.contentContainer}>
 				<h3 className={styles.title}>{title}</h3>
 				<div className={styles.row}>
