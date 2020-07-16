@@ -6,14 +6,20 @@
 	border-radius: 4px;
 	overflow: hidden;
 	transition: all ease-in-out 0.3s;
-	@include respond(desktop) {
-		display: flex;
-		flex-direction: column;
-	}
 	&:hover {
 		background-color: $color-card-hover;
 		.mainImage {
 			transform: scale(1.1);
+		}
+	}
+	@include respond(desktop) {
+		display: flex;
+		flex-direction: column;
+		background-color: $color-card-hover;
+		&:hover {
+			.mainImage {
+				transform: scale(1);
+			}
 		}
 	}
 }
@@ -67,7 +73,7 @@
 .mainImage {
 	width: 100%;
 	object-fit: cover;
-	transition: all ease-in-out 0.3s;
+	transition: transform ease-in-out 0.3s;
 	overflow: hidden;
 }
 .icons {

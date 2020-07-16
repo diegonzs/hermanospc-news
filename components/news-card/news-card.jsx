@@ -21,8 +21,12 @@ export const NewsCard = ({ news, isBig }) => {
 			}}
 			className={isBig ? styles.containerBigger : styles.container}
 		>
-			<img src={image} alt="" className={styles.image} />
-			<img src={bookmarkIcon} className={styles.icon} />
+			<picture className={styles.imageContainer}>
+				<img src={image} alt="" className={styles.image} />
+			</picture>
+			<div className={styles.iconContainer}>
+				<img src={bookmarkIcon} className={styles.icon} />
+			</div>
 			<div className={styles.contentContainer}>
 				<h3 className={styles.title}>{title}</h3>
 				<div className={styles.row}>

@@ -10,18 +10,33 @@
 	overflow: hidden;
 	transition: all ease-in-out 0.3s;
 	background-color: $color-background-card;
-	@include respond(desktop) {
-		flex-direction: row;
-		width: 100%;
-		height: auto;
-	}
 	&:hover {
 		background-color: $color-card-hover;
 		.image {
 			transform: scale(1.1);
 		}
+		.iconContainer {
+			opacity: 1;
+		}
 		.icon {
 			opacity: 1;
+		}
+	}
+	@include respond(desktop) {
+		flex-direction: row;
+		width: 100%;
+		height: auto;
+		background-color: $color-card-hover;
+		.iconContainer {
+			display: none;
+			.icon {
+				display: none;
+			}
+		}
+		&:hover {
+			.image {
+				transform: scale(1);
+			}
 		}
 	}
 }
@@ -66,31 +81,43 @@
 	}
 }
 
-.image {
+.imageContainer {
+	position: relative;
 	width: 260px;
 	height: 160px;
-	object-fit: cover;
-	background-color: $color-text-40;
 	border-radius: 4px;
 	margin-bottom: 12px;
 	overflow: hidden;
-	transition: all ease-in-out 0.3s;
-	position: relative;
 	@include respond(desktop) {
 		width: 76px;
 		height: auto;
+	}
+	.image {
+		width: 100%;
+		height: 100%;
 		object-fit: cover;
+		background-color: $color-text-40;
+		transition: all ease-in-out 0.3s;
 		margin-bottom: 0;
 	}
 }
 
-.icon {
+.iconContainer {
 	position: absolute;
-	margin-top: 12px;
-	margin-left: 230px;
+	margin-left: 210px;
+	width: 50px;
+	height: 160px;
+	background: linear-gradient(90deg, transparent 10%, rgba(0, 0, 0, 0.9) 90%);
+	opacity: 0;
 	overflow: hidden;
 	transition: all ease-in-out 0.3s;
-	opacity: 0;
+	.icon {
+		padding-top: 12px;
+		margin-left: 20px;
+		overflow: hidden;
+		transition: all ease-in-out 0.3s;
+		opacity: 0;
+	}
 }
 
 .title {
