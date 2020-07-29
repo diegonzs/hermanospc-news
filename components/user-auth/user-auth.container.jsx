@@ -20,7 +20,7 @@ export const UserAuthContainer = () => {
 					signout();
 				},
 			}}
-			isUserSignedIn={!!user}
+			isUserSignedIn={!!(user && user.uid)}
 		/>
 	);
 };

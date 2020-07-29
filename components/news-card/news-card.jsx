@@ -1,6 +1,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { NewsContext } from 'context/news-context';
+import moment from 'moment';
 
 // @ts-ignore
 import styles from './news-card.module.scss';
@@ -23,8 +24,13 @@ export const NewsCard = ({ news, isBig }) => {
 			<div className={styles.contentContainer}>
 				<h3 className={styles.title}>{title}</h3>
 				<div className={styles.row}>
-					<span className={styles.source}>: {source}</span>
-					<span className={styles.created_at}>{created_at}</span>
+					<span className={styles.source}>
+						<img className={styles.sourceIco} src={source.favicon} alt="" />{' '}
+						{source.name}
+					</span>
+					<span className={styles.created_at}>
+						{moment(created_at).fromNow()}
+					</span>
 				</div>
 			</div>
 		</div>
@@ -38,7 +44,10 @@ NewsCard.propTypes = {
 		/** Title */
 		title: PropTypes.string.isRequired,
 		/** Source */
-		source: PropTypes.string.isRequired,
+		source: PropTypes.shape({
+			name: PropTypes.string,
+			favicon: PropTypes.string,
+		}).isRequired,
 		/** How long since posted */
 		created_at: PropTypes.string.isRequired,
 		/** Where it sends the user when clicked. */

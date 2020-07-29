@@ -4,28 +4,24 @@ import Router from 'next/router';
 import { LoadingPage } from 'components/loading-page';
 
 /**
- * This component only allow user to see a page. 
+ * This component only allow user to see a page.
  */
 export const OnlyUsers = ({ children, isServer }) => {
-  const user = React.useContext(UserContext);
-  const [isLoading, setIsLoading] = React.useState(isServer);
-  
-  React.useEffect(() => {
-    console.log(isServer);
-  }, [isServer])
+	const user = React.useContext(UserContext);
+	const [isLoading, setIsLoading] = React.useState(isServer);
 
-  /** Redirect the user to home if he/she isn't logged in */
-  React.useEffect(() => {
-    if (!user) {
-      Router.push('/signup')
-    } else {
-      setIsLoading(false);
-    }
-  }, [user])
+	/** Redirect the user to home if he/she isn't logged in */
+	React.useEffect(() => {
+		if (!user) {
+			Router.push('/signup');
+		} else {
+			setIsLoading(false);
+		}
+	}, [user]);
 
-  if (isLoading) {
-    return <LoadingPage />
-  } else {
-    return children;
-  }
-}
+	if (isLoading) {
+		return <LoadingPage />;
+	} else {
+		return children;
+	}
+};

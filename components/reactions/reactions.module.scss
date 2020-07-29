@@ -1,0 +1,15 @@
+@import 'variables.scss';
+
+.container {
+	cursor: pointer;
+	padding: 0.3rem;
+	border-radius: 2px;
+}
+
+.active {
+	background-color: $color-primary-30;
+}
+
+.disabled {
+	cursor: not-allowed;
+}

@@ -8,9 +8,19 @@ function createContent(newContent) {
 		__html: newContent,
 	};
 }
-
+/**
+ * @typedef {Object} ContentComponentProps
+ * @property {string} [content]
+ */
+/**
+ * Component to show the content detail with the correct styles.
+ * @param {ContentComponentProps} props
+ */
 export const ContentComponent = ({ content }) => {
-	const newContent = content.replace('\n', '<br>');
+	let newContent = '';
+	if (content) {
+		newContent = content.split('\\n').join('<br />');
+	}
 	return (
 		<div
 			className={styles.NewDetailContentContainer}
@@ -20,5 +30,5 @@ export const ContentComponent = ({ content }) => {
 };
 
 ContentComponent.propTypes = {
-	content: PropTypes.string.isRequired,
+	content: PropTypes.string,
 };

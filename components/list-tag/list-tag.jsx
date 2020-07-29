@@ -1,12 +1,12 @@
 import React from 'react';
-import {Tag} from './tag';
+import { Tag } from './tag';
 import PropTypes from 'prop-types';
 //@ts-ignore
 import styles from './list-tag.module.scss';
 
 /**
  * @typedef {Object} ListTagProps
- * @property {import('./tag/tag').TagProps[]} tags - List of tags to be render
+ * @property {Tag[]} tags - List of tags to be render
  * @property {string} [gap] - space between the grid elements
  */
 /**
@@ -14,20 +14,20 @@ import styles from './list-tag.module.scss';
  * @param {ListTagProps} props
  */
 
-export const ListTag = ({ tags, gap='10' }) => {
-    return (
-   <ul style={{gridGap:`${gap}px`}} className={styles.listTag}>
-       {tags.map(t=>(<Tag key={t.text} text={t.text} />))}
-    </ul>
-    )
-  }
+export const ListTag = ({ tags, gap = '10' }) => {
+	return (
+		<ul style={{ gridGap: `${gap}px` }} className={styles.listTag}>
+			{tags && tags.map((t) => <Tag key={t.tag.text} text={t.tag.text} />)}
+		</ul>
+	);
+};
 ListTag.propTypes = {
-    /**  List of tags to be render */
-    tags: PropTypes.array.isRequired,
-    /**  Space between the tags */
-    gap: PropTypes.string,
-  }
+	/**  List of tags to be render */
+	tags: PropTypes.array.isRequired,
+	/**  Space between the tags */
+	gap: PropTypes.string,
+};
 
-  ListTag.defaultProps = {
-    gap: '10',
-  }
+ListTag.defaultProps = {
+	gap: '10',
+};

@@ -1,94 +1,79 @@
 import * as React from 'react';
+import { useQuery } from '@apollo/client';
+
+import { UserContext } from 'context/user-context';
+
 import { PageContainer } from 'components/page-container';
 import { Column } from 'components/column';
-import { HeadPage } from 'components/head-page/head-page';
+import { HeadPage } from 'components/head-page';
 import { ListNewsCard } from 'components/list-news-card';
 import { OnlyUsers } from 'components/only-users';
+import { Loader } from 'components/loader';
 
 //@ts-ignore
 import savedIcon from '/images/icons/bookmark.png';
-
-/** @type News[] */
-const newsCardsDefault = [
-	{
-		id: 'asdasda',
-		image: 'https://i.redd.it/1um8uengwo331.jpg',
-		title: 'AMD Launch the Radeon VII: The next power product against Nvidia',
-		source: 'TomsHardware',
-		created_at: '1 day ago',
-		original_link: '/',
-	},
-	{
-		id: 'fsdfsdf',
-		image: 'https://i.redd.it/1um8uengwo331.jpg',
-		title: 'AMD Launch the Radeon VII: The next power product against Nvidia',
-		source: 'TomsHardware',
-		created_at: '1 day ago',
-		original_link: '/',
-	},
-	{
-		id: 'asdasda',
-		image: 'https://i.redd.it/1um8uengwo331.jpg',
-		title: 'AMD Launch the Radeon VII: The next power product against Nvidia',
-		source: 'TomsHardware',
-		created_at: '1 day ago',
-		original_link: '/',
-	},
-	{
-		id: 'fsdfsdf',
-		image: 'https://i.redd.it/1um8uengwo331.jpg',
-		title: 'AMD Launch the Radeon VII: The next power product against Nvidia',
-		source: 'TomsHardware',
-		created_at: '1 day ago',
-		original_link: '/',
-	},
-	{
-		id: 'asdasda',
-		image: 'https://i.redd.it/1um8uengwo331.jpg',
-		title: 'AMD Launch the Radeon VII: The next power product against Nvidia',
-		source: 'TomsHardware',
-		created_at: '1 day ago',
-		original_link: '/',
-	},
-	{
-		id: 'fsdfsdf',
-		image: 'https://i.redd.it/1um8uengwo331.jpg',
-		title: 'AMD Launch the Radeon VII: The next power product against Nvidia',
-		source: 'TomsHardware',
-		created_at: '1 day ago',
-		original_link: '/',
-	},
-];
-
-/** @type News */
-const newCard = {
-	id: 'asdasdasgf',
-	image: 'https://i.redd.it/1um8uengwo331.jpg',
-	title: 'AMD Launch the Radeon VII: The next power product against Nvidia',
-	source: 'TomsHardware',
-	created_at: '1 day ago',
-	original_link: '/',
-};
+import {
+	ALL_LINKS_SAVED_QUERY,
+	ALL_LINKS_SAVED_QUERY_VARIABLES,
+} from 'graphql/queries/links-saved';
 
 const Saved = ({ isServer }) => {
-	const [newsCards, setNewsCards] = React.useState(newsCardsDefault);
-	const fetchMore = () => {
-		setTimeout(() => {
-			setNewsCards([...newsCards, newCard]);
-		}, 3000);
+	const user = React.useContext(UserContext);
+	const { data, fetchMore, loading } = useQuery(ALL_LINKS_SAVED_QUERY, {
+		variables: ALL_LINKS_SAVED_QUERY_VARIABLES(user ? user.uid : '', 0, 1),
+		fetchPolicy: 'cache-first',
+	});
+
+	/** @type {News[]} */
+	let news = [];
+	let hasMore = false;
+
+	const fetchMoreHandler = () => {
+		fetchMore({
+			variables: {
+				offset: data.links_saved.length,
+			},
+			updateQuery: (prev, { fetchMoreResult }) => {
+				if (!fetchMoreResult) return prev;
+				return {
+					...prev,
+					links_saved: [...prev.links_saved, ...fetchMoreResult.links_saved],
+				};
+			},
+		});
 	};
+
+	if (data && data.links_saved) {
+		const listOfIds = [];
+		news = data.links_saved.reduce((acum, l) => {
+			if (!listOfIds.includes(l.link.id)) {
+				listOfIds.push(l.link.id);
+				return [...acum, { ...l.link }];
+			} else {
+				return acum;
+			}
+		}, []);
+	}
+
+	if (data && data.links_saved_aggregate && data.links_saved) {
+		hasMore = data.links_saved_aggregate.aggregate.count > news.length;
+	}
+
 	return (
 		<OnlyUsers isServer={isServer}>
 			<PageContainer>
 				<Column gap="46" align="center">
 					<HeadPage title="For Later" icon={savedIcon} />
-					<ListNewsCard
-						newsCards={newsCards}
-						scroll="vertical"
-						isInfinity
-						hasMore
-						fetchMoreHandler={() => fetchMore()}
-					/>
+					{loading && <Loader />}
+					{!loading && data && data.links_saved && (
+						<ListNewsCard
+							newsCards={news}
+							scroll="vertical"
+							isInfinity
+							hasMore={hasMore}
+							fetchMoreHandler={() => fetchMoreHandler()}
+						/>
+					)}
 				</Column>
 			</PageContainer>
 		</OnlyUsers>
@@ -96,3 +81,5 @@ const Saved = ({ isServer }) => {
 };
 
 export default Saved;
+
+// export default withApollo({ ssr: false })(Saved);

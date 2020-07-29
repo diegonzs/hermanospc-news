@@ -17,13 +17,14 @@ import Link from 'next/link';
 /**
  * @typedef {Object} categoryCardProps  
  * @property {News[]} news - List of card to be displayed under the main card
- * @property {title} [title] - title of section
+ * @property {title} [title] - Title of section
+ * @property {string} slug - Slug to do the linking
  */
 /**
  * This is the category card component for the news section
  * @param {categoryCardProps} props
  */
-export const CategoryCard = ({ title, news }) => {
+export const CategoryCard = ({ title, news, slug }) => {
 	const firstNews = news[0];
 	const moreNews = news.slice(1);
 	return (
@@ -33,7 +34,7 @@ export const CategoryCard = ({ title, news }) => {
 			<ListNewsCard newsCards={moreNews} />
 			<div className={styles.showMoreContainer}>
 				<div className={styles.divider} />
-				<Link href="/news-category/[slug]" as="/news-category/hello-world">
+				<Link href="/news-category/[slug]" as={`/news-category/${slug}`}>
 					<a className={styles.showMoreLink}>Show more</a>
 				</Link>
 			</div>
@@ -42,9 +43,13 @@ export const CategoryCard = ({ title, news }) => {
 };
 
 CategoryCard.propTypes = {
+	/** Object that contains title info */
 	title: PropTypes.shape({
 		text: PropTypes.string,
 		emoji: PropTypes.string,
 	}),
+	/** Array of news to be rendered */
 	news: PropTypes.array.isRequired,
+	/** Slug to do the linking */
+	slug: PropTypes.string.isRequired,
 };

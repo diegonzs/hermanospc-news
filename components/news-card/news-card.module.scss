@@ -60,6 +60,7 @@
 	background-color: $color-text-40;
 	border-radius: 4px;
 	margin-bottom: 12px;
+	cursor: pointer;
 	@include respond(desktop) {
 		width: 76px;
 		height: auto;
@@ -71,6 +72,7 @@
 .title {
 	color: $color-text-100;
 	flex: 1;
+	cursor: pointer;
 	@include respond(desktop) {
 		margin-bottom: 6px;
 		font-size: 1.75rem;
@@ -93,6 +95,12 @@
 	@include respond(desktop) {
 		margin-right: 16px;
 	}
+}
+
+.sourceIco {
+	width: 12px;
+	height: 12px;
+	margin-right: 7px;
 }
 
 .created_at {

@@ -1,1 +1,1 @@
-export { Reactions } from './reactions';
+export { ReactionsContainer as Reactions } from './reactions-container';

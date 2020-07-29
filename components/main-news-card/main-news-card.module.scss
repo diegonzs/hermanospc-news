@@ -80,3 +80,14 @@
 	height: 12px;
 	margin-right: 7px;
 }
+.icon {
+	padding-top: 32px;
+	display: flex;
+	align-items: flex-end;
+	cursor: pointer;
+}
+
+.fillIcon {
+	svg {
+	}
+}

@@ -9,12 +9,23 @@ import { Reactions } from './reactions';
 // @ts-ignore
 import styles from './news-detail.module.scss';
 
-const mainListTagProps = {
-	tags: [{ text: 'AMD' }, { text: 'Graphic Card' }],
-	gap: '20',
-};
+// const mainListTagProps = {
+// 	tags: [{ text: 'AMD' }, { text: 'Graphic Card' }],
+// 	gap: '20',
+// };
 
-export const NewsDetail = ({ title, autor, image, content, onBack }) => {
+/**
+ * @typedef {Object} NewsDetailProps
+ * @property {News} news - News
+ * @property {() => void} [onBack] - Function to override back button behaviour
+ */
+
+/**
+ * Component to show the news detail
+ * @param {NewsDetailProps} props
+ */
+export const NewsDetail = ({ news, onBack }) => {
+	const { title, source, tags, image, content } = news;
 	return (
 		<div className={styles.container}>
 			<div className={styles.NewsDetailContainer}>
@@ -23,13 +34,13 @@ export const NewsDetail = ({ title, autor, image, content, onBack }) => {
 						<BackButton text="Back" handleClick={onBack} />
 					</div>
 					<div className={styles.tags}>
-						<ListTag tags={mainListTagProps.tags} />
+						<ListTag tags={tags} />
 					</div>
 				</div>
 				<div className={styles.image}>
 					<img src={image} />
 				</div>
-				<div className={styles.autor}>By {autor}</div>
+				<div className={styles.autor}>By {source.name}</div>
 				<div className={styles.title}>
 					<h1>{title}</h1>
 				</div>
@@ -42,8 +53,23 @@ export const NewsDetail = ({ title, autor, image, content, onBack }) => {
 };
 
 NewsDetail.propTypes = {
-	title: PropTypes.string.isRequired,
-	autor: PropTypes.string.isRequired,
-	image: PropTypes.string.isRequired,
-	content: PropTypes.string.isRequired,
+	news: PropTypes.shape({
+		/** Main image */
+		image: PropTypes.string.isRequired,
+		/** Title */
+		title: PropTypes.string.isRequired,
+		/** Source */
+		source: PropTypes.shape({
+			name: PropTypes.string,
+			favicon: PropTypes.string,
+		}).isRequired,
+		/** How long since posted */
+		created_at: PropTypes.string.isRequired,
+		/** Where it sends the user when clicked. */
+		original_link: PropTypes.string.isRequired,
+		/** Link's content */
+		content: PropTypes.string,
+	}),
+	/** Function to override back button functionality */
+	onBack: PropTypes.func,
 };

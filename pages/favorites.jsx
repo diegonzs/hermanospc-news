@@ -1,94 +1,82 @@
 import * as React from 'react';
+import { useQuery } from '@apollo/client';
+
+import { UserContext } from 'context/user-context';
+
 import { PageContainer } from 'components/page-container';
 import { Column } from 'components/column';
 import { HeadPage } from 'components/head-page/head-page';
 import { ListNewsCard } from 'components/list-news-card';
 import { OnlyUsers } from 'components/only-users';
 
+import {
+	ALL_FAVORITE_LINKS,
+	ALL_FAVORITE_LINKS_VARIABLES,
+} from 'graphql/queries/reactions';
+
 //@ts-ignore
 import thumbUpIcon from '/images/icons/emoji-favorites.png';
-
-/** @type News[] */
-const newsCardsDefault = [
-	{
-		id: 'asdasda',
-		image: 'https://i.redd.it/1um8uengwo331.jpg',
-		title: 'AMD Launch the Radeon VII: The next power product against Nvidia',
-		source: 'TomsHardware',
-		created_at: '1 day ago',
-		original_link: '/',
-	},
-	{
-		id: 'fsdfsdf',
-		image: 'https://i.redd.it/1um8uengwo331.jpg',
-		title: 'AMD Launch the Radeon VII: The next power product against Nvidia',
-		source: 'TomsHardware',
-		created_at: '1 day ago',
-		original_link: '/',
-	},
-	{
-		id: 'asdasda',
-		image: 'https://i.redd.it/1um8uengwo331.jpg',
-		title: 'AMD Launch the Radeon VII: The next power product against Nvidia',
-		source: 'TomsHardware',
-		created_at: '1 day ago',
-		original_link: '/',
-	},
-	{
-		id: 'fsdfsdf',
-		image: 'https://i.redd.it/1um8uengwo331.jpg',
-		title: 'AMD Launch the Radeon VII: The next power product against Nvidia',
-		source: 'TomsHardware',
-		created_at: '1 day ago',
-		original_link: '/',
-	},
-	{
-		id: 'asdasda',
-		image: 'https://i.redd.it/1um8uengwo331.jpg',
-		title: 'AMD Launch the Radeon VII: The next power product against Nvidia',
-		source: 'TomsHardware',
-		created_at: '1 day ago',
-		original_link: '/',
-	},
-	{
-		id: 'fsdfsdf',
-		image: 'https://i.redd.it/1um8uengwo331.jpg',
-		title: 'AMD Launch the Radeon VII: The next power product against Nvidia',
-		source: 'TomsHardware',
-		created_at: '1 day ago',
-		original_link: '/',
-	},
-];
-
-/** @type News */
-const newCard = {
-	id: 'asdasdasgf',
-	image: 'https://i.redd.it/1um8uengwo331.jpg',
-	title: 'AMD Launch the Radeon VII: The next power product against Nvidia',
-	source: 'TomsHardware',
-	created_at: '1 day ago',
-	original_link: '/',
-};
+import { Loader } from 'components/loader';
 
 const Favorites = ({ isServer }) => {
-	const [newsCards, setNewsCards] = React.useState(newsCardsDefault);
-	const fetchMore = () => {
-		setTimeout(() => {
-			setNewsCards([...newsCards, newCard]);
-		}, 3000);
+	const user = React.useContext(UserContext);
+	const { data, fetchMore, loading } = useQuery(ALL_FAVORITE_LINKS, {
+		variables: ALL_FAVORITE_LINKS_VARIABLES(user ? user.uid : '', 0, 1),
+		fetchPolicy: 'cache-first',
+	});
+
+	/** @type {News[]} */
+	let news = [];
+	let hasMore = false;
+
+	const fetchMoreHandler = () => {
+		fetchMore({
+			variables: {
+				offset: data.favorite_links.length,
+			},
+			updateQuery: (prev, { fetchMoreResult }) => {
+				if (!fetchMoreResult) return prev;
+				return {
+					...prev,
+					favorite_links: [
+						...prev.favorite_links,
+						...fetchMoreResult.favorite_links,
+					],
+				};
+			},
+		});
 	};
+
+	if (data && data.favorite_links) {
+		const listOfIds = [];
+		news = data.favorite_links.reduce((acum, l) => {
+			if (!listOfIds.includes(l.id)) {
+				listOfIds.push(l.id);
+				return [...acum, l];
+			} else {
+				return acum;
+			}
+		}, []);
+	}
+	if (data && data.favorite_links_aggregate && data.favorite_links) {
+		hasMore = data.favorite_links_aggregate.aggregate.count > news.length;
+	}
+
 	return (
 		<OnlyUsers isServer={isServer}>
 			<PageContainer>
 				<Column gap="46" align="center">
 					<HeadPage title="Favorites" icon={thumbUpIcon} />
-					<ListNewsCard
-						newsCards={newsCards}
-						scroll="vertical"
-						isInfinity
-						hasMore
-						fetchMoreHandler={() => fetchMore()}
-					/>
+					{loading && <Loader />}
+					{!loading && data && data.favorite_links && (
+						<ListNewsCard
+							newsCards={news}
+							scroll="vertical"
+							isInfinity
+							hasMore={hasMore}
+							fetchMoreHandler={() => fetchMoreHandler()}
+						/>
+					)}
 				</Column>
 			</PageContainer>
 		</OnlyUsers>
