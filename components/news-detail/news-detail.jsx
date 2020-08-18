@@ -34,7 +34,7 @@ export const NewsDetail = ({ news, onBack }) => {
 						<BackButton text="Back" handleClick={onBack} />
 					</div>
 					<div className={styles.tags}>
-						<ListTag tags={tags} />
+						{tags && <ListTag tags={JSON.parse(tags)} />}
 					</div>
 				</div>
 				<div className={styles.image}>

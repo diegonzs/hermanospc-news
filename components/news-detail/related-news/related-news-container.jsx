@@ -17,18 +17,17 @@ const fakeNews = [
 			favicon:
 				'https://www.muycomputer.com/wp-content/uploads/2018/07/MC_FAVICON_2018.png',
 		},
-		tags: [
-			{
-				tag: {
-					text: 'AMD',
-				},
+		tags: `['AMD']`,
+		likes: {
+			aggregate: {
+				count: 20,
 			},
-			{
-				tag: {
-					text: 'AMD',
-				},
+		},
+		dislikes: {
+			aggregate: {
+				count: 20,
 			},
-		],
+		},
 	},
 	{
 		id: 'ghjghj',
@@ -41,18 +40,17 @@ const fakeNews = [
 			favicon:
 				'https://www.muycomputer.com/wp-content/uploads/2018/07/MC_FAVICON_2018.png',
 		},
-		tags: [
-			{
-				tag: {
-					text: 'AMD',
-				},
+		tags: `['AMD']`,
+		likes: {
+			aggregate: {
+				count: 20,
 			},
-			{
-				tag: {
-					text: 'AMD',
-				},
+		},
+		dislikes: {
+			aggregate: {
+				count: 20,
 			},
-		],
+		},
 	},
 	{
 		id: 'jghcvxc',
@@ -65,18 +63,17 @@ const fakeNews = [
 			favicon:
 				'https://www.muycomputer.com/wp-content/uploads/2018/07/MC_FAVICON_2018.png',
 		},
-		tags: [
-			{
-				tag: {
-					text: 'AMD',
-				},
+		tags: `['AMD']`,
+		likes: {
+			aggregate: {
+				count: 20,
 			},
-			{
-				tag: {
-					text: 'AMD',
-				},
+		},
+		dislikes: {
+			aggregate: {
+				count: 20,
 			},
-		],
+		},
 	},
 ];
 

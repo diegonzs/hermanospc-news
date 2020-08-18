@@ -37,7 +37,7 @@
  * @property {Source} source - Source.
  * @property {string} created_at - How logn since posted.
  * @property {string} original_link  - Where it sends the user when clicked.
- * @property {Tag[]} [tags] - List of tags
+ * @property {string} [tags] - List of tags stringify
  * @property {string} [content] - News's content in HTML format
  * @property {LinkSaved[]} [links_saved] - Tells if the link has already saved this link.
  * @property {Reaction[]} [reactions] - Tells if the user has react to this link.

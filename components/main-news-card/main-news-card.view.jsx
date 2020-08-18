@@ -56,7 +56,7 @@ export const MainNewsCardView = ({
 				<img src={image} className={styles.mainImage} />
 			</div>
 			<div className={styles.leftColumn}>
-				{tags && <ListTag tags={tags} gap="20" />}
+				{tags && <ListTag tags={JSON.parse(tags)} gap="20" />}
 				<span className={styles.title} onClick={() => onClickNewsHandler(news)}>
 					{title}
 				</span>

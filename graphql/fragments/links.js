@@ -15,12 +15,7 @@ export const FRAGMENT_LINKS_ALL_FIELDS = gql`
 			name
 			favicon
 		}
-		tags {
-			tag {
-				id
-				text
-			}
-		}
+		tags
 		reactions(where: { user_id: { _eq: $userId } }) {
 			id
 			emoji
