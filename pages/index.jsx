@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { UserContext } from '../context/user-context';
-import { useQuery } from '@apollo/client';
+import { useQuery, NetworkStatus } from '@apollo/client';
 import { PageContainer } from 'components/page-container';
 import { HeadPage } from 'components/head-page/head-page';
 import { CategoryCard } from 'components/category-card';
@@ -10,19 +10,50 @@ import styles from 'styles/pages/home.module.scss';
 import {
 	ALL_CATEGORIES_QUERY,
 	ALL_CATEGORIES_QUERY_VARIABLES,
+	ALL_CATEGORIES_QUERY_WITH_USER,
 } from 'graphql/queries/categories';
 import { LoadingPage } from 'components/loading-page';
+import { SourcesSelection } from 'components/sources-selection';
+import { isFirstTimeVar } from 'lib/apollo-client';
 
 const Home = () => {
 	const user = React.useContext(UserContext);
+	const categoriesQuery = user
+		? ALL_CATEGORIES_QUERY_WITH_USER
+		: ALL_CATEGORIES_QUERY;
 
-	const { loading, data } = useQuery(ALL_CATEGORIES_QUERY, {
+	const { loading, data, networkStatus } = useQuery(categoriesQuery, {
 		variables: ALL_CATEGORIES_QUERY_VARIABLES(user ? user.uid : ''),
+		notifyOnNetworkStatusChange: true,
 	});
+
+	React.useEffect(() => {
+		console.log({ data });
+	}, [data]);
+
+	let hasNews = true;
+
+	if (data && data.categories) {
+		hasNews = data.categories.reduce((prev, current) => {
+			if (current.links && current.links.length) return true;
+			return prev;
+		}, false);
+	}
+
+	if ((user && isFirstTimeVar()) || !hasNews) {
+		return (
+			<PageContainer customClass={styles.container}>
+				{(loading || networkStatus === NetworkStatus.refetch) && (
+					<LoadingPage />
+				)}
+				<SourcesSelection userId={user.uid} />
+			</PageContainer>
+		);
+	}
 
 	return (
 		<PageContainer customClass={styles.container}>
-			{loading && <LoadingPage />}
+			{(loading || networkStatus === NetworkStatus.refetch) && <LoadingPage />}
 			{data &&
 				data.categories &&
 				data.categories.map((category, i) => (

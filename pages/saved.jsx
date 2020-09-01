@@ -20,8 +20,8 @@ import {
 const Saved = ({ isServer }) => {
 	const user = React.useContext(UserContext);
 	const { data, fetchMore, loading } = useQuery(ALL_LINKS_SAVED_QUERY, {
-		variables: ALL_LINKS_SAVED_QUERY_VARIABLES(user ? user.uid : '', 0, 1),
-		fetchPolicy: 'cache-first',
+		variables: ALL_LINKS_SAVED_QUERY_VARIABLES(user ? user.uid : '', 0, 10),
+		fetchPolicy: 'cache-and-network',
 	});
 
 	/** @type {News[]} */
@@ -32,6 +32,7 @@ const Saved = ({ isServer }) => {
 		fetchMore({
 			variables: {
 				offset: data.links_saved.length,
+				limit: 3,
 			},
 			updateQuery: (prev, { fetchMoreResult }) => {
 				if (!fetchMoreResult) return prev;

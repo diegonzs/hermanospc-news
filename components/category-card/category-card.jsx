@@ -27,17 +27,24 @@ import Link from 'next/link';
 export const CategoryCard = ({ title, news, slug }) => {
 	const firstNews = news[0];
 	const moreNews = news.slice(1);
+
 	return (
 		<div className={styles.container}>
 			{title && <Title text={title.text} emoji={title.emoji} />}
-			<MainNewsCard {...firstNews} />
-			<ListNewsCard newsCards={moreNews} />
-			<div className={styles.showMoreContainer}>
-				<div className={styles.divider} />
-				<Link href="/news-category/[slug]" as={`/news-category/${slug}`}>
-					<a className={styles.showMoreLink}>Show more</a>
-				</Link>
-			</div>
+			{!news.length ? (
+				<h2>There's no news in this categories</h2>
+			) : (
+				<>
+					<MainNewsCard {...firstNews} />
+					<ListNewsCard newsCards={moreNews} />
+					<div className={styles.showMoreContainer}>
+						<div className={styles.divider} />
+						<Link href="/news-category/[slug]" as={`/news-category/${slug}`}>
+							<a className={styles.showMoreLink}>Show more</a>
+						</Link>
+					</div>
+				</>
+			)}
 		</div>
 	);
 };

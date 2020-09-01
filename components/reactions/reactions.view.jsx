@@ -10,6 +10,7 @@ import styles from './reactions.module.scss';
  * @property {boolean} isActive - Tells if the user likes or dislikes
  * @property {boolean} isDisabled - Indicates if the reaction is disabled
  * @property {() => void} createReactionHandler - Handler to create a reaction
+ * @property {boolean} [isBig] - Tells if the icon is big
  */
 
 /**
@@ -22,7 +23,24 @@ export const ReactionsView = ({
 	isActive,
 	isDisabled,
 	createReactionHandler,
+	isBig = false,
 }) => {
+	if (isBig) {
+		return (
+			<div
+				className={`${styles.container} ${styles.containerBig} ${
+					isActive && styles.active
+				} ${isDisabled && styles.disabled}`}
+				onClick={() => (isDisabled ? null : createReactionHandler())}
+			>
+				<Column gap="8" justify="center" width="35px">
+					<img src={icon} />
+					<p>{data}</p>
+				</Column>
+			</div>
+		);
+	}
+
 	return (
 		<div
 			className={`${styles.container} ${isActive && styles.active} ${
@@ -48,10 +66,13 @@ ReactionsView.propTypes = {
 	isDisabled: PropTypes.bool.isRequired,
 	/** Handler to create a reaction */
 	createReactionHandler: PropTypes.func.isRequired,
+	/** Tells if the icon is big */
+	isBig: PropTypes.bool,
 };
 
 ReactionsView.defaultProps = {
 	data: 0,
 	icon: '/images/example/thumbs-up.png',
 	isDisabled: false,
+	isBig: false,
 };

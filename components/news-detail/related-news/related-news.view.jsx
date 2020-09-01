@@ -9,16 +9,17 @@ import { NewsCard } from 'components/news-card';
 /**
  * @typedef {Object} RelatedNewsProps
  * @property {News[]} news
+ * @property {string} category
  */
 
 /**
  *
  * @param {RelatedNewsProps} props
  */
-export const RelatedNewsView = ({ news }) => {
+export const RelatedNewsView = ({ news, category }) => {
 	return (
 		<div className={styles.container}>
-			<Title text="Related News" icon={newspaperIcon} />
+			<Title text={`More on ${category}`} icon={newspaperIcon} />
 			<ul className={styles.listOfNews}>
 				{news.map((n) => (
 					<NewsCard news={n} key={n.id} />

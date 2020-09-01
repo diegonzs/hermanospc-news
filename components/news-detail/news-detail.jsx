@@ -4,19 +4,48 @@ import { ContentComponent } from './content';
 import { BackButton } from 'components/back-button';
 import { ListTag } from 'components/list-tag';
 import { RelatedNews } from './related-news';
-import { Reactions } from './reactions';
+import { ReactionsForDetails } from './reactions';
+import { UserContext } from 'context';
+import { ShareModal } from 'components/share-modal';
+import { Row } from 'components/row';
+import SVG from 'react-inlinesvg';
+
+//@ts-ignore
+import bookmarkIcon from '/images/svgs/bookmark.svg';
+//@ts-ignore
+import bookmarkedIcon from '/images/svgs/bookmarked.svg';
+//@ts-ignore
+import shareIcon from '/images/svgs/share.svg';
 
 // @ts-ignore
 import styles from './news-detail.module.scss';
+import { ModalContainer } from 'components/modal-container/modal-container';
+import { SaveLinkButtonContainer } from 'components/save-link-button/save-link-button.container';
+import {
+	GET_LINK_BY_ID,
+	GET_LINK_BY_ID_VARIABLES,
+} from 'graphql/queries/links';
+import { useQuery } from '@apollo/client';
+import { LoadingPage } from 'components/loading-page';
 
-// const mainListTagProps = {
-// 	tags: [{ text: 'AMD' }, { text: 'Graphic Card' }],
-// 	gap: '20',
-// };
+const fakeNews = {
+	title: '',
+	source: { favicon: '', name: '' },
+	tags: '[]',
+	image: '',
+	content: '',
+	category: { slug: '' },
+	original_link: '',
+	likes: { aggregate: { count: 0 } },
+	dislikes: { aggregate: { count: 0 } },
+	reactions: [],
+	links_saved: [],
+};
 
 /**
  * @typedef {Object} NewsDetailProps
- * @property {News} news - News
+ * @property {string} id - News ID
+ * @property {News} [news] - news to render while loading.
  * @property {() => void} [onBack] - Function to override back button behaviour
  */
 
@@ -24,8 +53,38 @@ import styles from './news-detail.module.scss';
  * Component to show the news detail
  * @param {NewsDetailProps} props
  */
-export const NewsDetail = ({ news, onBack }) => {
-	const { title, source, tags, image, content } = news;
+export const NewsDetail = ({ news, id, onBack }) => {
+	const user = React.useContext(UserContext);
+	const [isShareModalOpen, setIsShareModalOpen] = React.useState(false);
+
+	const { data, loading, error } = useQuery(GET_LINK_BY_ID, {
+		variables: GET_LINK_BY_ID_VARIABLES(user ? user.id : '', id),
+		fetchPolicy: 'cache-first',
+	});
+
+	/**
+	 * @type {News}
+	 */
+	const newsData =
+		loading && news
+			? news
+			: data && data.links_by_pk
+			? data.links_by_pk
+			: fakeNews;
+	const {
+		title,
+		source,
+		tags,
+		image,
+		content,
+		category,
+		original_link,
+		likes,
+		dislikes,
+		reactions,
+		links_saved,
+	} = newsData;
+	if (loading && !newsData.title) return <LoadingPage />;
 	return (
 		<div className={styles.container}>
 			<div className={styles.NewsDetailContainer}>
@@ -34,42 +93,69 @@ export const NewsDetail = ({ news, onBack }) => {
 						<BackButton text="Back" handleClick={onBack} />
 					</div>
 					<div className={styles.tags}>
-						{tags && <ListTag tags={JSON.parse(tags)} />}
+						{tags && <ListTag tags={JSON.parse(tags).slice(0, 3)} />}
 					</div>
 				</div>
 				<div className={styles.image}>
 					<img src={image} />
 				</div>
-				<div className={styles.autor}>By {source.name}</div>
+				<div className={styles.autor}>
+					<img src={source.favicon} alt="" width="20" height="20" />
+					{source.name}
+				</div>
+				<Row isGrid={true} gap="20" customClass={styles.socialBox}>
+					<SaveLinkButtonContainer
+						id={id}
+						isDisabled={!!(links_saved.length || !user)}
+					>
+						<div className={styles.icon}>
+							<SVG src={links_saved.length ? bookmarkedIcon : bookmarkIcon} />
+						</div>
+					</SaveLinkButtonContainer>
+					<div
+						className={styles.icon}
+						onClick={() => setIsShareModalOpen(true)}
+					>
+						<SVG src={shareIcon} />
+					</div>
+				</Row>
 				<div className={styles.title}>
 					<h1>{title}</h1>
 				</div>
-				<ContentComponent content={content} />
+				{!!content ? (
+					<ContentComponent content={content} />
+				) : (
+					<div className={styles.noContent}>
+						<h2>
+							Check this new in{' '}
+							<a href={original_link} target="_blank">
+								{source.name}
+							</a>
+						</h2>
+					</div>
+				)}
 			</div>
-			<Reactions />
-			<RelatedNews />
+			<ReactionsForDetails
+				likes={likes}
+				dislikes={dislikes}
+				reactions={reactions}
+				user={user}
+				id={id}
+			/>
+			<RelatedNews category={category.slug} linkId={id} />
+			<ModalContainer
+				isOpen={isShareModalOpen}
+				closeHandler={() => setIsShareModalOpen(false)}
+			>
+				<ShareModal closeModalHandler={() => setIsShareModalOpen(false)} />
+			</ModalContainer>
 		</div>
 	);
 };
 
 NewsDetail.propTypes = {
-	news: PropTypes.shape({
-		/** Main image */
-		image: PropTypes.string.isRequired,
-		/** Title */
-		title: PropTypes.string.isRequired,
-		/** Source */
-		source: PropTypes.shape({
-			name: PropTypes.string,
-			favicon: PropTypes.string,
-		}).isRequired,
-		/** How long since posted */
-		created_at: PropTypes.string.isRequired,
-		/** Where it sends the user when clicked. */
-		original_link: PropTypes.string.isRequired,
-		/** Link's content */
-		content: PropTypes.string,
-	}),
+	/** Link's ID */
+	id: PropTypes.string.isRequired,
 	/** Function to override back button functionality */
 	onBack: PropTypes.func,
 };

@@ -9,6 +9,7 @@
 .NewsDetailContainer {
 	max-width: 720px;
 	.header {
+		margin-bottom: 24px;
 		.tags {
 			float: right;
 			margin-bottom: 2rem;
@@ -26,11 +27,16 @@
 		}
 	}
 	.autor {
+		display: flex;
+		align-items: center;
 		margin-top: 1rem;
 		margin-bottom: 1rem;
 		color: $color-primary-90;
 		letter-spacing: 0px;
 		text-align: left;
+		img {
+			margin-right: 5px;
+		}
 	}
 }
 
@@ -41,4 +47,27 @@
 		width: 100%;
 		object-fit: contain;
 	}
+}
+
+.noContent {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	margin-top: 70px;
+	h2 {
+		width: fit-content;
+		a {
+			color: $color-primary-90;
+		}
+	}
+}
+
+.icon {
+	cursor: pointer;
+}
+
+.socialBox {
+	margin: 20px 0;
 }

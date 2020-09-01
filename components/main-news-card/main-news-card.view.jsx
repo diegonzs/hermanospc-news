@@ -15,6 +15,8 @@ import bookmarkIcon from '/images/svgs/bookmark.svg';
 import bookmarkedIcon from '/images/svgs/bookmarked.svg';
 //@ts-ignore
 import shareIcon from '/images/svgs/share.svg';
+import { UserContext } from 'context';
+import { SaveLinkButtonContainer } from 'components/save-link-button/save-link-button.container';
 
 /**
  * @typedef {Object} MainNewsCardViewProps
@@ -32,7 +34,6 @@ export const MainNewsCardView = ({
 	news,
 	openModalHandler,
 	onClickNewsHandler,
-	saveLinkHandler,
 }) => {
 	const {
 		id,
@@ -47,6 +48,7 @@ export const MainNewsCardView = ({
 		likes,
 		dislikes,
 	} = news;
+	const user = React.useContext(UserContext);
 	return (
 		<div className={styles.columns}>
 			<div
@@ -63,14 +65,16 @@ export const MainNewsCardView = ({
 				<div className={styles.likeSection}>
 					<Row>
 						<Row isGrid={true} gap="16">
-							<div
-								className={styles.icon}
-								onClick={() => {
-									links_saved.length ? null : saveLinkHandler();
-								}}
+							<SaveLinkButtonContainer
+								id={id}
+								isDisabled={!!(links_saved.length || !user)}
 							>
-								<SVG src={links_saved.length ? bookmarkedIcon : bookmarkIcon} />
-							</div>
+								<div className={styles.icon}>
+									<SVG
+										src={links_saved.length ? bookmarkedIcon : bookmarkIcon}
+									/>
+								</div>
+							</SaveLinkButtonContainer>
 							<div
 								className={styles.icon}
 								onClick={() => openModalHandler(true)}
@@ -85,7 +89,7 @@ export const MainNewsCardView = ({
 								isActive={
 									!!(reactions.length && reactions[0].emoji === 'U+1F44D')
 								}
-								isDisabled={!!reactions.length}
+								isDisabled={!!reactions.length || !user}
 								linkId={id}
 								iconCode="U+1F44D"
 							/>
@@ -95,7 +99,7 @@ export const MainNewsCardView = ({
 								isActive={
 									!!(reactions.length && reactions[0].emoji === 'U+1F44E')
 								}
-								isDisabled={!!reactions.length}
+								isDisabled={!!reactions.length || !user}
 								linkId={id}
 								iconCode="U+1F44E"
 							/>
@@ -118,8 +122,8 @@ MainNewsCardView.propTypes = {
 	news: PropTypes.shape({
 		/**  Main image of the article */
 		image: PropTypes.string.isRequired,
-		/**  List of tags to be render */
-		tags: PropTypes.array.isRequired,
+		/**  Stringify list of tags to be render */
+		tags: PropTypes.string,
 		/**  title of the new */
 		title: PropTypes.string.isRequired,
 		/**  url link to show the detail of the new */

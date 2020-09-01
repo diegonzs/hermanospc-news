@@ -124,7 +124,7 @@ MainNewsCardContainer.propTypes = {
 	/**  Main image of the article */
 	image: PropTypes.string.isRequired,
 	/**  List of tags to be render */
-	tags: PropTypes.array.isRequired,
+	tags: PropTypes.string,
 	/**  title of the new */
 	title: PropTypes.string.isRequired,
 	/**  url link to show the detail of the new */

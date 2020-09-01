@@ -1,1 +1,1 @@
-export { Reactions } from './reactions';
+export { ReactionsForDetails } from './reactions-for-details';

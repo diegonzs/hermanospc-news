@@ -5,6 +5,7 @@
 	background-color: $color-background-card;
 	border-radius: 4px;
 	overflow: hidden;
+	width: 100%;
 	@include respond(desktop) {
 		display: flex;
 		flex-direction: column;

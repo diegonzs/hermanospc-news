@@ -21,8 +21,8 @@ import { Loader } from 'components/loader';
 const Favorites = ({ isServer }) => {
 	const user = React.useContext(UserContext);
 	const { data, fetchMore, loading } = useQuery(ALL_FAVORITE_LINKS, {
-		variables: ALL_FAVORITE_LINKS_VARIABLES(user ? user.uid : '', 0, 1),
-		fetchPolicy: 'cache-first',
+		variables: ALL_FAVORITE_LINKS_VARIABLES(user ? user.uid : '', 0, 10),
+		fetchPolicy: 'cache-and-network',
 	});
 
 	/** @type {News[]} */
@@ -33,6 +33,7 @@ const Favorites = ({ isServer }) => {
 		fetchMore({
 			variables: {
 				offset: data.favorite_links.length,
+				limit: 3,
 			},
 			updateQuery: (prev, { fetchMoreResult }) => {
 				if (!fetchMoreResult) return prev;

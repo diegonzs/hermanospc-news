@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { UserSettings } from './user-settings';
+// import { UserSettings } from './user-settings';
 import { NotificationSettings } from './notification-settings';
 import { Column } from 'components/column';
 
@@ -21,8 +21,8 @@ export const SettingsView = ({ userSettings, notificationSettings }) => {
 	return (
 		<div className={styles.container}>
 			<Column gap="40" justify="center">
-				<UserSettings {...userSettings} />
-				<div className={styles.divider}></div>
+				{/* <UserSettings {...userSettings} /> */}
+				{/* <div className={styles.divider}></div> */}
 				<NotificationSettings {...notificationSettings} />
 			</Column>
 		</div>

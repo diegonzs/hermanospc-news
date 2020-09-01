@@ -5,6 +5,11 @@
 	padding: 0.3rem;
 	border-radius: 2px;
 }
+.containerBig {
+	p {
+		font-size: $font-size-medium;
+	}
+}
 
 .active {
 	background-color: $color-primary-30;

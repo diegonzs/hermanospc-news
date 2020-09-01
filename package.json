@@ -16,6 +16,7 @@
 		"@apollo/react-ssr": "^3.1.5",
 		"apollo-cache-inmemory": "^1.6.5",
 		"apollo-client": "^2.6.8",
+		"apollo-fetch": "^0.7.0",
 		"apollo-link-context": "^1.0.20",
 		"apollo-link-http": "^1.5.17",
 		"body-parser": "^1.19.0",

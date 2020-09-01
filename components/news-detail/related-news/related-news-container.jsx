@@ -1,92 +1,27 @@
 import * as React from 'react';
 import { RelatedNewsView } from './related-news.view';
 import { Loader } from 'components/loader';
+import { useQuery } from '@apollo/client';
+import {
+	RELATED_LINKS_BY_CATEGORY,
+	RELATED_LINKS_BY_CATEGORY_VARIABLES,
+} from 'graphql/queries/related-links';
+import { UserContext } from 'context';
 
-/**
- * @type {News[]}
- */
-const fakeNews = [
-	{
-		id: 'asdasd',
-		image: 'https://i.redd.it/1um8uengwo331.jpg',
-		title: 'AMD Launch the Ryzen 5 3500X: The next product against Intel.',
-		created_at: '2020-07-14T15:56:10.160136+00:00',
-		original_link: 'https://google.com',
-		source: {
-			name: 'Muy Computer',
-			favicon:
-				'https://www.muycomputer.com/wp-content/uploads/2018/07/MC_FAVICON_2018.png',
-		},
-		tags: `['AMD']`,
-		likes: {
-			aggregate: {
-				count: 20,
-			},
-		},
-		dislikes: {
-			aggregate: {
-				count: 20,
-			},
-		},
-	},
-	{
-		id: 'ghjghj',
-		image: 'https://i.redd.it/1um8uengwo331.jpg',
-		title: 'AMD Launch the Ryzen 5 3500X: The next product against Intel.',
-		created_at: '2020-07-14T15:56:10.160136+00:00',
-		original_link: 'https://google.com',
-		source: {
-			name: 'Muy Computer',
-			favicon:
-				'https://www.muycomputer.com/wp-content/uploads/2018/07/MC_FAVICON_2018.png',
-		},
-		tags: `['AMD']`,
-		likes: {
-			aggregate: {
-				count: 20,
-			},
-		},
-		dislikes: {
-			aggregate: {
-				count: 20,
-			},
-		},
-	},
-	{
-		id: 'jghcvxc',
-		image: 'https://i.redd.it/1um8uengwo331.jpg',
-		title: 'AMD Launch the Ryzen 5 3500X: The next product against Intel.',
-		created_at: '2020-07-14T15:56:10.160136+00:00',
-		original_link: 'https://google.com',
-		source: {
-			name: 'Muy Computer',
-			favicon:
-				'https://www.muycomputer.com/wp-content/uploads/2018/07/MC_FAVICON_2018.png',
-		},
-		tags: `['AMD']`,
-		likes: {
-			aggregate: {
-				count: 20,
-			},
-		},
-		dislikes: {
-			aggregate: {
-				count: 20,
-			},
-		},
-	},
-];
+export const RelatedNewsContainer = ({ category, linkId }) => {
+	const user = React.useContext(UserContext);
 
-export const RelatedNewsContainer = () => {
-	const [news, setNews] = React.useState([]);
-	React.useEffect(() => {
-		const timer = setTimeout(() => {
-			setNews([...fakeNews]);
-		}, 5000);
-		return () => clearTimeout(timer);
-	}, []);
-	if (news.length < 1) {
+	const { data, loading } = useQuery(RELATED_LINKS_BY_CATEGORY, {
+		variables: RELATED_LINKS_BY_CATEGORY_VARIABLES(
+			user ? user.uid : '',
+			category,
+			linkId
+		),
+	});
+
+	if (loading) {
 		return <Loader />;
 	}
-	return <RelatedNewsView news={news} />;
+
+	return <RelatedNewsView news={data ? data.links : []} category={category} />;
 };

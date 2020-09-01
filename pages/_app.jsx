@@ -29,8 +29,10 @@ import '../styles/main.scss';
 import 'react-toastify/dist/ReactToastify.min.css';
 
 function MyApp({ Component, pageProps, sessionUser, isServer, user_token }) {
-	const user = useFirebaseUser(sessionUser);
-	const apolloClient = useApollo(pageProps.initialApolloState, user_token);
+	const [currentToken, setCurrentToken] = React.useState(user_token);
+	const user = useFirebaseUser(sessionUser, setCurrentToken);
+
+	const apolloClient = useApollo(pageProps.initialApolloState, currentToken);
 
 	const [selectedNews, setSelectedNews] = React.useState(null);
 	const [isOverlayActive, setIsOverlayActive] = React.useState(false);
@@ -44,17 +46,17 @@ function MyApp({ Component, pageProps, sessionUser, isServer, user_token }) {
 	React.useEffect(() => {
 		apolloClient.query({
 			query: ALL_LINKS_SAVED_QUERY,
-			variables: ALL_LINKS_SAVED_QUERY_VARIABLES(user ? user.uid : '', 0, 1),
+			variables: ALL_LINKS_SAVED_QUERY_VARIABLES(user ? user.uid : '', 0, 10),
 		});
 		apolloClient.query({
 			query: ALL_FAVORITE_LINKS,
-			variables: ALL_FAVORITE_LINKS_VARIABLES(user ? user.uid : '', 0, 1),
+			variables: ALL_FAVORITE_LINKS_VARIABLES(user ? user.uid : '', 0, 10),
 		});
 	}, [user]);
 
-	React.useEffect(() => {
-		initMessaging();
-	}, []);
+	// React.useEffect(() => {
+	// 	initMessaging();
+	// }, []);
 
 	const hideOverlayHandler = () => {
 		setIsOverlayActive(false);
@@ -99,7 +101,11 @@ function MyApp({ Component, pageProps, sessionUser, isServer, user_token }) {
 						>
 							{!!selectedNews && (
 								<OverlayWrapper hideOverlayHandler={hideOverlayHandler}>
-									<NewsDetail news={selectedNews} onBack={hideOverlayHandler} />
+									<NewsDetail
+										news={selectedNews}
+										id={selectedNews.id}
+										onBack={hideOverlayHandler}
+									/>
 								</OverlayWrapper>
 							)}
 						</OverlayPage>

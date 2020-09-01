@@ -38,11 +38,13 @@ const Signin = () => {
 				return;
 			});
 	};
+
 	/**
 	 * Function for handling signin with third party providers
 	 * @param {"google" | "twitter" | "facebook"} provider - The provider the user will use to signin
 	 */
 	const handleSigninProvider = (provider) => {
+		console.log(provider);
 		setIsLoading(true);
 		let firebaseProvider;
 		if (provider === 'google') {

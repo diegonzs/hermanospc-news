@@ -14,22 +14,28 @@ import { Loader } from 'components/loader';
 import {
 	ALL_LINKS_BY_CATEGORY,
 	ALL_LINKS_BY_CATEGORY_VARIABLES,
+	ALL_LINKS_BY_CATEGORY_WITH_USER,
 } from 'graphql/queries/categories';
 
 const CategoryPage = () => {
 	const router = useRouter();
 	const user = React.useContext(UserContext);
+
 	const { slug } = router.query;
 	let hasMore = false;
+	const categoryQuery = user
+		? ALL_LINKS_BY_CATEGORY_WITH_USER
+		: ALL_LINKS_BY_CATEGORY;
 
 	/** @type {News} */
 	let mainCard;
 	/** @type {News[]} */
 	let commonCards = [];
 
-	const { data, loading, fetchMore } = useQuery(ALL_LINKS_BY_CATEGORY, {
+	const { data, loading, fetchMore } = useQuery(categoryQuery, {
 		variables: ALL_LINKS_BY_CATEGORY_VARIABLES(user ? user.uid : '', slug, 0),
 	});
+
 	const category = data && data.categories.length ? data.categories[0] : null;
 
 	const fetchMoreHandler = () => {

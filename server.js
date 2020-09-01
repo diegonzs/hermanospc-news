@@ -98,6 +98,10 @@ app.prepare().then(() => {
 		return handle(req, res);
 	});
 
+	server.post('*', (req, res) => {
+		return handle(req, res);
+	});
+
 	// Turn on the server
 	server.listen(port, (err) => {
 		if (err) throw err;
