@@ -6,9 +6,22 @@
 	border-radius: 4px;
 	overflow: hidden;
 	width: 100%;
+	transition: all ease-in-out 0.3s;
+	&:hover {
+		background-color: $color-card-hover;
+		.mainImage {
+			transform: scale(1.1);
+		}
+	}
 	@include respond(desktop) {
 		display: flex;
 		flex-direction: column;
+		background-color: $color-card-hover;
+		&:hover {
+			.mainImage {
+				transform: scale(1);
+			}
+		}
 	}
 }
 .leftColumn {
@@ -49,6 +62,7 @@
 	max-height: 491px;
 	display: flex;
 	cursor: pointer;
+	overflow: hidden;
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-khtml-user-select: none;
@@ -60,6 +74,8 @@
 .mainImage {
 	width: 100%;
 	object-fit: cover;
+	transition: transform ease-in-out 0.3s;
+	overflow: hidden;
 }
 .icons {
 	padding-left: 16px;
@@ -86,9 +102,4 @@
 	display: flex;
 	align-items: flex-end;
 	cursor: pointer;
-}
-
-.fillIcon {
-	svg {
-	}
 }

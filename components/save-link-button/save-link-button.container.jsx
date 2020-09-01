@@ -105,7 +105,13 @@ export const SaveLinkButtonContainer = (props) => {
 	};
 
 	return (
-		<div onClick={() => saveLinkHandler()} style={{ cursor: 'pointer' }}>
+		<div
+			onClick={(e) => {
+				e.stopPropagation();
+				saveLinkHandler();
+			}}
+			style={{ cursor: 'pointer' }}
+		>
 			{props.children}
 		</div>
 	);
