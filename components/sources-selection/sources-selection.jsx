@@ -6,7 +6,10 @@ import {
 	ALL_CATEGORIES_QUERY_VARIABLES,
 } from 'graphql/queries/categories';
 import { isFirstTimeVar } from 'lib/apollo-client';
-import { FETCH_ALL_SOURCES } from 'graphql/queries/sources';
+import {
+	FETCH_ALL_SOURCES,
+	FETCH_ALL_SOURCES_VARIABLES,
+} from 'graphql/queries/sources';
 import { Loader } from 'components/loader';
 import { ToggleSwitch } from 'components/toggle-switch';
 
@@ -16,10 +19,34 @@ import { Button } from 'components/button';
 import { initMessaging, getFCMToken } from 'lib/firebase-messaging';
 import { setSources } from 'lib/local-storage-util';
 
-export const SourcesSelection = ({ userId }) => {
+/**
+ *
+ * @typedef {Object} SourcesSelectionProps
+ * @property {string} userId
+ * @property {string} title
+ * @property {string} description
+ * @property {() => void} [onDone]
+ */
+
+/**
+ * Component use to select news sources
+ * @param {SourcesSelectionProps} props
+ */
+export const SourcesSelection = ({ userId, title, description, onDone }) => {
 	const [selectedSources, setSelectedSources] = React.useState([]);
 
-	const sourcesResponse = useQuery(FETCH_ALL_SOURCES);
+	const sourcesResponse = useQuery(FETCH_ALL_SOURCES, {
+		variables: FETCH_ALL_SOURCES_VARIABLES(userId),
+	});
+
+	const isSourceDisabled = (id) => {
+		const index = sourcesResponse.data.users_sources.findIndex(
+			(elem) => id === elem.source_id
+		);
+		if (index > -1) {
+			return true;
+		}
+	};
 
 	const onClickSource = (value) => {
 		const selectedIndex = selectedSources.findIndex(
@@ -71,11 +98,17 @@ export const SourcesSelection = ({ userId }) => {
 			setSources(sources);
 			if (token) {
 				callApi(sources, token);
+				if (onDone) {
+					onDone();
+				}
 			} else {
 				await initMessaging();
 				token = getFCMToken();
 				if (token) {
 					callApi(sources, token);
+					if (onDone) {
+						onDone();
+					}
 				}
 			}
 		},
@@ -83,12 +116,8 @@ export const SourcesSelection = ({ userId }) => {
 
 	return (
 		<div className={styles.container}>
-			<h1>Welcome to News!</h1>
-			<p className={styles.description}>
-				Tell us what sources do you want to see in your news feed. You can
-				change this later any time. If you don't see your favorite source
-				contact us to add it.
-			</p>
+			<h1>{title}</h1>
+			<p className={styles.description}>{description}</p>
 			{sourcesResponse.loading && <Loader />}
 			<ul className={styles.sourcesList}>
 				{sourcesResponse.data &&
@@ -103,17 +132,30 @@ export const SourcesSelection = ({ userId }) => {
 								{source.name}
 							</span>{' '}
 							<ToggleSwitch
-								isActive={selectedSources.includes(source.id)}
+								isActive={
+									selectedSources.includes(source.id) ||
+									isSourceDisabled(source.id)
+								}
 								onClickHandler={() => onClickSource(source.id)}
+								isDisabled={isSourceDisabled(source.id)}
 							/>
 						</li>
 					))}
 			</ul>
-			<Button
-				text="Continue"
-				onClickHandler={() => subscribe()}
-				isDisabled={!selectedSources.length || loading}
-			/>
+			<div className={styles.buttonContainer}>
+				{onDone && (
+					<Button
+						text="Cancel"
+						onClickHandler={() => onDone()}
+						isFilled={false}
+					/>
+				)}
+				<Button
+					text="Continue"
+					onClickHandler={() => subscribe()}
+					isDisabled={!selectedSources.length || loading}
+				/>
+			</div>
 		</div>
 	);
 };

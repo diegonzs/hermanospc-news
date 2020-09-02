@@ -46,7 +46,13 @@ const Home = () => {
 				{(loading || networkStatus === NetworkStatus.refetch) && (
 					<LoadingPage />
 				)}
-				<SourcesSelection userId={user.uid} />
+				<SourcesSelection
+					userId={user.uid}
+					title="Welcome to News!"
+					description="Tell us what sources do you want to see in your news feed. You can
+				change this later any time. If you don't see your favorite source
+				contact us to add it."
+				/>
 			</PageContainer>
 		);
 	}

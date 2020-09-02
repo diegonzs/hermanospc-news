@@ -52,7 +52,7 @@ export const Sign = ({
 				Stay updated on any relevant new in the PC industry
 			</p>
 			<ul className={styles.socialList}>
-				{['google', 'twitter', 'facebook'].map((p) => (
+				{['google'].map((p) => (
 					<li key={p} onClick={() => handleSigninProvider(providers[p].slug)}>
 						<SVG src={providers[p].icon} />
 						<span>{providers[p].provider}</span>

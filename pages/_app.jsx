@@ -27,13 +27,12 @@ import {
 
 import '../styles/main.scss';
 import 'react-toastify/dist/ReactToastify.min.css';
-import { useRouter } from 'next/router';
-// import { initGA, logPageView } from 'lib/analytics';
+import Router from 'next/router';
+import { initGA, logPageView } from 'lib/analytics';
 
 function MyApp({ Component, pageProps, sessionUser, isServer, user_token }) {
-	const [currentToken, setCurrentToken] = React.useState(user_token);
-	const user = useFirebaseUser(sessionUser, setCurrentToken);
-	const router = useRouter();
+	const [currentToken, setCurrentToken] = React.useState();
+	const user = useFirebaseUser(setCurrentToken);
 	const apolloClient = useApollo(pageProps.initialApolloState, currentToken);
 
 	const [selectedNews, setSelectedNews] = React.useState(null);
@@ -54,24 +53,27 @@ function MyApp({ Component, pageProps, sessionUser, isServer, user_token }) {
 			query: ALL_FAVORITE_LINKS,
 			variables: ALL_FAVORITE_LINKS_VARIABLES(user ? user.uid : '', 0, 10),
 		});
+		if (user) {
+			setCurrentToken(user.token);
+		}
 	}, [user]);
 
-	// React.useEffect(() => {
-	// 	if (process.env.NODE_ENV === 'development') {
-	// 		if (!window.GA_INITIALIZED) {
-	// 			initGA();
-	// 			window.GA_INITIALIZED = true;
-	// 		}
-	// 		const ReactPixel = require('react-facebook-pixel');
-	// 		ReactPixel.init('381691672399829');
-	// 		logPageView();
-	// 		ReactPixel.pageView();
-	// 		router.events.on('routeChangeComplete', () => {
-	// 			logPageView();
-	// 			ReactPixel.pageView();
-	// 		});
-	// 	}
-	// }, []);
+	React.useEffect(() => {
+		if (process.env.NODE_ENV === 'production') {
+			if (!window.GA_INITIALIZED) {
+				initGA();
+				window.GA_INITIALIZED = true;
+			}
+			const ReactPixel = require('react-facebook-pixel');
+			ReactPixel.default.init('381691672399829');
+			logPageView();
+			ReactPixel.default.pageView();
+			Router.events.on('routeChangeComplete', () => {
+				logPageView();
+				ReactPixel.default.pageView();
+			});
+		}
+	}, []);
 
 	const hideOverlayHandler = () => {
 		setIsOverlayActive(false);
@@ -103,11 +105,12 @@ function MyApp({ Component, pageProps, sessionUser, isServer, user_token }) {
 						<meta name="msapplication-tap-highlight" content="no" />
 						<meta name="theme-color" content="#000000" />
 						<link rel="manifest" href="/manifest.json" />
+						<link rel="shorcut icon" href="/brand/favicon.png" />
 					</Head>
 					<div className="mainContainer">
 						<Header />
 						<div className="mainContent">
-							<Component {...pageProps} isServer={isServer} />
+							<Component {...pageProps} isServer={false} />
 						</div>
 						<Footer />
 						<OverlayPage
@@ -136,23 +139,23 @@ function MyApp({ Component, pageProps, sessionUser, isServer, user_token }) {
 // perform automatic static optimization, causing every page in your app to
 // be server-side rendered.
 //
-MyApp.getInitialProps = async (appContext) => {
-	// calls page's `getInitialProps` and fills `appProps.pageProps`
-	const sessionUser =
-		appContext.ctx.req && appContext.ctx.req.session
-			? appContext.ctx.req.session.decodedToken
-			: null;
-	const user_token =
-		appContext.ctx.req && appContext.ctx.req.session
-			? appContext.ctx.req.session.token
-			: null;
-	const appProps = await App.getInitialProps(appContext);
-	return {
-		...appProps,
-		sessionUser,
-		isServer: !!appContext.ctx.req,
-		user_token,
-	};
-};
+// MyApp.getInitialProps = async (appContext) => {
+// 	// calls page's `getInitialProps` and fills `appProps.pageProps`
+// 	const sessionUser =
+// 		appContext.ctx.req && appContext.ctx.req.session
+// 			? appContext.ctx.req.session.decodedToken
+// 			: null;
+// 	const user_token =
+// 		appContext.ctx.req && appContext.ctx.req.session
+// 			? appContext.ctx.req.session.token
+// 			: null;
+// 	const appProps = await App.getInitialProps(appContext);
+// 	return {
+// 		...appProps,
+// 		sessionUser,
+// 		isServer: !!appContext.ctx.req,
+// 		user_token,
+// 	};
+// };
 
 export default MyApp;

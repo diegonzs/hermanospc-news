@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": "NODE_ENV=development PORT=5000 node server.js",
+		"dev": "next dev -p 5000",
 		"build": "next build",
 		"start": "NODE_ENV=production node server.js",
 		"storybook": "start-storybook -s ./public -p 6006",
@@ -26,6 +26,7 @@
 		"firebase-admin": "^8.11.0",
 		"graphql": "^15.0.0",
 		"graphql-tag": "^2.10.3",
+		"js-cookie": "^2.2.1",
 		"moment": "^2.27.0",
 		"next": "9.4.2",
 		"next-compose-plugins": "^2.2.0",
