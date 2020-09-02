@@ -5,7 +5,7 @@
 	"scripts": {
 		"dev": "next dev -p 5000",
 		"build": "next build",
-		"start": "NODE_ENV=production node server.js",
+		"start": "next start",
 		"storybook": "start-storybook -s ./public -p 6006",
 		"build-storybook": "build-storybook",
 		"mock-api": "graphql-faker -p 9000 -e http://159.203.114.72/v1/graphql -H 'x-hasura-admin-secret: DiegoAndAndresHasura100'"
