@@ -18,16 +18,16 @@ const providers = {
 		icon: googleIcon,
 		slug: 'google',
 	},
-	twitter: {
-		provider: 'Continue with Twitter',
-		icon: twitterIcon,
-		slug: 'twitter',
-	},
-	facebook: {
-		provider: 'Continue with Facebook',
-		icon: facebookIcon,
-		slug: 'facebook',
-	},
+	// twitter: {
+	// 	provider: 'Continue with Twitter',
+	// 	icon: twitterIcon,
+	// 	slug: 'twitter',
+	// },
+	// facebook: {
+	// 	provider: 'Continue with Facebook',
+	// 	icon: facebookIcon,
+	// 	slug: 'facebook',
+	// },
 };
 
 /**
