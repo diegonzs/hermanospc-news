@@ -27,11 +27,13 @@ import {
 
 import '../styles/main.scss';
 import 'react-toastify/dist/ReactToastify.min.css';
+import { useRouter } from 'next/router';
+import { initGA, logPageView } from 'lib/analytics';
 
 function MyApp({ Component, pageProps, sessionUser, isServer, user_token }) {
 	const [currentToken, setCurrentToken] = React.useState(user_token);
 	const user = useFirebaseUser(sessionUser, setCurrentToken);
-
+	const router = useRouter();
 	const apolloClient = useApollo(pageProps.initialApolloState, currentToken);
 
 	const [selectedNews, setSelectedNews] = React.useState(null);
@@ -54,9 +56,22 @@ function MyApp({ Component, pageProps, sessionUser, isServer, user_token }) {
 		});
 	}, [user]);
 
-	// React.useEffect(() => {
-	// 	initMessaging();
-	// }, []);
+	React.useEffect(() => {
+		if (process.env.NODE_ENV === 'production') {
+			if (!window.GA_INITIALIZED) {
+				initGA();
+				window.GA_INITIALIZED = true;
+			}
+			const ReactPixel = require('react-facebook-pixel');
+			ReactPixel.init('381691672399829');
+			logPageView();
+			ReactPixel.pageView();
+			router.events.on('routeChangeComplete', () => {
+				logPageView();
+				ReactPixel.pageView();
+			});
+		}
+	}, []);
 
 	const hideOverlayHandler = () => {
 		setIsOverlayActive(false);
