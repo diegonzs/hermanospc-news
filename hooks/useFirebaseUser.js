@@ -7,6 +7,7 @@ export const useFirebaseUser = (initialUser, setToken) => {
 
 	useEffect(() => {
 		return firebase.auth().onIdTokenChanged(async (user) => {
+			// If user
 			if (user) {
 				const userData = {
 					email: user.email,
