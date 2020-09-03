@@ -27,10 +27,6 @@ const Home = () => {
 		notifyOnNetworkStatusChange: true,
 	});
 
-	React.useEffect(() => {
-		console.log({ data });
-	}, [data]);
-
 	let hasNews = true;
 
 	if (data && data.categories) {

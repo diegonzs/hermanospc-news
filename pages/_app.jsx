@@ -8,29 +8,16 @@ import { useApollo } from 'lib/apollo-client';
 import { UserContext, NewsContext } from 'context';
 import { useFirebaseUser } from 'hooks';
 
-import { initMessaging } from 'lib/firebase-messaging';
-
 import { Header } from 'components/header';
 import { Footer } from 'components/footer';
 import { OverlayPage } from 'components/overlay-page';
 import { NewsDetail } from 'components/news-detail';
 import { OverlayWrapper } from 'components/overlay-page/overlay-wrapper/overlay-wrapper';
 
-import {
-	ALL_LINKS_SAVED_QUERY_VARIABLES,
-	ALL_LINKS_SAVED_QUERY,
-} from 'graphql/queries/links-saved';
-import {
-	ALL_FAVORITE_LINKS,
-	ALL_FAVORITE_LINKS_VARIABLES,
-} from 'graphql/queries/reactions';
-
 import '../styles/main.scss';
 import 'react-toastify/dist/ReactToastify.min.css';
-import Router from 'next/router';
-import { initGA, logPageView } from 'lib/analytics';
 
-function MyApp({ Component, pageProps, sessionUser, isServer, user_token }) {
+function MyApp({ Component, pageProps }) {
 	const [currentToken, setCurrentToken] = React.useState();
 	const user = useFirebaseUser(setCurrentToken);
 	const apolloClient = useApollo(pageProps.initialApolloState, currentToken);
@@ -45,35 +32,10 @@ function MyApp({ Component, pageProps, sessionUser, isServer, user_token }) {
 	}, [selectedNews]);
 
 	React.useEffect(() => {
-		apolloClient.query({
-			query: ALL_LINKS_SAVED_QUERY,
-			variables: ALL_LINKS_SAVED_QUERY_VARIABLES(user ? user.uid : '', 0, 10),
-		});
-		apolloClient.query({
-			query: ALL_FAVORITE_LINKS,
-			variables: ALL_FAVORITE_LINKS_VARIABLES(user ? user.uid : '', 0, 10),
-		});
 		if (user) {
 			setCurrentToken(user.token);
 		}
 	}, [user]);
-
-	React.useEffect(() => {
-		if (process.env.NODE_ENV === 'production') {
-			if (!window.GA_INITIALIZED) {
-				initGA();
-				window.GA_INITIALIZED = true;
-			}
-			const ReactPixel = require('react-facebook-pixel');
-			ReactPixel.default.init('381691672399829');
-			logPageView();
-			ReactPixel.default.pageView();
-			Router.events.on('routeChangeComplete', () => {
-				logPageView();
-				ReactPixel.default.pageView();
-			});
-		}
-	}, []);
 
 	const hideOverlayHandler = () => {
 		setIsOverlayActive(false);
@@ -134,29 +96,5 @@ function MyApp({ Component, pageProps, sessionUser, isServer, user_token }) {
 		</ApolloProvider>
 	);
 }
-
-// Only uncomment this method if you have blocking data requirements for
-// every single page in your application. This disables the ability to
-// perform automatic static optimization, causing every page in your app to
-// be server-side rendered.
-//
-// MyApp.getInitialProps = async (appContext) => {
-// 	// calls page's `getInitialProps` and fills `appProps.pageProps`
-// 	const sessionUser =
-// 		appContext.ctx.req && appContext.ctx.req.session
-// 			? appContext.ctx.req.session.decodedToken
-// 			: null;
-// 	const user_token =
-// 		appContext.ctx.req && appContext.ctx.req.session
-// 			? appContext.ctx.req.session.token
-// 			: null;
-// 	const appProps = await App.getInitialProps(appContext);
-// 	return {
-// 		...appProps,
-// 		sessionUser,
-// 		isServer: !!appContext.ctx.req,
-// 		user_token,
-// 	};
-// };
 
 export default MyApp;

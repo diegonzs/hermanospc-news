@@ -7,10 +7,10 @@ import logo from '/images/brand/hermanospc-logo-small.svg';
 import styles from './loading-page.module.scss';
 
 export const LoadingPage = () => {
-  return (
-    <div className={styles.loadingContainer}>
-      <SVG src={logo} className={styles.image} />
-    </div>
-    // <h1>CARGANDO....</h1>
-  )
-}
+	return (
+		<div className={styles.loadingContainer}>
+			<SVG src={logo} className={styles.image} cacheRequests={true} />
+		</div>
+		// <h1>CARGANDO....</h1>
+	);
+};
