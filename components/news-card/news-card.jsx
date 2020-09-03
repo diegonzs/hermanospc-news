@@ -2,7 +2,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import { NewsContext } from 'context/news-context';
 import moment from 'moment';
-import { Image, Transformation, Placeholder } from 'cloudinary-react';
+// import { Image, Transformation, Placeholder } from 'cloudinary-react';
 
 //@ts-ignore
 import bookmarkIcon from '/images/svgs/bookmark.svg';
@@ -13,6 +13,7 @@ import bookmarkedIcon from '/images/svgs/bookmarked.svg';
 import styles from './news-card.module.scss';
 import { SaveLinkButtonContainer } from 'components/save-link-button/save-link-button.container';
 import { UserContext } from 'context';
+import { CloudinaryImage } from 'components/cloudinary-image';
 
 /**
  * Use to show tthe preview of a new
@@ -39,20 +40,12 @@ export const NewsCard = ({ news, isBig }) => {
 		>
 			<picture className={styles.imageContainer}>
 				{cloudinary_id ? (
-					<Image
-						cloudName="tribuagency"
-						publicId={cloudinary_id}
-						className={styles.image}
-						loading="lazy"
-					>
-						<Transformation
-							quality="70"
-							width="260"
-							fetchFormat="auto"
-							crop="scale"
-						/>
-						<Placeholder />
-					</Image>
+					<CloudinaryImage
+						cloudinaryId={cloudinary_id}
+						customClassName={styles.image}
+						bigSize="260"
+						smallSize="76"
+					/>
 				) : (
 					<img src={image} className={styles.image} />
 				)}

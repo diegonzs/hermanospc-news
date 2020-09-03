@@ -27,6 +27,7 @@ import {
 } from 'graphql/queries/links';
 import { useQuery } from '@apollo/client';
 import { LoadingPage } from 'components/loading-page';
+import { CloudinaryImage } from 'components/cloudinary-image';
 
 const fakeNews = {
 	title: '',
@@ -83,6 +84,7 @@ export const NewsDetail = ({ news, id, onBack }) => {
 		dislikes,
 		reactions,
 		links_saved,
+		cloudinary_id,
 	} = newsData;
 	if (loading && !newsData.title) return <LoadingPage />;
 	return (
@@ -97,7 +99,15 @@ export const NewsDetail = ({ news, id, onBack }) => {
 					</div>
 				</div>
 				<div className={styles.image}>
-					<img src={image} />
+					{cloudinary_id ? (
+						<CloudinaryImage
+							cloudinaryId={cloudinary_id}
+							bigSize="798"
+							smallSize="335"
+						/>
+					) : (
+						<img src={image} />
+					)}
 				</div>
 				<div className={styles.autor}>
 					<img src={source.favicon} alt="" width="20" height="20" />
@@ -122,9 +132,8 @@ export const NewsDetail = ({ news, id, onBack }) => {
 				<div className={styles.title}>
 					<h1>{title}</h1>
 				</div>
-				{!!content ? (
-					<ContentComponent content={content} />
-				) : (
+				<ContentComponent content={content} />
+				{!content.includes('<p') && (
 					<div className={styles.noContent}>
 						<h2>
 							Check this new in{' '}

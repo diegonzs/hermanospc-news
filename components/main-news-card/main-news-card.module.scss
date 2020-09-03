@@ -76,6 +76,7 @@
 	object-fit: cover;
 	transition: transform ease-in-out 0.3s;
 	overflow: hidden;
+	background-color: $color-background-card;
 }
 .icons {
 	padding-left: 16px;

@@ -6,7 +6,9 @@ import { ListTag } from 'components/list-tag/list-tag';
 import { Row } from 'components/row/row';
 import { Reactions } from 'components/reactions';
 
-import { Image, Transformation, Placeholder } from 'cloudinary-react';
+import { UserContext } from 'context';
+import { SaveLinkButtonContainer } from 'components/save-link-button/save-link-button.container';
+import { CloudinaryImage } from 'components/cloudinary-image';
 
 //@ts-ignore
 import styles from './main-news-card.module.scss';
@@ -17,8 +19,6 @@ import bookmarkIcon from '/images/svgs/bookmark.svg';
 import bookmarkedIcon from '/images/svgs/bookmarked.svg';
 //@ts-ignore
 import shareIcon from '/images/svgs/share.svg';
-import { UserContext } from 'context';
-import { SaveLinkButtonContainer } from 'components/save-link-button/save-link-button.container';
 
 /**
  * @typedef {Object} MainNewsCardViewProps
@@ -59,20 +59,12 @@ export const MainNewsCardView = ({
 				onClick={() => onClickNewsHandler(news)}
 			>
 				{cloudinary_id ? (
-					<Image
-						cloudName="tribuagency"
-						publicId={cloudinary_id}
-						className={styles.mainImage}
-						loading="lazy"
-					>
-						<Transformation
-							quality="70"
-							width="800"
-							fetchFormat="auto"
-							crop="scale"
-						/>
-						<Placeholder />
-					</Image>
+					<CloudinaryImage
+						cloudinaryId={cloudinary_id}
+						customClassName={styles.mainImage}
+						bigSize="798"
+						smallSize="335"
+					/>
 				) : (
 					<img src={image} className={styles.mainImage} />
 				)}
