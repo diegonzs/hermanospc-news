@@ -7,6 +7,7 @@ export const FRAGMENT_LINKS_ALL_FIELDS = gql`
 	fragment LinksAllFields on links {
 		id
 		image
+		cloudinary_id
 		original_link
 		title
 		created_at

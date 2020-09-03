@@ -38,6 +38,7 @@
  * @typedef {Object} News
  * @property {string} id - ID
  * @property {string} image - Main image.
+ * @property {string} cloudinary_id
  * @property {string} title - Title.
  * @property {Source} source - Source.
  * @property {string} created_at - How logn since posted.

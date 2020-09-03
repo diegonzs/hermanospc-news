@@ -6,6 +6,8 @@ import { ListTag } from 'components/list-tag/list-tag';
 import { Row } from 'components/row/row';
 import { Reactions } from 'components/reactions';
 
+import { Image, Transformation, Placeholder } from 'cloudinary-react';
+
 //@ts-ignore
 import styles from './main-news-card.module.scss';
 
@@ -47,6 +49,7 @@ export const MainNewsCardView = ({
 		reactions,
 		likes,
 		dislikes,
+		cloudinary_id,
 	} = news;
 	const user = React.useContext(UserContext);
 	return (
@@ -55,7 +58,24 @@ export const MainNewsCardView = ({
 				className={styles.imageContainer}
 				onClick={() => onClickNewsHandler(news)}
 			>
-				<img src={image} className={styles.mainImage} />
+				{cloudinary_id ? (
+					<Image
+						cloudName="tribuagency"
+						publicId={cloudinary_id}
+						className={styles.mainImage}
+						loading="lazy"
+					>
+						<Transformation
+							quality="70"
+							width="800"
+							fetchFormat="auto"
+							crop="scale"
+						/>
+						<Placeholder />
+					</Image>
+				) : (
+					<img src={image} className={styles.mainImage} />
+				)}
 			</div>
 			<div className={styles.leftColumn}>
 				{tags && <ListTag tags={JSON.parse(tags).slice(0, 1)} gap="20" />}

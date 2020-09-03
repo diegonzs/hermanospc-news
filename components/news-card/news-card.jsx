@@ -2,6 +2,8 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import { NewsContext } from 'context/news-context';
 import moment from 'moment';
+import { Image, Transformation, Placeholder } from 'cloudinary-react';
+
 //@ts-ignore
 import bookmarkIcon from '/images/svgs/bookmark.svg';
 //@ts-ignore
@@ -17,7 +19,15 @@ import { UserContext } from 'context';
  * @param {NewsCardProps} props
  */
 export const NewsCard = ({ news, isBig }) => {
-	const { id, title, image, source, created_at, links_saved } = news;
+	const {
+		id,
+		title,
+		image,
+		source,
+		created_at,
+		links_saved,
+		cloudinary_id,
+	} = news;
 	const { setSelectedNews } = React.useContext(NewsContext);
 	const user = React.useContext(UserContext);
 	return (
@@ -28,7 +38,25 @@ export const NewsCard = ({ news, isBig }) => {
 			className={isBig ? styles.containerBigger : styles.container}
 		>
 			<picture className={styles.imageContainer}>
-				<img src={image} alt="" className={styles.image} />
+				{cloudinary_id ? (
+					<Image
+						cloudName="tribuagency"
+						publicId={cloudinary_id}
+						className={styles.image}
+						loading="lazy"
+					>
+						<Transformation
+							quality="70"
+							width="260"
+							fetchFormat="auto"
+							crop="scale"
+						/>
+						<Placeholder />
+					</Image>
+				) : (
+					<img src={image} className={styles.image} />
+				)}
+				{/* <img src={image} alt="" className={styles.image} /> */}
 			</picture>
 			<div className={styles.iconContainer}>
 				<SaveLinkButtonContainer
