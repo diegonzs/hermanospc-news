@@ -6,12 +6,9 @@ import {
 	setUserCookie,
 	getUserFromCookie,
 } from 'lib/user-cookies';
-import { useRouter } from 'next/router';
 
 export const useFirebaseUser = (setToken) => {
 	const [finalUser, setFinalUser] = useState(getUserFromCookie());
-	const router = useRouter();
-
 	useEffect(() => {
 		const cancelAuthListener = firebase
 			.auth()
@@ -46,13 +43,6 @@ export const useFirebaseUser = (setToken) => {
 
 						// Create the user session in the backend.
 						setUserCookie(userData);
-						// fetch('/api/login', {
-						// 	method: 'POST',
-						// 	// eslint-disable-next-line no-undef
-						// 	headers: new Headers({ 'Content-Type': 'application/json' }),
-						// 	credentials: 'same-origin',
-						// 	body: JSON.stringify({ token }),
-						// });
 					} else {
 						// Update de token in firebase to add Hasura claims.
 						await fetch('/api/process-signup', {
@@ -68,13 +58,6 @@ export const useFirebaseUser = (setToken) => {
 						// refresh the token in the session backend
 						userData.token = newToken;
 						setUserCookie(userData);
-						// fetch('/api/login', {
-						// 	method: 'POST',
-						// 	// eslint-disable-next-line no-undef
-						// 	headers: new Headers({ 'Content-Type': 'application/json' }),
-						// 	credentials: 'same-origin',
-						// 	body: JSON.stringify({ token: newToken }),
-						// });
 
 						// Generate a random number to use in the username.
 						const randomNumber = Math.floor(1000 + Math.random() * 9000);
@@ -103,6 +86,14 @@ export const useFirebaseUser = (setToken) => {
 								username: userData.email,
 							}),
 						});
+
+						// Add user to the newsletter
+						fetch('/api/add-user-newsletter', {
+							method: 'POST',
+							body: JSON.stringify({
+								email: userData.email,
+							}),
+						});
 					}
 				} else {
 					// Set the user to null
@@ -111,10 +102,6 @@ export const useFirebaseUser = (setToken) => {
 					setToken(null);
 					// call log out on the backend to delete the session
 					removeUserCookie();
-					// fetch('/api/logout', {
-					// 	method: 'POST',
-					// 	credentials: 'same-origin',
-					// });
 				}
 
 				const userFromCookie = getUserFromCookie();

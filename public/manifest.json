@@ -1,10 +1,10 @@
 {
 	"name": "hermanospc-news",
-	"short_name": "hpc-news",
-	"description": "Nextjs using service worker via next-offline",
+	"short_name": "HPC News",
+	"description": "All important tech news",
 	"icons": [
 		{
-			"src": "/brand/pwa.png",
+			"src": "/brand/hpc-pwa-icon.png",
 			"sizes": "192x192",
 			"type": "image/png"
 		}
