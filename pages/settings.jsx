@@ -24,7 +24,7 @@ const Settings = ({ isServer }) => {
 	const user = React.useContext(UserContext);
 
 	const { data, loading } = useQuery(FETCH_USER_SOURCES, {
-		variables: FETCH_ALL_SOURCES_VARIABLES(user.uid),
+		variables: FETCH_ALL_SOURCES_VARIABLES(user ? user.uid : ''),
 	});
 
 	const updateNotifications = async () => {
