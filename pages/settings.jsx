@@ -11,9 +11,21 @@ import smilyFaceIcon from '/images/icons/emoji-profile.png';
 //@ts-ignore
 import styles from 'styles/pages/settings.module.scss';
 import { initMessaging, getFCMToken } from 'lib/firebase-messaging';
+import { useQuery } from '@apollo/client';
+import {
+	FETCH_ALL_SOURCES_VARIABLES,
+	FETCH_USER_SOURCES,
+} from 'graphql/queries/sources';
+import { UserContext } from 'context';
+import { Loader } from 'components/loader';
 
 const Settings = ({ isServer }) => {
 	const [notificationStatus, setNotificationStatus] = React.useState(false);
+	const user = React.useContext(UserContext);
+
+	const { data, loading } = useQuery(FETCH_USER_SOURCES, {
+		variables: FETCH_ALL_SOURCES_VARIABLES(user.uid),
+	});
 
 	const updateNotifications = async () => {
 		if (notificationStatus) return;
@@ -21,6 +33,22 @@ const Settings = ({ isServer }) => {
 		const token = getFCMToken();
 		if (token) {
 			setNotificationStatus(true);
+			if (data && data.users_sources) {
+				const sources = data.users_sources.map(
+					(source) => source.links_source.slug
+				);
+				try {
+					fetch('/api/fcm-register-topic', {
+						method: 'POST',
+						body: JSON.stringify({
+							token,
+							topics: sources,
+						}),
+					});
+				} catch (error) {
+					console.log({ error });
+				}
+			}
 		}
 	};
 
@@ -35,34 +63,32 @@ const Settings = ({ isServer }) => {
 			<PageContainer>
 				<Column gap="90" justify="center" customClass={styles.columnContainer}>
 					<HeadPage title="Profile" icon={smilyFaceIcon} />
-					<SettingsComponent
-						userSettings={{
-							email: 'diego.ags04@gmail.com',
-							username: 'diegonzs',
-							avatar: '',
-						}}
-						notificationSettings={{
-							settings: [
-								// {
-								// 	title: 'Subscribe to Weekly Digest',
-								// 	description: 'Our email summary every Monday',
-								// 	id: 'fsdfsd',
-								// 	isActive: true,
-								// },
-								{
-									title: 'Push alert of last news',
-									description: 'Receive notifications for relevant news',
-									id: 'notifications',
-									isActive: notificationStatus,
+					{loading ? (
+						<Loader />
+					) : (
+						<SettingsComponent
+							userSettings={{
+								email: 'diego.ags04@gmail.com',
+								username: 'diegonzs',
+								avatar: '',
+							}}
+							notificationSettings={{
+								settings: [
+									{
+										title: 'Push alert of last news',
+										description: 'Receive notifications for relevant news',
+										id: 'notifications',
+										isActive: notificationStatus,
+									},
+								],
+								updateSettings: (id) => {
+									if (id === 'notifications') {
+										updateNotifications();
+									}
 								},
-							],
-							updateSettings: (id) => {
-								if (id === 'notifications') {
-									updateNotifications();
-								}
-							},
-						}}
-					/>
+							}}
+						/>
+					)}
 				</Column>
 			</PageContainer>
 		</OnlyUsers>

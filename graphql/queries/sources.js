@@ -14,6 +14,17 @@ export const FETCH_ALL_SOURCES = gql`
 	}
 `;
 
+export const FETCH_USER_SOURCES = gql`
+	query FETCH_USER_SOURCCES($userId: String) {
+		users_sources(where: { user_id: { _eq: $userId } }) {
+			source_id
+			links_source {
+				slug
+			}
+		}
+	}
+`;
+
 /**
  * Variables for query FETCH_ALL_SOURCES
  * @param {string} userId
