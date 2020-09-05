@@ -16,11 +16,11 @@ import {
 	ALL_LINKS_SAVED_QUERY,
 	ALL_LINKS_SAVED_QUERY_VARIABLES,
 } from 'graphql/queries/links-saved';
-import { useSwrQuery } from 'hooks';
+import { UseSwrQuery } from 'hooks';
 
 const Saved = ({ isServer }) => {
 	const user = React.useContext(UserContext);
-	const { data, fetchMore, loading } = useSwrQuery(ALL_LINKS_SAVED_QUERY, {
+	const { data, fetchMore, loading } = UseSwrQuery(ALL_LINKS_SAVED_QUERY, {
 		variables: ALL_LINKS_SAVED_QUERY_VARIABLES(user ? user.uid : '', 0, 10),
 		fetchPolicy: 'cache-and-network',
 	});

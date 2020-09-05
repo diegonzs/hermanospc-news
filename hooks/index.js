@@ -1,2 +1,2 @@
 export { useFirebaseUser } from './useFirebaseUser';
-export { useSwrQuery } from './useSWRQuery';
+export { UseSwrQuery } from './useSWRQuery';

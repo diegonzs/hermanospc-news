@@ -17,12 +17,12 @@ import {
 //@ts-ignore
 import thumbUpIcon from '/images/icons/emoji-favorites.png';
 import { Loader } from 'components/loader';
-import { useSwrQuery } from 'hooks';
+import { UseSwrQuery } from 'hooks';
 
 const Favorites = ({ isServer }) => {
 	const user = React.useContext(UserContext);
 
-	const { data, fetchMore, loading } = useSwrQuery(ALL_FAVORITE_LINKS, {
+	const { data, fetchMore, loading } = UseSwrQuery(ALL_FAVORITE_LINKS, {
 		variables: ALL_FAVORITE_LINKS_VARIABLES(user ? user.uid : '', 0, 10),
 		fetchPolicy: 'cache-and-network',
 	});

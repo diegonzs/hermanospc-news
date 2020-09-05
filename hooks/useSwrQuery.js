@@ -12,7 +12,7 @@ import {
  * @param {QueryHookOptions<any, OperationVariables>} [options]
  * @returns {QueryResult<any, OperationVariables>}
  */
-export const useSwrQuery = (query, options) => {
+export const UseSwrQuery = (query, options) => {
 	const result = useQuery(query, options);
 	let inCache = true;
 

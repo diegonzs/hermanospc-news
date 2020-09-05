@@ -15,7 +15,7 @@ import {
 import { LoadingPage } from 'components/loading-page';
 import { SourcesSelection } from 'components/sources-selection';
 import { isFirstTimeVar } from 'lib/apollo-client';
-import { useSwrQuery } from 'hooks';
+import { UseSwrQuery } from 'hooks';
 
 const fakeCategories = [
 	{
@@ -47,7 +47,7 @@ const Home = () => {
 		? ALL_CATEGORIES_QUERY_WITH_USER
 		: ALL_CATEGORIES_QUERY;
 
-	const { loading, data, networkStatus } = useSwrQuery(categoriesQuery, {
+	const { loading, data, networkStatus } = UseSwrQuery(categoriesQuery, {
 		variables: ALL_CATEGORIES_QUERY_VARIABLES(user ? user.uid : ''),
 		notifyOnNetworkStatusChange: true,
 		fetchPolicy: 'cache-and-network',
