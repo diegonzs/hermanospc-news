@@ -16,10 +16,11 @@ import {
 	ALL_LINKS_SAVED_QUERY,
 	ALL_LINKS_SAVED_QUERY_VARIABLES,
 } from 'graphql/queries/links-saved';
+import { useSwrQuery } from 'hooks';
 
 const Saved = ({ isServer }) => {
 	const user = React.useContext(UserContext);
-	const { data, fetchMore, loading } = useQuery(ALL_LINKS_SAVED_QUERY, {
+	const { data, fetchMore, loading } = useSwrQuery(ALL_LINKS_SAVED_QUERY, {
 		variables: ALL_LINKS_SAVED_QUERY_VARIABLES(user ? user.uid : '', 0, 10),
 		fetchPolicy: 'cache-and-network',
 	});
@@ -44,20 +45,25 @@ const Saved = ({ isServer }) => {
 		});
 	};
 
+	// if (data && data.links_saved) {
+	// 	const listOfIds = [];
+	// 	news = data.links_saved.reduce((acum, l) => {
+	// 		if (!listOfIds.includes(l.link.id)) {
+	// 			listOfIds.push(l.link.id);
+	// 			return [...acum, { ...l.link }];
+	// 		} else {
+	// 			return acum;
+	// 		}
+	// 	}, []);
+	// }
+
 	if (data && data.links_saved) {
-		const listOfIds = [];
-		news = data.links_saved.reduce((acum, l) => {
-			if (!listOfIds.includes(l.link.id)) {
-				listOfIds.push(l.link.id);
-				return [...acum, { ...l.link }];
-			} else {
-				return acum;
-			}
-		}, []);
+		news = data.links_saved.map((l) => l.link);
 	}
 
 	if (data && data.links_saved_aggregate && data.links_saved) {
-		hasMore = data.links_saved_aggregate.aggregate.count > news.length;
+		hasMore =
+			data.links_saved_aggregate.aggregate.count > data.links_saved.length;
 	}
 
 	return (

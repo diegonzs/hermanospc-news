@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 /**
  * @typedef {Object} rowProps
+ * @property {string} [id] - Valu use to identify the row
  * @property {('flex-end' | 'flex-start' | 'center' | 'space-between' | 'space-around')} [justify] - value for justify-content property.
  * @property {('flex-end' | 'flex-start' | 'center' | 'space-between' | 'space-around')} [align] - value for align-items property.
  * @property {boolean} [isGrid] - Determine if the elements inside would be grid items.
@@ -24,6 +25,7 @@ export const Row = ({
 	gap = '0',
 	customStyles,
 	customClass,
+	id,
 }) => {
 	/**
 	 * @type {React.CSSProperties}
@@ -47,7 +49,7 @@ export const Row = ({
 				...customStyles,
 		  };
 	return (
-		<div style={styles} className={customClass}>
+		<div id={id} style={styles} className={customClass}>
 			{children}
 		</div>
 	);
@@ -76,6 +78,8 @@ Row.propTypes = {
 	gap: PropTypes.string,
 	/** Determine if the elements inside would be grid items. */
 	isGrid: PropTypes.bool,
+	/** Value to identify the Row */
+	id: PropTypes.string,
 };
 
 Row.defaultProps = {

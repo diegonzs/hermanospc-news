@@ -26,7 +26,7 @@ import styles from './with-user-ui.module.scss';
  */
 export const WithUserUI = ({ avatar, username, signout }) => {
 	return (
-		<Row isGrid={true} gap="26" customClass={styles.container}>
+		<Row id="with-user" isGrid={true} gap="26" customClass={styles.container}>
 			<Row isGrid={true} gap="26">
 				<Link href="/favorites" passHref>
 					<a className={styles.iconContainer}>

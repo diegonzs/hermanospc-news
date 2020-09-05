@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { UserContext } from '../context/user-context';
-import { useQuery, NetworkStatus } from '@apollo/client';
+import { NetworkStatus } from '@apollo/client';
 import { PageContainer } from 'components/page-container';
 import { HeadPage } from 'components/head-page/head-page';
 import { CategoryCard } from 'components/category-card';
@@ -15,6 +15,31 @@ import {
 import { LoadingPage } from 'components/loading-page';
 import { SourcesSelection } from 'components/sources-selection';
 import { isFirstTimeVar } from 'lib/apollo-client';
+import { useSwrQuery } from 'hooks';
+
+const fakeCategories = [
+	{
+		emoji: '🔥',
+		id: 'asdasdasdasdasd',
+		slug: 'featured',
+		title: 'featured',
+		links: [],
+	},
+	{
+		emoji: '🛠️',
+		id: 'hjkhgjkghjkghjkghjk',
+		slug: 'hardware',
+		title: 'hardware',
+		links: [],
+	},
+	{
+		emoji: '🕹️',
+		id: 'asfaksdlfkjsadlkfjasdlkfj',
+		slug: 'gaming',
+		title: 'gaming',
+		links: [],
+	},
+];
 
 const Home = () => {
 	const user = React.useContext(UserContext);
@@ -22,7 +47,7 @@ const Home = () => {
 		? ALL_CATEGORIES_QUERY_WITH_USER
 		: ALL_CATEGORIES_QUERY;
 
-	const { loading, data, networkStatus } = useQuery(categoriesQuery, {
+	const { loading, data, networkStatus } = useSwrQuery(categoriesQuery, {
 		variables: ALL_CATEGORIES_QUERY_VARIABLES(user ? user.uid : ''),
 		notifyOnNetworkStatusChange: true,
 		fetchPolicy: 'cache-and-network',
@@ -54,31 +79,35 @@ const Home = () => {
 		);
 	}
 
+	let categoriesToRender = [];
+
+	if (loading || networkStatus === NetworkStatus.refetch) {
+		categoriesToRender = fakeCategories;
+	} else if (data && data.categories) {
+		categoriesToRender = data.categories;
+	}
+
 	return (
 		<PageContainer customClass={styles.container}>
-			{(loading || networkStatus === NetworkStatus.refetch) && <LoadingPage />}
-			{data &&
-				data.categories &&
-				data.categories.map((category, i) => (
-					<div className={styles.categories} key={category.id}>
-						{!i && (
-							<HeadPage
-								title={category.title}
-								emoji={category.emoji}
-								hasBack={false}
-							/>
-						)}
-						<CategoryCard
-							title={
-								!!i
-									? { text: category.title, emoji: category.emoji }
-									: undefined
-							}
-							news={category.links}
-							slug={category.slug}
+			{categoriesToRender.map((category, i) => (
+				<div className={styles.categories} key={category.id}>
+					{!i && (
+						<HeadPage
+							title={category.title}
+							emoji={category.emoji}
+							hasBack={false}
 						/>
-					</div>
-				))}
+					)}
+					<CategoryCard
+						title={
+							!!i ? { text: category.title, emoji: category.emoji } : undefined
+						}
+						news={category.links}
+						slug={category.slug}
+						loading={loading}
+					/>
+				</div>
+			))}
 		</PageContainer>
 	);
 };

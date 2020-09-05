@@ -9,10 +9,12 @@
 .NewsDetailContainer {
 	max-width: 720px;
 	.header {
-		margin-bottom: 24px;
+		margin-bottom: 2rem;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
 		.tags {
-			float: right;
-			margin-bottom: 2rem;
+			display: flex;
 		}
 		.backbutton {
 			float: left;

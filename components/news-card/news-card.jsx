@@ -44,7 +44,7 @@ export const NewsCard = ({ news, isBig }) => {
 						cloudinaryId={cloudinary_id}
 						customClassName={styles.image}
 						bigSize="260"
-						smallSize="76"
+						smallSize="152"
 					/>
 				) : (
 					<img src={image} className={styles.image} />

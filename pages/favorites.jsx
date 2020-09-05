@@ -17,16 +17,18 @@ import {
 //@ts-ignore
 import thumbUpIcon from '/images/icons/emoji-favorites.png';
 import { Loader } from 'components/loader';
+import { useSwrQuery } from 'hooks';
 
 const Favorites = ({ isServer }) => {
 	const user = React.useContext(UserContext);
-	const { data, fetchMore, loading } = useQuery(ALL_FAVORITE_LINKS, {
+
+	const { data, fetchMore, loading } = useSwrQuery(ALL_FAVORITE_LINKS, {
 		variables: ALL_FAVORITE_LINKS_VARIABLES(user ? user.uid : '', 0, 10),
 		fetchPolicy: 'cache-and-network',
 	});
 
-	/** @type {News[]} */
-	let news = [];
+	// /** @type {News[]} */
+	// let news = [];
 	let hasMore = false;
 
 	const fetchMoreHandler = () => {
@@ -48,19 +50,21 @@ const Favorites = ({ isServer }) => {
 		});
 	};
 
-	if (data && data.favorite_links) {
-		const listOfIds = [];
-		news = data.favorite_links.reduce((acum, l) => {
-			if (!listOfIds.includes(l.id)) {
-				listOfIds.push(l.id);
-				return [...acum, l];
-			} else {
-				return acum;
-			}
-		}, []);
-	}
+	// if (data && data.favorite_links) {
+	// 	const listOfIds = [];
+	// 	news = data.favorite_links.reduce((acum, l) => {
+	// 		if (!listOfIds.includes(l.id)) {
+	// 			listOfIds.push(l.id);
+	// 			return [...acum, l];
+	// 		} else {
+	// 			return acum;
+	// 		}
+	// 	}, []);
+	// }
 	if (data && data.favorite_links_aggregate && data.favorite_links) {
-		hasMore = data.favorite_links_aggregate.aggregate.count > news.length;
+		hasMore =
+			data.favorite_links_aggregate.aggregate.count >
+			data.favorite_links.length;
 	}
 
 	return (
@@ -71,7 +75,7 @@ const Favorites = ({ isServer }) => {
 					{loading && <Loader />}
 					{!loading && data && data.favorite_links && (
 						<ListNewsCard
-							newsCards={news}
+							newsCards={data.favorite_links}
 							scroll="vertical"
 							isInfinity
 							hasMore={hasMore}

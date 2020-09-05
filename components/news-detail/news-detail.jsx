@@ -95,7 +95,7 @@ export const NewsDetail = ({ news, id, onBack }) => {
 						<BackButton text="Back" handleClick={onBack} />
 					</div>
 					<div className={styles.tags}>
-						{tags && <ListTag tags={JSON.parse(tags).slice(0, 3)} />}
+						{tags && <ListTag tags={JSON.parse(tags).slice(1, 2)} />}
 					</div>
 				</div>
 				<div className={styles.image}>

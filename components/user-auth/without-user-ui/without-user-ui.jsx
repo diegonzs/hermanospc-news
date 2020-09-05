@@ -11,7 +11,12 @@ import styles from './without-user-ui.module.scss';
  */
 export const WithoutUserUI = () => {
 	return (
-		<Row isGrid={true} gap="24" customClass={styles.container}>
+		<Row
+			id="without-user"
+			isGrid={true}
+			gap="24"
+			customClass={styles.container}
+		>
 			<Link href="/signin">
 				<a>
 					<Button

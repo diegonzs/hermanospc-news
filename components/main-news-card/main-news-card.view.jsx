@@ -70,7 +70,7 @@ export const MainNewsCardView = ({
 				)}
 			</div>
 			<div className={styles.leftColumn}>
-				{tags && <ListTag tags={JSON.parse(tags).slice(0, 1)} gap="20" />}
+				{tags && <ListTag tags={JSON.parse(tags).slice(1, 2)} gap="20" />}
 				<span className={styles.title} onClick={() => onClickNewsHandler(news)}>
 					{title}
 				</span>
