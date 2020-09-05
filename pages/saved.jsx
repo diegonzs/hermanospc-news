@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useQuery } from '@apollo/client';
 
 import { UserContext } from 'context/user-context';
 
@@ -16,11 +15,11 @@ import {
 	ALL_LINKS_SAVED_QUERY,
 	ALL_LINKS_SAVED_QUERY_VARIABLES,
 } from 'graphql/queries/links-saved';
-import { UseSwrQuery } from 'hooks';
+import { useSwrQuery } from 'hooks';
 
 const Saved = ({ isServer }) => {
 	const user = React.useContext(UserContext);
-	const { data, fetchMore, loading } = UseSwrQuery(ALL_LINKS_SAVED_QUERY, {
+	const { data, fetchMore, loading } = useSwrQuery(ALL_LINKS_SAVED_QUERY, {
 		variables: ALL_LINKS_SAVED_QUERY_VARIABLES(user ? user.uid : '', 0, 10),
 		fetchPolicy: 'cache-and-network',
 	});

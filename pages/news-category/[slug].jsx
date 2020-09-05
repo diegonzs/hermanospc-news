@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useRouter } from 'next/router';
-import { useQuery } from '@apollo/client';
 
 import { UserContext } from 'context/user-context';
 
@@ -10,6 +9,8 @@ import { HeadPage } from 'components/head-page/head-page';
 import { ListNewsCard } from 'components/list-news-card';
 import { MainNewsCard } from 'components/main-news-card';
 import { Loader } from 'components/loader';
+
+import { useSwrQuery } from 'hooks';
 
 import {
 	ALL_LINKS_BY_CATEGORY,
@@ -32,7 +33,7 @@ const CategoryPage = () => {
 	/** @type {News[]} */
 	let commonCards = [];
 
-	const { data, loading, fetchMore } = useQuery(categoryQuery, {
+	const { data, loading, fetchMore } = useSwrQuery(categoryQuery, {
 		variables: ALL_LINKS_BY_CATEGORY_VARIABLES(user ? user.uid : '', slug, 0),
 	});
 
