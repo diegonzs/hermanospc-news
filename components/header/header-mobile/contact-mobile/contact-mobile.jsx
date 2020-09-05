@@ -8,6 +8,7 @@ export const ContactMobile = () => {
 			className={styles.contact}
 			href="https://hermanospc.co/contact"
 			target="_blank"
+			rel="noopener"
 		>
 			Contact
 		</a>

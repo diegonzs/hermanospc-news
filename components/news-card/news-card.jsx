@@ -32,7 +32,7 @@ export const NewsCard = ({ news, isBig }) => {
 	const { setSelectedNews } = React.useContext(NewsContext);
 	const user = React.useContext(UserContext);
 	return (
-		<div
+		<article
 			onClick={() => {
 				setSelectedNews(news);
 			}}
@@ -87,7 +87,7 @@ export const NewsCard = ({ news, isBig }) => {
 					</div>
 				</div>
 			</div>
-		</div>
+		</article>
 	);
 };
 

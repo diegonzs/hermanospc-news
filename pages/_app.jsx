@@ -49,6 +49,7 @@ function MyApp({ Component, pageProps }) {
 			<UserContext.Provider value={user}>
 				<NewsContext.Provider value={{ selectedNews, setSelectedNews }}>
 					<Head>
+						<title>HPC News</title>
 						<meta
 							name="viewport"
 							content="width=device-width, initial-scale=1"
@@ -60,7 +61,7 @@ function MyApp({ Component, pageProps }) {
 							content="black"
 						/>
 						<meta name="apple-mobile-web-app-title" content="HPC News" />
-						<meta name="description" content="" />
+						<meta name="description" content="All tech news in one place" />
 						<meta name="format-detection" content="telephone=no" />
 						<meta name="mobile-web-app-capable" content="yes" />
 						<meta name="apple-touch-fullscreen" content="yes" />

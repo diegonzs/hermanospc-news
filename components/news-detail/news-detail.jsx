@@ -137,7 +137,7 @@ export const NewsDetail = ({ news, id, onBack }) => {
 					<div className={styles.noContent}>
 						<h2>
 							Check this new in{' '}
-							<a href={original_link} target="_blank">
+							<a href={original_link} target="_blank" rel="noopener">
 								{source.name}
 							</a>
 						</h2>

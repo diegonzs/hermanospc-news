@@ -42,7 +42,7 @@ export const SocialMobile = () => {
 			<ul className={styles.list}>
 				{socialMediaList.map((value) => (
 					<li className={styles.item} key={value.key}>
-						<a href={value.link} target="_blank">
+						<a href={value.link} target="_blank" rel="noopener">
 							<SVG className={styles.icon} src={value.icon} />
 						</a>
 					</li>

@@ -53,7 +53,7 @@ export const MainNewsCardView = ({
 	} = news;
 	const user = React.useContext(UserContext);
 	return (
-		<div className={styles.columns}>
+		<article className={styles.columns}>
 			<div
 				className={styles.imageContainer}
 				onClick={() => onClickNewsHandler(news)}
@@ -126,7 +126,7 @@ export const MainNewsCardView = ({
 					<p className={styles.created_at}>{moment(created_at).fromNow()}</p>
 				</Row>
 			</div>
-		</div>
+		</article>
 	);
 };
 
