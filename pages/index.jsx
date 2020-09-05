@@ -25,6 +25,7 @@ const Home = () => {
 	const { loading, data, networkStatus } = useQuery(categoriesQuery, {
 		variables: ALL_CATEGORIES_QUERY_VARIABLES(user ? user.uid : ''),
 		notifyOnNetworkStatusChange: true,
+		fetchPolicy: 'cache-and-network',
 	});
 
 	let hasNews = true;
