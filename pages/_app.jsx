@@ -16,6 +16,7 @@ import { OverlayWrapper } from 'components/overlay-page/overlay-wrapper/overlay-
 
 import '../styles/main.scss';
 import 'react-toastify/dist/ReactToastify.min.css';
+import { initMessaging } from 'lib/firebase-messaging';
 
 function MyApp({ Component, pageProps }) {
 	const [currentToken, setCurrentToken] = React.useState();
@@ -36,6 +37,10 @@ function MyApp({ Component, pageProps }) {
 			setCurrentToken(user.token);
 		}
 	}, [user]);
+
+	React.useEffect(() => {
+		initMessaging();
+	}, []);
 
 	const hideOverlayHandler = () => {
 		setIsOverlayActive(false);

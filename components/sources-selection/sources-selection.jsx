@@ -124,6 +124,7 @@ export const SourcesSelection = ({ userId, title, description, onDone }) => {
 					sourcesResponse.data.links_sources &&
 					sourcesResponse.data.links_sources.map((source) => (
 						<li
+							key={source.name}
 							onClick={() => onClickSource(source.id)}
 							className={styles.sourceElem}
 						>
@@ -133,8 +134,10 @@ export const SourcesSelection = ({ userId, title, description, onDone }) => {
 							</span>{' '}
 							<ToggleSwitch
 								isActive={
-									selectedSources.includes(source.id) ||
-									isSourceDisabled(source.id)
+									!!(
+										selectedSources.includes(source.id) ||
+										isSourceDisabled(source.id)
+									)
 								}
 								onClickHandler={() => onClickSource(source.id)}
 								isDisabled={isSourceDisabled(source.id)}

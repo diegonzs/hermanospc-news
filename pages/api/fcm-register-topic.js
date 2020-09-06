@@ -8,7 +8,9 @@ export default async (req, res) => {
 		const tokens = [token];
 
 		for (const topic of topics) {
-			admin.messaging().subscribeToTopic(tokens, topic);
+			console.log('subscribing to this topic:', topic);
+			const data = await admin.messaging().subscribeToTopic(tokens, topic);
+			console.log(data);
 		}
 
 		res.statusCode = 200;
