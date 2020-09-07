@@ -22,6 +22,10 @@ import {
 } from 'graphql/queries/sources';
 import { ToastContainer, toast } from 'react-toastify';
 import { getFCMToken, initMessaging } from 'lib/firebase-messaging';
+import {
+	ALL_CATEGORIES_QUERY_WITH_USER,
+	ALL_CATEGORIES_QUERY_VARIABLES,
+} from 'graphql/queries/categories';
 
 /**
  * This component shows all the visual for notification settings
@@ -69,6 +73,12 @@ export const NotificationSettings = ({
 	const onClickSource = (id) => {
 		unsubscribe({
 			variables: UNSUBSCRIBE_TO_SOURCE_VARIABLES(user ? user.uid : '', id),
+			refetchQueries: [
+				{
+					query: ALL_CATEGORIES_QUERY_WITH_USER,
+					variables: ALL_CATEGORIES_QUERY_VARIABLES(user ? user.uid : ''),
+				},
+			],
 			optimisticResponse: {
 				delete_users_sources: {
 					returning: [

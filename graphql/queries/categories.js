@@ -74,7 +74,12 @@ export const ALL_LINKS_BY_CATEGORY_WITH_USER = gql`
 		categories(where: { slug: { _eq: $slug } }) {
 			title
 			emoji
-			links(limit: 10, order_by: { created_at: desc }, offset: $offset) {
+			links(
+				limit: 10
+				order_by: { created_at: desc }
+				offset: $offset
+				where: { source: { users_sources: { user_id: { _eq: $userId } } } }
+			) {
 				...LinksAllFields
 			}
 			links_aggregate {
