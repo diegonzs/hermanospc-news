@@ -11,7 +11,7 @@ import smilyFaceIcon from '/images/icons/emoji-profile.png';
 //@ts-ignore
 import styles from 'styles/pages/settings.module.scss';
 import { initMessaging, getFCMToken } from 'lib/firebase-messaging';
-import { useQuery } from '@apollo/client';
+import { useQuery, NetworkStatus } from '@apollo/client';
 import {
 	FETCH_ALL_SOURCES_VARIABLES,
 	FETCH_USER_SOURCES,
@@ -23,8 +23,10 @@ const Settings = ({ isServer }) => {
 	const [notificationStatus, setNotificationStatus] = React.useState(false);
 	const user = React.useContext(UserContext);
 
-	const { data, loading } = useQuery(FETCH_USER_SOURCES, {
+	const { data, loading, networkStatus } = useQuery(FETCH_USER_SOURCES, {
 		variables: FETCH_ALL_SOURCES_VARIABLES(user ? user.uid : ''),
+		fetchPolicy: 'network-only',
+		notifyOnNetworkStatusChange: true,
 	});
 
 	const updateNotifications = async () => {
@@ -58,12 +60,18 @@ const Settings = ({ isServer }) => {
 		}
 	}, []);
 
+	let userSources = [];
+
+	if (data && data.users_sources) {
+		userSources = data.users_sources;
+	}
+
 	return (
 		<OnlyUsers isServer={isServer}>
 			<PageContainer>
 				<Column gap="90" justify="center" customClass={styles.columnContainer}>
 					<HeadPage title="Profile" icon={smilyFaceIcon} />
-					{loading ? (
+					{loading || networkStatus === NetworkStatus.refetch ? (
 						<Loader />
 					) : (
 						<SettingsComponent
@@ -86,6 +94,7 @@ const Settings = ({ isServer }) => {
 										updateNotifications();
 									}
 								},
+								userSources,
 							}}
 						/>
 					)}

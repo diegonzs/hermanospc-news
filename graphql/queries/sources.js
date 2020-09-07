@@ -19,7 +19,10 @@ export const FETCH_USER_SOURCES = gql`
 		users_sources(where: { user_id: { _eq: $userId } }) {
 			source_id
 			links_source {
+				id
 				slug
+				name
+				favicon
 			}
 		}
 	}

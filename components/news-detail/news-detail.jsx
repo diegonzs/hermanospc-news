@@ -29,7 +29,9 @@ import { useQuery } from '@apollo/client';
 import { LoadingPage } from 'components/loading-page';
 import { CloudinaryImage } from 'components/cloudinary-image';
 
+/** @type {News} */
 const fakeNews = {
+	id: 'asdasdasd',
 	title: '',
 	source: { favicon: '', name: '' },
 	tags: '[]',
@@ -41,6 +43,8 @@ const fakeNews = {
 	dislikes: { aggregate: { count: 0 } },
 	reactions: [],
 	links_saved: [],
+	cloudinary_id: '',
+	created_at: '',
 };
 
 /**
@@ -66,12 +70,16 @@ export const NewsDetail = ({ news, id, onBack }) => {
 	/**
 	 * @type {News}
 	 */
-	const newsData =
-		loading && news
-			? news
-			: data && data.links_by_pk
-			? data.links_by_pk
-			: fakeNews;
+	let newsData;
+
+	if (news) {
+		newsData = news;
+	} else if (loading) {
+		newsData = fakeNews;
+	} else if (data && data.links_by_pk) {
+		newsData = data.links_by_pk;
+	}
+
 	const {
 		title,
 		source,
@@ -86,7 +94,7 @@ export const NewsDetail = ({ news, id, onBack }) => {
 		links_saved,
 		cloudinary_id,
 	} = newsData;
-	if (loading && !newsData.title) return <LoadingPage />;
+	if (loading && !news) return <LoadingPage />;
 	return (
 		<div className={styles.container}>
 			<div className={styles.NewsDetailContainer}>

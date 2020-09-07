@@ -9,6 +9,7 @@ import { isFirstTimeVar } from 'lib/apollo-client';
 import {
 	FETCH_ALL_SOURCES,
 	FETCH_ALL_SOURCES_VARIABLES,
+	FETCH_USER_SOURCES,
 } from 'graphql/queries/sources';
 import { Loader } from 'components/loader';
 import { ToggleSwitch } from 'components/toggle-switch';
@@ -88,6 +89,10 @@ export const SourcesSelection = ({ userId, title, description, onDone }) => {
 				query: ALL_CATEGORIES_QUERY_WITH_USER,
 				variables: ALL_CATEGORIES_QUERY_VARIABLES(userId),
 			},
+			{
+				query: FETCH_USER_SOURCES,
+				variables: FETCH_ALL_SOURCES_VARIABLES(userId),
+			},
 		],
 		onCompleted: async (data) => {
 			isFirstTimeVar(false);
@@ -122,28 +127,36 @@ export const SourcesSelection = ({ userId, title, description, onDone }) => {
 			<ul className={styles.sourcesList}>
 				{sourcesResponse.data &&
 					sourcesResponse.data.links_sources &&
-					sourcesResponse.data.links_sources.map((source) => (
-						<li
-							key={source.name}
-							onClick={() => onClickSource(source.id)}
-							className={styles.sourceElem}
-						>
-							<span className={styles.content}>
-								<img className={styles.favicon} src={source.favicon} />
-								{source.name}
-							</span>{' '}
-							<ToggleSwitch
-								isActive={
-									!!(
-										selectedSources.includes(source.id) ||
-										isSourceDisabled(source.id)
-									)
-								}
-								onClickHandler={() => onClickSource(source.id)}
-								isDisabled={isSourceDisabled(source.id)}
-							/>
-						</li>
-					))}
+					sourcesResponse.data.links_sources.map((source) => {
+						const isDisabled = isSourceDisabled(source.id);
+						return (
+							<li
+								key={source.name}
+								onClick={() => (isDisabled ? null : onClickSource(source.id))}
+								className={`${styles.sourceElem} ${
+									isDisabled ? styles.disabled : ''
+								}`}
+							>
+								<span className={styles.content}>
+									<img className={styles.favicon} src={source.favicon} />
+									{source.name}
+								</span>{' '}
+								{isDisabled ? (
+									<span className={styles.followingTag}>FOLLOWING</span>
+								) : (
+									<ToggleSwitch
+										isActive={
+											!!(selectedSources.includes(source.id) || isDisabled)
+										}
+										onClickHandler={() =>
+											isDisabled ? null : onClickSource(source.id)
+										}
+										isDisabled={isDisabled}
+									/>
+								)}
+							</li>
+						);
+					})}
 			</ul>
 			<div className={styles.buttonContainer}>
 				{onDone && (

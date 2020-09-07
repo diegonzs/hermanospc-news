@@ -8,7 +8,7 @@
 	background-color: black;
 	width: 100%;
 	height: 100vh;
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 	z-index: 10000;
@@ -41,6 +41,7 @@
 	width: 100%;
 	justify-content: space-between;
 	height: 60px;
+	align-items: center;
 }
 
 .content {
@@ -59,4 +60,13 @@
 	grid-template-columns: 1fr 1fr;
 	width: min-content;
 	grid-column-gap: 20px;
+}
+
+.followingTag {
+	color: $color-primary-40;
+	font-size: $font-size-smallest;
+}
+
+.disabled {
+	cursor: not-allowed;
 }
