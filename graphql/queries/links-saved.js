@@ -10,6 +10,7 @@ export const ALL_LINKS_SAVED_QUERY = gql`
 			where: { user_id: { _eq: $userId } }
 			limit: $limit
 			offset: $offset
+			order_by: { created_at: desc }
 		) {
 			id
 			link {

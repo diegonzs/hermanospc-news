@@ -12,6 +12,7 @@ export const ALL_FAVORITE_LINKS = gql`
 			}
 			limit: $limit
 			offset: $offset
+			order_by: { created_at: desc }
 		) {
 			...LinksAllFields
 		}
