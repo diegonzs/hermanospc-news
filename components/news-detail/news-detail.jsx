@@ -118,7 +118,7 @@ export const NewsDetail = ({ news, id, onBack }) => {
 					)}
 				</div>
 				<div className={styles.autor}>
-					<img src={source.favicon} alt="" width="20" height="20" />
+					<img src={source.favicon} alt="" width="13" />
 					{source.name}
 				</div>
 				<Row isGrid={true} gap="20" customClass={styles.socialBox}>

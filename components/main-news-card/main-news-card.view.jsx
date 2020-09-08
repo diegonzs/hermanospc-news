@@ -97,6 +97,7 @@ export const MainNewsCardView = ({
 						<Row isGrid={true} gap="32">
 							<Reactions
 								data={likes.aggregate.count}
+								total={likes.aggregate.count + dislikes.aggregate.count}
 								icon="/images/example/thumbs-up.png"
 								isActive={
 									!!(reactions.length && reactions[0].emoji === 'U+1F44D')
@@ -107,6 +108,7 @@ export const MainNewsCardView = ({
 							/>
 							<Reactions
 								data={dislikes.aggregate.count}
+								total={likes.aggregate.count + dislikes.aggregate.count}
 								icon="/images/example/thumbs-down.png"
 								isActive={
 									!!(reactions.length && reactions[0].emoji === 'U+1F44E')

@@ -3,6 +3,7 @@ import { Column } from 'components/column/column';
 import PropTypes from 'prop-types';
 //@ts-ignore
 import styles from './reactions.module.scss';
+import { UserContext } from 'context';
 /**
  * @typedef {Object} reactionsProps
  * @property {number} data - number of likes/dislikes
@@ -11,6 +12,7 @@ import styles from './reactions.module.scss';
  * @property {boolean} isDisabled - Indicates if the reaction is disabled
  * @property {() => void} createReactionHandler - Handler to create a reaction
  * @property {boolean} [isBig] - Tells if the icon is big
+ * @property {number} total - Total of reactions
  */
 
 /**
@@ -24,7 +26,9 @@ export const ReactionsView = ({
 	isDisabled,
 	createReactionHandler,
 	isBig = false,
+	total,
 }) => {
+	const user = React.useContext(UserContext);
 	if (isBig) {
 		return (
 			<div
@@ -35,7 +39,8 @@ export const ReactionsView = ({
 			>
 				<Column gap="8" justify="center" width="35px">
 					<img src={icon} />
-					<p>{data}</p>
+					{/* <p>10</p> */}
+					{isDisabled && total && user ? <p>{(data / total) * 100}%</p> : null}
 				</Column>
 			</div>
 		);
@@ -49,7 +54,8 @@ export const ReactionsView = ({
 			onClick={() => (isDisabled ? null : createReactionHandler())}
 		>
 			<Column gap="8" justify="center" width="35px">
-				<p>{data}</p>
+				{isDisabled && total && user ? <p>{(data / total) * 100}%</p> : null}
+				{/* <p>10</p> */}
 				<img src={icon} />
 			</Column>
 		</div>

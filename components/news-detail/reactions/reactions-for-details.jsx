@@ -33,6 +33,7 @@ export const ReactionsForDetails = ({
 			<Row isGrid={true} gap="32" justify="center">
 				<Reactions
 					data={likes.aggregate.count}
+					total={likes.aggregate.count + dislikes.aggregate.count}
 					icon="/images/example/thumbs-up-big.png"
 					isActive={!!(reactions.length && reactions[0].emoji === 'U+1F44D')}
 					isDisabled={!!reactions.length || !user}
@@ -42,6 +43,7 @@ export const ReactionsForDetails = ({
 				/>
 				<Reactions
 					data={dislikes.aggregate.count}
+					total={likes.aggregate.count + dislikes.aggregate.count}
 					icon="/images/example/thumbs-down-big.png"
 					isActive={!!(reactions.length && reactions[0].emoji === 'U+1F44E')}
 					isDisabled={!!reactions.length || !user}

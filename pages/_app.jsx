@@ -46,7 +46,7 @@ function MyApp({ Component, pageProps }) {
 		setIsOverlayActive(false);
 		setTimeout(() => {
 			setSelectedNews(null);
-		}, 250);
+		}, 300);
 	};
 
 	return (

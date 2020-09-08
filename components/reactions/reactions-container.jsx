@@ -18,6 +18,7 @@ import { UserContext } from 'context/user-context';
  * @property {boolean} isDisabled - Indicates if the reaction is disabled
  * @property {string} linkId - Indicates the link id
  * @property {boolean} [isBig] - Tells if the reaction icon should be big
+ * @property {number} total - Total of reactions
  */
 
 /**
