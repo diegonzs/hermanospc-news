@@ -11,8 +11,16 @@
 		object-fit: contain;
 		height: auto;
 	}
-	h3 {
-		margin-top: 24px;
+	h3,
+	h2 {
+		margin-top: 2.4rem;
+	}
+	ul {
+		margin-top: 1.5rem;
+		padding-left: 2.5rem;
+	}
+	iframe {
+		margin-top: 2rem;
 	}
 	p {
 		font-size: 16px;
