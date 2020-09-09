@@ -33,14 +33,19 @@ export const ReactionsView = ({
 		return (
 			<div
 				className={`${styles.container} ${styles.containerBig} ${
-					isActive && styles.active
-				} ${isDisabled && styles.disabled}`}
-				onClick={() => (isDisabled ? null : createReactionHandler())}
+					isActive ? styles.active : ''
+				} ${isDisabled ? styles.disabled : ''}`}
+				onClick={() => {
+					console.log('isDisabled', isDisabled);
+					isDisabled ? null : createReactionHandler();
+				}}
 			>
 				<Column gap="8" justify="center" width="35px">
 					<img src={icon} />
 					{/* <p>10</p> */}
-					{isDisabled && total && user ? <p>{(data / total) * 100}%</p> : null}
+					{isDisabled && total && user ? (
+						<p>{Math.round((data / total) * 100)}%</p>
+					) : null}
 				</Column>
 			</div>
 		);
@@ -48,13 +53,15 @@ export const ReactionsView = ({
 
 	return (
 		<div
-			className={`${styles.container} ${isActive && styles.active} ${
-				isDisabled && styles.disabled
+			className={`${styles.container} ${isActive ? styles.active : ''} ${
+				isDisabled ? styles.disabled : ''
 			}`}
 			onClick={() => (isDisabled ? null : createReactionHandler())}
 		>
 			<Column gap="8" justify="center" width="35px">
-				{isDisabled && total && user ? <p>{(data / total) * 100}%</p> : null}
+				{isDisabled && total && user ? (
+					<p>{Math.round((data / total) * 100)}%</p>
+				) : null}
 				{/* <p>10</p> */}
 				<img src={icon} />
 			</Column>

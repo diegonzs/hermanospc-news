@@ -63,7 +63,7 @@ export const NewsDetail = ({ news, id, onBack }) => {
 	const [isShareModalOpen, setIsShareModalOpen] = React.useState(false);
 
 	const { data, loading, error } = useQuery(GET_LINK_BY_ID, {
-		variables: GET_LINK_BY_ID_VARIABLES(user ? user.id : '', id),
+		variables: GET_LINK_BY_ID_VARIABLES(user ? user.uid : '', id),
 		fetchPolicy: 'cache-first',
 	});
 
@@ -72,12 +72,16 @@ export const NewsDetail = ({ news, id, onBack }) => {
 	 */
 	let newsData;
 
-	if (news) {
+	if (data && data.links_by_pk) {
+		console.log('using query');
+		newsData = data.links_by_pk;
+		console.log(data.links_by_pk.reactions);
+	} else if (news) {
+		console.log('using news from props');
 		newsData = news;
 	} else if (loading) {
+		console.log('using fake news');
 		newsData = fakeNews;
-	} else if (data && data.links_by_pk) {
-		newsData = data.links_by_pk;
 	}
 
 	const {

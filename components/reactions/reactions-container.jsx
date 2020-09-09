@@ -61,7 +61,7 @@ export const ReactionsContainer = (props) => {
 									__typename: 'reactions_aggregate_fields',
 									count: storeFieldName.includes(props.iconCode)
 										? props.data + 1
-										: props.data,
+										: props.total - props.data,
 								},
 							};
 							return newValue;
