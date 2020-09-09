@@ -14,29 +14,31 @@ import { WithoutUserUI } from './without-user-ui';
  * @param {UserAuthViewProps} props
  */
 export const UserAuthView = ({ isUserSignedIn, userData }) => {
-  if (isUserSignedIn && userData) {
-    return (
-      <WithUserUI
-        {...userData}
-      />
-    )
-  } else {
-    return (
-      <WithoutUserUI />
-    )
-  }
-}
+	const [isLoading, setIsloaidng] = React.useState(true);
+
+	React.useEffect(() => {
+		setIsloaidng(false);
+	}, []);
+
+	if (isLoading) return null;
+
+	if (isUserSignedIn && userData) {
+		return <WithUserUI {...userData} />;
+	} else {
+		return <WithoutUserUI />;
+	}
+};
 
 UserAuthView.propTypes = {
-  /** The user data. */
-  userData: PropTypes.shape({
-    /** username */
-    username: PropTypes.string.isRequired,
-    /** avatar */
-    avatar: PropTypes.string.isRequired,
-    /** signout function */
-    signout: PropTypes.func.isRequired,
-  }),
-  /** Flag to verify if the user is sined in. */
-  isUserSignedIn: PropTypes.bool.isRequired,
-}
+	/** The user data. */
+	userData: PropTypes.shape({
+		/** username */
+		username: PropTypes.string.isRequired,
+		/** avatar */
+		avatar: PropTypes.string.isRequired,
+		/** signout function */
+		signout: PropTypes.func.isRequired,
+	}),
+	/** Flag to verify if the user is sined in. */
+	isUserSignedIn: PropTypes.bool.isRequired,
+};

@@ -9,6 +9,7 @@ export const FETCH_ALL_SOURCES = gql`
 			favicon
 		}
 		users_sources(where: { user_id: { _eq: $userId } }) {
+			id
 			source_id
 		}
 	}
@@ -17,6 +18,7 @@ export const FETCH_ALL_SOURCES = gql`
 export const FETCH_USER_SOURCES = gql`
 	query FETCH_USER_SOURCCES($userId: String) {
 		users_sources(where: { user_id: { _eq: $userId } }) {
+			id
 			source_id
 			links_source {
 				id

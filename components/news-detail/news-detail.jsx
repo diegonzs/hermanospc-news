@@ -73,14 +73,10 @@ export const NewsDetail = ({ news, id, onBack }) => {
 	let newsData;
 
 	if (data && data.links_by_pk) {
-		console.log('using query');
 		newsData = data.links_by_pk;
-		console.log(data.links_by_pk.reactions);
 	} else if (news) {
-		console.log('using news from props');
 		newsData = news;
 	} else if (loading) {
-		console.log('using fake news');
 		newsData = fakeNews;
 	}
 

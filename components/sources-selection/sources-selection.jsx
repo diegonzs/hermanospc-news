@@ -38,6 +38,7 @@ export const SourcesSelection = ({ userId, title, description, onDone }) => {
 
 	const sourcesResponse = useQuery(FETCH_ALL_SOURCES, {
 		variables: FETCH_ALL_SOURCES_VARIABLES(userId),
+		fetchPolicy: 'network-only',
 	});
 
 	const isSourceDisabled = (id) => {
@@ -159,7 +160,7 @@ export const SourcesSelection = ({ userId, title, description, onDone }) => {
 					})}
 			</ul>
 			<div className={styles.buttonContainer}>
-				{onDone && (
+				{!!onDone && (
 					<Button
 						text="Cancel"
 						onClickHandler={() => onDone()}
