@@ -21,8 +21,8 @@ const fakeCategories = [
 	{
 		emoji: '🔥',
 		id: 'asdasdasdasdasd',
-		slug: 'featured',
-		title: 'featured',
+		slug: 'latest',
+		title: 'latest',
 		links: [],
 	},
 	{
