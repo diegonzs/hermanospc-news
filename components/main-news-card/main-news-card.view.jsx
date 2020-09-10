@@ -100,7 +100,7 @@ export const MainNewsCardView = ({
 							<div
 								className={styles.icon}
 								onClick={() => {
-									openModalHandler(true);
+									share();
 								}}
 							>
 								<SVG src={shareIcon} />

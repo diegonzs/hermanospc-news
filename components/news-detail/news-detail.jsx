@@ -95,6 +95,18 @@ export const NewsDetail = ({ news, id, onBack }) => {
 		cloudinary_id,
 	} = newsData;
 	if (loading && !news) return <LoadingPage />;
+
+	const share = () => {
+		if (navigator.share) {
+			navigator.share({
+				title,
+				url: `https://news.hermanospc.co/news-detail/${id}`,
+			});
+		} else {
+			setIsShareModalOpen(true);
+		}
+	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.NewsDetailContainer}>
@@ -130,10 +142,7 @@ export const NewsDetail = ({ news, id, onBack }) => {
 							<SVG src={links_saved.length ? bookmarkedIcon : bookmarkIcon} />
 						</div>
 					</SaveLinkButtonContainer>
-					<div
-						className={styles.icon}
-						onClick={() => setIsShareModalOpen(true)}
-					>
+					<div className={styles.icon} onClick={() => share()}>
 						<SVG src={shareIcon} />
 					</div>
 				</Row>
