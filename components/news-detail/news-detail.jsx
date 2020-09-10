@@ -164,7 +164,11 @@ export const NewsDetail = ({ news, id, onBack }) => {
 				isOpen={isShareModalOpen}
 				closeHandler={() => setIsShareModalOpen(false)}
 			>
-				<ShareModal closeModalHandler={() => setIsShareModalOpen(false)} />
+				<ShareModal
+					closeModalHandler={() => setIsShareModalOpen(false)}
+					title={title}
+					url={`https://news.hermanospc.co/news-detail/${id}`}
+				/>
 			</ModalContainer>
 		</div>
 	);

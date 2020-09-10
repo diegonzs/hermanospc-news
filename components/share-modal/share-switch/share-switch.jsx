@@ -7,25 +7,49 @@ import {
 	EmailShareButton,
 } from 'react-share';
 
-export const ShareSwitch = ({ children, platform, url }) => {
+export const ShareSwitch = ({ children, platform, url, title }) => {
 	switch (platform) {
 		case 'Facebook': {
-			return <FacebookShareButton url={url}>{children}</FacebookShareButton>;
+			return (
+				<FacebookShareButton url={url} quote={title}>
+					{children}
+				</FacebookShareButton>
+			);
 		}
 		case 'Whatsapp': {
-			return <WhatsappShareButton url={url}>{children}</WhatsappShareButton>;
+			return (
+				<WhatsappShareButton url={url} title={title}>
+					{children}
+				</WhatsappShareButton>
+			);
 		}
 		case 'Twitter': {
-			return <TwitterShareButton url={url}>{children}</TwitterShareButton>;
+			return (
+				<TwitterShareButton url={url} title={title}>
+					{children}
+				</TwitterShareButton>
+			);
 		}
 		case 'Email': {
-			return <EmailShareButton url={url}>{children}</EmailShareButton>;
+			return (
+				<EmailShareButton url={url} subject={title}>
+					{children}
+				</EmailShareButton>
+			);
 		}
 		case 'LinkedIn': {
-			return <LinkedinShareButton url={url}>{children}</LinkedinShareButton>;
+			return (
+				<LinkedinShareButton url={url} title={title} source="Hermanos PC News">
+					{children}
+				</LinkedinShareButton>
+			);
 		}
 		default: {
-			return <FacebookShareButton url={url}>{children}</FacebookShareButton>;
+			return (
+				<FacebookShareButton url={url} quote={title}>
+					{children}
+				</FacebookShareButton>
+			);
 		}
 	}
 };

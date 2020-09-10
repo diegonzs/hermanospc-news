@@ -114,7 +114,11 @@ export const MainNewsCardContainer = (props) => {
 				isOpen={isModalOpen}
 				closeHandler={() => setIsModalOpen(false)}
 			>
-				<ShareModal closeModalHandler={() => setIsModalOpen(false)} />
+				<ShareModal
+					closeModalHandler={() => setIsModalOpen(false)}
+					title={props.title}
+					url={`https://news.hermanospc.co/news-detail/${props.id}`}
+				/>
 			</ModalContainer>
 		</>
 	);

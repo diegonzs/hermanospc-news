@@ -52,6 +52,16 @@ export const MainNewsCardView = ({
 		cloudinary_id,
 	} = news;
 	const user = React.useContext(UserContext);
+	const share = () => {
+		if (navigator.share) {
+			navigator.share({
+				title,
+				url: `https://news.hermanospc.co/news-detail/${id}`,
+			});
+		} else {
+			openModalHandler(true);
+		}
+	};
 	return (
 		<article className={styles.columns}>
 			<div
@@ -89,7 +99,9 @@ export const MainNewsCardView = ({
 							</SaveLinkButtonContainer>
 							<div
 								className={styles.icon}
-								onClick={() => openModalHandler(true)}
+								onClick={() => {
+									openModalHandler(true);
+								}}
 							>
 								<SVG src={shareIcon} />
 							</div>

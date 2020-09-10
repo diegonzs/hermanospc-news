@@ -20,28 +20,23 @@ import linkedinIcon from '/images/social/linkedin.svg';
 
 const SocialLinks = [
 	{
-		link: 'https://facebook.com/hermanospc',
 		icon: facebookIcon,
 		text: 'Facebook',
 	},
 	{
-		link: '#',
 		icon: whatsappIcon,
 		text: 'Whatsapp',
 	},
 	{
-		link: 'https://twitter.com/hermanospc',
 		icon: twitterIcon,
 		text: 'Twitter',
 		text2Style: true,
 	},
 	{
-		link: '#',
 		icon: emailIcon,
 		text: 'Email',
 	},
 	{
-		link: '#',
 		icon: linkedinIcon,
 		text: 'LinkedIn',
 	},
@@ -50,13 +45,15 @@ const SocialLinks = [
 /**
  * @typedef {Object} ShareModalProps
  * @property {() => void} closeModalHandler - Function use o close the modal
+ * @property {string} title - share title
+ * @property {string} url - url to be share
  */
 
 /**
  * This Modal displays a list of social links, so the user can share the content
  * @param {ShareModalProps} props
  */
-export const ShareModal = ({ closeModalHandler }) => {
+export const ShareModal = ({ closeModalHandler, title, url }) => {
 	return (
 		<div className={styles.ShareModalCont}>
 			<div className={styles.title}>
@@ -70,7 +67,7 @@ export const ShareModal = ({ closeModalHandler }) => {
 				{SocialLinks.map((value) => (
 					<Row isGrid={true} gap="24" key={value.text}>
 						<SVG src={value.icon} />
-						<ShareSwitch url={value.link} platform={value.text}>
+						<ShareSwitch url={url} title={title} platform={value.text}>
 							<span className={value.text2Style ? styles.text2 : styles.text}>
 								{value.text}
 							</span>
