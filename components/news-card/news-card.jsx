@@ -46,8 +46,10 @@ export const NewsCard = ({ news, isBig }) => {
 						bigSize="260"
 						smallSize="152"
 					/>
-				) : (
+				) : image ? (
 					<img src={image} className={styles.image} />
+				) : (
+					<div className={styles.image} />
 				)}
 				{/* <img src={image} alt="" className={styles.image} /> */}
 			</picture>

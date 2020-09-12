@@ -12,14 +12,15 @@ import { Header } from 'components/header';
 import { Footer } from 'components/footer';
 import { OverlayPage } from 'components/overlay-page';
 import { NewsDetail } from 'components/news-detail';
-import { OverlayWrapper } from 'components/overlay-page/overlay-wrapper/overlay-wrapper';
 
 import '../styles/main.scss';
 import 'react-toastify/dist/ReactToastify.min.css';
 import { initMessaging } from 'lib/firebase-messaging';
+import { useRouter } from 'next/router';
 
 function MyApp({ Component, pageProps }) {
 	const [currentToken, setCurrentToken] = React.useState();
+	const router = useRouter();
 	const user = useFirebaseUser(setCurrentToken);
 	const apolloClient = useApollo(pageProps.initialApolloState, currentToken);
 
@@ -27,7 +28,11 @@ function MyApp({ Component, pageProps }) {
 	const [isOverlayActive, setIsOverlayActive] = React.useState(false);
 
 	React.useEffect(() => {
+		if (isOverlayActive) {
+			router.push(router.pathname);
+		}
 		if (!!selectedNews) {
+			router.push(router.pathname, `/news-detail/${selectedNews.id}`);
 			setIsOverlayActive(true);
 		}
 	}, [selectedNews]);
@@ -42,12 +47,20 @@ function MyApp({ Component, pageProps }) {
 		initMessaging();
 	}, []);
 
-	const hideOverlayHandler = () => {
+	const hideOverlayHandler = React.useCallback(() => {
+		router.push(router.pathname);
 		setIsOverlayActive(false);
 		setTimeout(() => {
 			setSelectedNews(null);
 		}, 300);
-	};
+	}, []);
+
+	React.useEffect(() => {
+		router.beforePopState(({ url, as, options }) => {
+			hideOverlayHandler();
+			return true;
+		});
+	}, [hideOverlayHandler]);
 
 	return (
 		<ApolloProvider client={apolloClient}>
@@ -90,13 +103,11 @@ function MyApp({ Component, pageProps }) {
 							hideOverlayHandler={hideOverlayHandler}
 						>
 							{!!selectedNews && (
-								<OverlayWrapper hideOverlayHandler={hideOverlayHandler}>
-									<NewsDetail
-										news={selectedNews}
-										id={selectedNews.id}
-										onBack={hideOverlayHandler}
-									/>
-								</OverlayWrapper>
+								<NewsDetail
+									news={selectedNews}
+									id={selectedNews.id}
+									onBack={hideOverlayHandler}
+								/>
 							)}
 						</OverlayPage>
 					</div>
