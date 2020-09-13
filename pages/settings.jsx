@@ -11,21 +11,22 @@ import smilyFaceIcon from '/images/icons/emoji-profile.png';
 //@ts-ignore
 import styles from 'styles/pages/settings.module.scss';
 import { initMessaging, getFCMToken } from 'lib/firebase-messaging';
-import { useQuery, NetworkStatus } from '@apollo/client';
+import { NetworkStatus } from '@apollo/client';
 import {
 	FETCH_ALL_SOURCES_VARIABLES,
 	FETCH_USER_SOURCES,
 } from 'graphql/queries/sources';
 import { UserContext } from 'context';
 import { Loader } from 'components/loader';
+import { useSwrQuery } from 'hooks';
 
 const Settings = ({ isServer }) => {
 	const [notificationStatus, setNotificationStatus] = React.useState(false);
 	const user = React.useContext(UserContext);
 
-	const { data, loading, networkStatus } = useQuery(FETCH_USER_SOURCES, {
+	const { data, loading, networkStatus } = useSwrQuery(FETCH_USER_SOURCES, {
 		variables: FETCH_ALL_SOURCES_VARIABLES(user ? user.uid : ''),
-		fetchPolicy: 'network-only',
+		fetchPolicy: 'cache-and-network',
 		notifyOnNetworkStatusChange: true,
 	});
 
@@ -36,15 +37,15 @@ const Settings = ({ isServer }) => {
 		if (token) {
 			setNotificationStatus(true);
 			if (data && data.users_sources) {
-				const sources = data.users_sources.map(
-					(source) => source.links_source.slug
-				);
+				const topics = data.users_sources
+					.filter((elem) => elem.is_notification_on)
+					.map((source) => source.links_source.slug);
 				try {
 					fetch('/api/fcm-register-topic', {
 						method: 'POST',
 						body: JSON.stringify({
 							token,
-							topics: sources,
+							topics,
 						}),
 					});
 				} catch (error) {

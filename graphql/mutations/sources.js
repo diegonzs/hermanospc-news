@@ -27,6 +27,26 @@ export const UNSUBSCRIBE_TO_SOURCE = gql`
 	}
 `;
 
+export const TOGGLE_SOURCE_NOTIFICATION = gql`
+	mutation TOGGLE_SOURCE_NOTIFICATION($usersSourcesId: uuid, $value: Boolean) {
+		update_users_sources(
+			where: { id: { _eq: $usersSourcesId } }
+			_set: { is_notification_on: $value }
+		) {
+			returning {
+				id
+				is_notification_on
+				links_source {
+					id
+					slug
+					name
+					favicon
+				}
+			}
+		}
+	}
+`;
+
 /**
  * Variables for unsubsribe
  * @param {string} userId - User ID
@@ -35,4 +55,17 @@ export const UNSUBSCRIBE_TO_SOURCE = gql`
 export const UNSUBSCRIBE_TO_SOURCE_VARIABLES = (userId, sourceId) => ({
 	userId,
 	sourceId,
+});
+
+/**
+ * Variables for stop notification of a source
+ * @param {string} usersSourcesId - users_sources ID
+ * @param {boolean} value - tells if is active or not
+ */
+export const TOGGLE_SOURCE_NOTIFICATION_VARIABLES = (
+	usersSourcesId,
+	value
+) => ({
+	usersSourcesId,
+	value,
 });

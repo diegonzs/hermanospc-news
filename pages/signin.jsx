@@ -4,6 +4,7 @@ import Router from 'next/router';
 import { UserContext } from 'context/user-context';
 import { Sign } from 'components/sign';
 import { toast, ToastContainer } from 'react-toastify';
+import { renewToken } from 'lib/firebase-messaging';
 // import { Toast } from 'components/toast/toast';
 
 /** Signin Page */
@@ -57,6 +58,18 @@ const Signin = () => {
 		firebase
 			.auth()
 			.signInWithPopup(firebaseProvider)
+			.then(async (result) => {
+				const token = await renewToken();
+				if (token) {
+					fetch('/api/fcm-register-topic', {
+						method: 'POST',
+						body: JSON.stringify({
+							token,
+							userId: result.user.uid,
+						}),
+					});
+				}
+			})
 			.catch(function (error) {
 				const errorCode = error.code;
 				const errorMessage = error.message;

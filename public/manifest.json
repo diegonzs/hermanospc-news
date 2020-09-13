@@ -1,11 +1,17 @@
 {
 	"name": "HPC News",
 	"short_name": "HPC News",
-	"description": "All important tech news",
+	"description": "Get the trends and latest news in gaming and tech industry",
 	"icons": [
 		{
-			"src": "/brand/maskable-icon-RGB.png",
+			"src": "/brand/icon-196.png",
 			"sizes": "196x196",
+			"type": "image/png",
+			"purpose": "maskable"
+		},
+		{
+			"src": "/brand/icon-512.png",
+			"sizes": "512x512",
 			"type": "image/png",
 			"purpose": "maskable"
 		}

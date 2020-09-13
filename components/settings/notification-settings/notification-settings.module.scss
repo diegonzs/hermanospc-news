@@ -48,7 +48,6 @@
 	display: flex;
 	list-style: none;
 	align-items: center;
-	max-width: 300px;
 	width: 100%;
 	justify-content: space-between;
 	height: 60px;
@@ -77,4 +76,20 @@
 .unFollowingTag {
 	color: red;
 	font-size: $font-size-smallest;
+	margin-right: 20px;
+}
+
+.notificationIcon {
+	width: 20px;
+	height: auto;
+}
+
+.actionsContainer {
+	display: flex;
+	align-items: center;
+}
+
+.notificationIconContainer {
+	display: flex;
+	align-items: center;
 }

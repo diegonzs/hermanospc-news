@@ -1,12 +1,16 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import SVG from 'react-inlinesvg';
+
 import { NotificationOption } from '../notification-option';
 import { Row } from 'components/row';
 
 //@ts-ignore
 import bellIcon from '/images/icons/bell.png';
+
 //@ts-ignore
 import styles from './notification-settings.module.scss';
+
 import { Button } from 'components/button';
 import { SourcesSelection } from 'components/sources-selection';
 import { UserContext } from 'context';
@@ -14,14 +18,18 @@ import { useMutation } from '@apollo/client';
 import {
 	UNSUBSCRIBE_TO_SOURCE,
 	UNSUBSCRIBE_TO_SOURCE_VARIABLES,
+	TOGGLE_SOURCE_NOTIFICATION,
+	TOGGLE_SOURCE_NOTIFICATION_VARIABLES,
 } from 'graphql/mutations/sources';
 import {
-	FETCH_ALL_SOURCES,
 	FETCH_ALL_SOURCES_VARIABLES,
 	FETCH_USER_SOURCES,
 } from 'graphql/queries/sources';
 import { ToastContainer, toast } from 'react-toastify';
-import { getFCMToken, initMessaging } from 'lib/firebase-messaging';
+import {
+	unsubscribeFromTopics,
+	subscribeToTopics,
+} from 'lib/firebase-messaging';
 import {
 	ALL_CATEGORIES_QUERY_WITH_USER,
 	ALL_CATEGORIES_QUERY_VARIABLES,
@@ -44,31 +52,63 @@ export const NotificationSettings = ({
 			if (!data) {
 				return;
 			}
+			toast('Source removed', {
+				type: 'success',
+			});
 			const topic = data.delete_users_sources.returning[0].links_source.slug;
-			const token = getFCMToken();
-			if (token) {
-				try {
-					await fetch('/api/fcm-register-topic', {
-						method: 'DELETE',
-						body: JSON.stringify({
-							token,
-							topic,
-						}),
-					});
-					toast('Source removed', {
-						type: 'success',
-					});
-				} catch (error) {
-					console.log({ error });
-					toast('An error happened', {
-						type: 'error',
-					});
-				}
-			} else {
+			await unsubscribeFromTopics([topic]);
+		},
+	});
+
+	const [toggleNotification] = useMutation(TOGGLE_SOURCE_NOTIFICATION, {
+		onCompleted: async (data) => {
+			if (!data) {
 				return;
+			}
+			const topic = data.update_users_sources.returning[0].links_source.slug;
+			const name = data.update_users_sources.returning[0].links_source.name;
+			if (data.update_users_sources.returning[0].is_notification_on) {
+				await subscribeToTopics([topic], `Added notifications for ${name}`);
+			} else {
+				await unsubscribeFromTopics(
+					[topic],
+					`Removed notifications from ${name}`
+				);
 			}
 		},
 	});
+
+	const onlyBellClick = ({ id, slug, value, source }) => {
+		toggleNotification({
+			variables: TOGGLE_SOURCE_NOTIFICATION_VARIABLES(id, value),
+			optimisticResponse: {
+				update_users_sources: {
+					__typename: 'users_sources_mutation_response',
+					returning: [
+						{
+							__typename: 'users_sources',
+							id,
+							is_notification_on: value,
+							links_source: {
+								id: source.id,
+								name: source.name,
+								favicon: source.favicon,
+								slug,
+							},
+						},
+					],
+				},
+			},
+			update: async (store) => {
+				store.modify({
+					id: `users_sources:${id}`,
+					fields: {
+						is_notifications_on: value,
+					},
+				});
+			},
+		});
+	};
 
 	const onClickSource = (id) => {
 		unsubscribe({
@@ -126,26 +166,49 @@ export const NotificationSettings = ({
 				))}
 			</div>
 			<Row isGrid={true} gap="24">
-				<p className={styles.title}>News Sources</p>
-				{/* <picture className={styles.icon}>
-					<img src={bellIcon} alt="bell" />
-				</picture> */}
+				<p className={styles.title}>Manage Sources</p>
 			</Row>
 			<ul className={styles.sourcesList}>
 				{userSources &&
 					userSources.map((sourceElem) => {
 						const source = sourceElem.links_source;
 						return (
-							<li
-								key={source.name}
-								onClick={() => onClickSource(source.id)}
-								className={`${styles.sourceElem}`}
-							>
+							<li key={source.name} className={styles.sourceElem}>
 								<span className={styles.content}>
 									<img className={styles.favicon} src={source.favicon} />
 									{source.name}
-								</span>{' '}
-								<span className={styles.unFollowingTag}>UNFOLLOW</span>
+								</span>
+								<div className={styles.actionsContainer}>
+									<span
+										onClick={() => onClickSource(source.id)}
+										className={styles.unFollowingTag}
+									>
+										UNFOLLOW
+									</span>
+									<span
+										className={styles.notificationIconContainer}
+										onClick={() =>
+											onlyBellClick({
+												id: sourceElem.id,
+												slug: source.slug,
+												value: !sourceElem.is_notification_on,
+												source,
+											})
+										}
+									>
+										{sourceElem.is_notification_on ? (
+											<SVG
+												className={styles.notificationIcon}
+												src="/images/svgs/icon-notification-on.svg"
+											/>
+										) : (
+											<SVG
+												className={styles.notificationIcon}
+												src="/images/svgs/icon-notification-off.svg"
+											/>
+										)}
+									</span>
+								</div>
 							</li>
 						);
 					})}

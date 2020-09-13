@@ -20,11 +20,22 @@ export const FETCH_USER_SOURCES = gql`
 		users_sources(where: { user_id: { _eq: $userId } }) {
 			id
 			source_id
+			is_notification_on
 			links_source {
 				id
 				slug
 				name
 				favicon
+			}
+		}
+	}
+`;
+
+export const FETCH_USER_SOURCES_NOTIFICATIONS = (userId) => `
+	query MyQuery {
+		users_sources(where: {user_id: {_eq: "${userId}"}, _and: {is_notification_on: {_eq: true}}}) {
+			links_source {
+				slug
 			}
 		}
 	}

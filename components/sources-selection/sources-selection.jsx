@@ -17,8 +17,7 @@ import { ToggleSwitch } from 'components/toggle-switch';
 //@ts-ignore
 import styles from './source-selection.module.scss';
 import { Button } from 'components/button';
-import { initMessaging, getFCMToken } from 'lib/firebase-messaging';
-import { setSources } from 'lib/local-storage-util';
+import { subscribeToTopics } from 'lib/firebase-messaging';
 
 /**
  *
@@ -64,25 +63,12 @@ export const SourcesSelection = ({ userId, title, description, onDone }) => {
 		}
 	};
 
-	const callApi = (sources, token) => {
-		try {
-			fetch('/api/fcm-register-topic', {
-				method: 'POST',
-				body: JSON.stringify({
-					token,
-					topics: sources,
-				}),
-			});
-		} catch (error) {
-			console.log({ error });
-		}
-	};
-
 	const [subscribe, { loading }] = useMutation(SUBSCRIBE_TO_SOURCES, {
 		variables: {
 			sources: selectedSources.map((elem) => ({
 				user_id: userId,
 				source_id: elem,
+				is_notification_on: true,
 			})),
 		},
 		refetchQueries: [
@@ -97,25 +83,12 @@ export const SourcesSelection = ({ userId, title, description, onDone }) => {
 		],
 		onCompleted: async (data) => {
 			isFirstTimeVar(false);
-			let token = getFCMToken();
-			const sources = data.insert_users_sources.returning.map(
+			const topics = data.insert_users_sources.returning.map(
 				(source) => source.links_source.slug
 			);
-			setSources(sources);
-			if (token) {
-				callApi(sources, token);
-				if (onDone) {
-					onDone();
-				}
-			} else {
-				await initMessaging();
-				token = getFCMToken();
-				if (token) {
-					callApi(sources, token);
-					if (onDone) {
-						onDone();
-					}
-				}
+			subscribeToTopics(topics);
+			if (onDone) {
+				onDone();
 			}
 		},
 	});

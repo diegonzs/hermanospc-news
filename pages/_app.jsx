@@ -13,10 +13,11 @@ import { Footer } from 'components/footer';
 import { OverlayPage } from 'components/overlay-page';
 import { NewsDetail } from 'components/news-detail';
 
+import { renewToken } from 'lib/firebase-messaging';
+import { useRouter } from 'next/router';
+
 import '../styles/main.scss';
 import 'react-toastify/dist/ReactToastify.min.css';
-import { initMessaging } from 'lib/firebase-messaging';
-import { useRouter } from 'next/router';
 
 function MyApp({ Component, pageProps }) {
 	const [currentToken, setCurrentToken] = React.useState();
@@ -44,7 +45,7 @@ function MyApp({ Component, pageProps }) {
 	}, [user]);
 
 	React.useEffect(() => {
-		initMessaging();
+		renewToken();
 	}, []);
 
 	const hideOverlayHandler = React.useCallback(() => {
@@ -56,7 +57,7 @@ function MyApp({ Component, pageProps }) {
 	}, []);
 
 	React.useEffect(() => {
-		router.beforePopState(({ url, as, options }) => {
+		router.beforePopState(() => {
 			hideOverlayHandler();
 			return true;
 		});
