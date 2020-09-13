@@ -49,9 +49,22 @@
 			}
 		}
 	}
+	strong {
+		color: $color-text-100;
+	}
 	a {
 		font-size: $font-size-medium;
-		color: $color-primary;
+		text-decoration: none;
 		letter-spacing: 0px;
+		position: relative;
+		color: $color-text-90;
+		&:before {
+			content: '';
+			height: 1px;
+			width: 100%;
+			position: absolute;
+			bottom: 0.4px;
+			background-color: $color-primary;
+		}
 	}
 }

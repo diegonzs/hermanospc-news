@@ -59,6 +59,17 @@ export const Sign = ({
 					</li>
 				))}
 			</ul>
+			<p className={styles.terms}>
+				By continuing, you agree to Hermanos PC’s{' '}
+				<a href="https://hermanospc.co/legal" target="_blank">
+					Terms of Use
+				</a>{' '}
+				and confirm that you have read Hermanos PC’s{' '}
+				<a href="https://hermanospc.co/legal" target="_blank">
+					{' '}
+					Privacy Policy
+				</a>
+			</p>
 			{/* <div className={styles.separator}>
 				<span>or continue with email</span>
 			</div>
@@ -70,11 +81,11 @@ export const Sign = ({
 				hasTick={hasTick}
 				isLoading={isLoading}
 			/> */}
-			{!!errorMsg && (
+			{/* {!!errorMsg && (
 				<div className={styles.errorBox}>
 					<p>{errorMsg}</p>
 				</div>
-			)}
+			)} */}
 		</div>
 	);
 };

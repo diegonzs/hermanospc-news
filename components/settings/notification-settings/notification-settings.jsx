@@ -25,7 +25,7 @@ import {
 	FETCH_ALL_SOURCES_VARIABLES,
 	FETCH_USER_SOURCES,
 } from 'graphql/queries/sources';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import {
 	unsubscribeFromTopics,
 	subscribeToTopics,
@@ -214,7 +214,6 @@ export const NotificationSettings = ({
 					})}
 			</ul>
 			<Button text="Add More" onClickHandler={() => setShowSourcesList(true)} />
-			<ToastContainer position="bottom-center" />
 			{showSourcesList && (
 				<SourcesSelection
 					userId={user.uid}

@@ -136,7 +136,9 @@ export const NewsDetail = ({ news, id, onBack }) => {
 				<Row isGrid={true} gap="20" customClass={styles.socialBox}>
 					<SaveLinkButtonContainer
 						id={id}
-						isDisabled={!!(links_saved.length || !user)}
+						isSaved={!!links_saved.length}
+						saveLinkId={links_saved.length ? links_saved[0].id : ''}
+						isDisabled={!user}
 					>
 						<div className={styles.icon}>
 							<SVG src={links_saved.length ? bookmarkedIcon : bookmarkIcon} />

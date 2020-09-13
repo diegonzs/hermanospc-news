@@ -35,7 +35,7 @@ export const ReactionsForDetails = ({
 					data={likes.aggregate.count}
 					total={likes.aggregate.count + dislikes.aggregate.count}
 					icon="/images/example/thumbs-up-big.png"
-					isActive={!!reactions.length}
+					isActive={!!reactions.length && reactions[0].emoji === 'U+1F44D'}
 					isDisabled={!!reactions.length || !user}
 					linkId={id}
 					iconCode="U+1F44D"

@@ -8,7 +8,7 @@
 		"start": "next start",
 		"storybook": "start-storybook -s ./public -p 6006",
 		"build-storybook": "build-storybook",
-		"mock-api": "graphql-faker -p 9000 -e http://159.203.114.72/v1/graphql -H 'x-hasura-admin-secret: DiegoAndAndresHasura100'"
+		"mock-api": "graphql-faker -p 9000 -e http://159.203.114.72/v1/graphql -H 'x-hasura-admin-secret: sadsdasd'"
 	},
 	"dependencies": {
 		"@apollo/client": "^3.0.2",
@@ -33,7 +33,7 @@
 		"next": "9.5.3",
 		"next-compose-plugins": "^2.2.0",
 		"next-offline": "^5.0.1",
-		"next-seo": "^4.7.1",
+		"next-seo": "^4.7.3",
 		"react": "16.13.1",
 		"react-dom": "16.13.1",
 		"react-facebook-pixel": "^1.0.3",

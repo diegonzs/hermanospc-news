@@ -78,7 +78,7 @@
 	@include respond(desktop) {
 		padding: 8px;
 		padding-left: 12px;
-		min-height: 109px;
+		min-height: 92px;
 	}
 }
 
@@ -178,7 +178,7 @@
 }
 
 .created_at {
-	color: $color-text-40;
+	color: $color-text-60;
 	font-size: $font-size-smallest;
 }
 

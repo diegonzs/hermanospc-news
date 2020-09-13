@@ -56,7 +56,9 @@ export const NewsCard = ({ news, isBig }) => {
 			<div className={styles.iconContainer}>
 				<SaveLinkButtonContainer
 					id={id}
-					isDisabled={!!(links_saved.length || !user)}
+					isSaved={!!links_saved.length}
+					saveLinkId={links_saved.length ? links_saved[0].id : ''}
+					isDisabled={!user}
 				>
 					<img
 						src={links_saved.length ? bookmarkedIcon : bookmarkIcon}
@@ -79,7 +81,9 @@ export const NewsCard = ({ news, isBig }) => {
 					<div className={styles.iconForMobile}>
 						<SaveLinkButtonContainer
 							id={id}
-							isDisabled={!!(links_saved.length || !user)}
+							isSaved={!!links_saved.length}
+							saveLinkId={links_saved.length ? links_saved[0].id : ''}
+							isDisabled={!user}
 						>
 							<img
 								src={links_saved.length ? bookmarkedIcon : bookmarkIcon}

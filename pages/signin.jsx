@@ -3,7 +3,7 @@ import firebase from 'lib/firebase-client';
 import Router from 'next/router';
 import { UserContext } from 'context/user-context';
 import { Sign } from 'components/sign';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { renewToken } from 'lib/firebase-messaging';
 // import { Toast } from 'components/toast/toast';
 
@@ -83,19 +83,16 @@ const Signin = () => {
 	};
 
 	return (
-		<>
-			<Sign
-				title="Welcome back"
-				buttonText="sign in"
-				handleSubmit={handleSignIn}
-				handleSigninProvider={handleSigninProvider}
-				changeFormText="I do not have an accont"
-				changeFormPath="signup"
-				hasTick={false}
-				isLoading={isLoading}
-			/>
-			<ToastContainer position="bottom-center" />
-		</>
+		<Sign
+			title="Welcome back"
+			buttonText="sign in"
+			handleSubmit={handleSignIn}
+			handleSigninProvider={handleSigninProvider}
+			changeFormText="I do not have an accont"
+			changeFormPath="signup"
+			hasTick={false}
+			isLoading={isLoading}
+		/>
 	);
 };
 

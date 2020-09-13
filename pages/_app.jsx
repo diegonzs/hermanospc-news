@@ -1,7 +1,9 @@
 //@ts-nocheck
 import App from 'next/app';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { ApolloProvider } from '@apollo/client';
+import { ToastContainer } from 'react-toastify';
 
 import { useApollo } from 'lib/apollo-client';
 
@@ -14,7 +16,6 @@ import { OverlayPage } from 'components/overlay-page';
 import { NewsDetail } from 'components/news-detail';
 
 import { renewToken } from 'lib/firebase-messaging';
-import { useRouter } from 'next/router';
 
 import '../styles/main.scss';
 import 'react-toastify/dist/ReactToastify.min.css';
@@ -99,6 +100,7 @@ function MyApp({ Component, pageProps }) {
 							<Component {...pageProps} isServer={false} />
 						</div>
 						<Footer />
+						<ToastContainer position="bottom-center" />
 						<OverlayPage
 							isActive={!!selectedNews && isOverlayActive}
 							hideOverlayHandler={hideOverlayHandler}

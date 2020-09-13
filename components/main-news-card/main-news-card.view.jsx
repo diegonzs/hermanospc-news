@@ -25,7 +25,6 @@ import shareIcon from '/images/svgs/share.svg';
  * @property {News} news
  * @property {(value: boolean) => void} openModalHandler
  * @property {(value: News) => void} onClickNewsHandler
- * @property {() => void} saveLinkHandler
  */
 
 /**
@@ -52,6 +51,7 @@ export const MainNewsCardView = ({
 		cloudinary_id,
 	} = news;
 	const user = React.useContext(UserContext);
+
 	const share = () => {
 		if (navigator.share) {
 			navigator.share({
@@ -62,6 +62,7 @@ export const MainNewsCardView = ({
 			openModalHandler(true);
 		}
 	};
+
 	return (
 		<article className={styles.columns}>
 			<div
@@ -89,7 +90,9 @@ export const MainNewsCardView = ({
 						<Row isGrid={true} gap="16">
 							<SaveLinkButtonContainer
 								id={id}
-								isDisabled={!!(links_saved.length || !user)}
+								isSaved={!!links_saved.length}
+								saveLinkId={links_saved.length ? links_saved[0].id : ''}
+								isDisabled={!user}
 							>
 								<div className={styles.icon}>
 									<SVG

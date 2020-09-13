@@ -1,9 +1,12 @@
 import React from 'react';
 import { Column } from 'components/column/column';
 import PropTypes from 'prop-types';
+import { UserContext } from 'context';
+import { useRouter } from 'next/router';
+
 //@ts-ignore
 import styles from './reactions.module.scss';
-import { UserContext } from 'context';
+
 /**
  * @typedef {Object} reactionsProps
  * @property {number} data - number of likes/dislikes
@@ -29,6 +32,7 @@ export const ReactionsView = ({
 	total,
 }) => {
 	const user = React.useContext(UserContext);
+	const router = useRouter();
 	if (isBig) {
 		return (
 			<div
@@ -37,12 +41,15 @@ export const ReactionsView = ({
 				} ${isDisabled ? styles.disabled : ''}`}
 				onClick={() => {
 					console.log('isDisabled', isDisabled);
-					isDisabled ? null : createReactionHandler();
+					isDisabled
+						? user
+							? null
+							: router.push('/signup')
+						: createReactionHandler();
 				}}
 			>
 				<Column gap="8" justify="center" width="35px">
 					<img src={icon} />
-					{/* <p>10</p> */}
 					{isDisabled && total && user ? (
 						<p>{Math.round((data / total) * 100)}%</p>
 					) : null}
@@ -56,18 +63,20 @@ export const ReactionsView = ({
 			className={`${styles.container} ${isActive ? styles.active : ''} ${
 				isDisabled ? styles.disabled : ''
 			}`}
-			onClick={() => (isDisabled ? null : createReactionHandler())}
+			onClick={() =>
+				isDisabled ? (user ? null : router.push('/')) : createReactionHandler()
+			}
 		>
 			<Column gap="8" justify="center" width="35px">
 				{isDisabled && total && user ? (
 					<p>{Math.round((data / total) * 100)}%</p>
 				) : null}
-				{/* <p>10</p> */}
 				<img src={icon} />
 			</Column>
 		</div>
 	);
 };
+
 ReactionsView.propTypes = {
 	/**  number of likes/dislikes */
 	data: PropTypes.number,

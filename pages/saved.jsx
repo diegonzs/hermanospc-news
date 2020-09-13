@@ -44,20 +44,22 @@ const Saved = ({ isServer }) => {
 		});
 	};
 
-	// if (data && data.links_saved) {
-	// 	const listOfIds = [];
-	// 	news = data.links_saved.reduce((acum, l) => {
-	// 		if (!listOfIds.includes(l.link.id)) {
-	// 			listOfIds.push(l.link.id);
-	// 			return [...acum, { ...l.link }];
-	// 		} else {
-	// 			return acum;
-	// 		}
-	// 	}, []);
-	// }
+	if (data && data.links_saved) {
+		const listOfIds = [];
+		news = data.links_saved.reduce((acum, l) => {
+			if (!listOfIds.includes(l.link.id)) {
+				listOfIds.push(l.link.id);
+				return [...acum, { ...l.link }];
+			} else {
+				return acum;
+			}
+		}, []);
+	}
 
 	if (data && data.links_saved) {
-		news = data.links_saved.map((l) => l.link);
+		news = data.links_saved
+			.map((l) => l.link)
+			.filter((link) => link.links_saved.length);
 	}
 
 	if (data && data.links_saved_aggregate && data.links_saved) {

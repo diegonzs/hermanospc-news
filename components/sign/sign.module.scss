@@ -108,3 +108,17 @@
 		margin: 0;
 	}
 }
+
+.terms {
+	margin-top: 3rem;
+	max-width: 490px;
+	color: $color-text-60;
+	text-align: center;
+	@include respond(desktop) {
+		max-width: 80%;
+	}
+	a {
+		color: $color-text-100;
+		text-decoration: none;
+	}
+}
