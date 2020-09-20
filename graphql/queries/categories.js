@@ -6,13 +6,16 @@ import { FRAGMENT_LINKS_ALL_FIELDS } from '../fragments/links';
  */
 export const ALL_CATEGORIES_QUERY_WITH_USER = gql`
 	query ALL_CATEGORIES_QUERY_WITH_USER($userId: String) {
-		categories(order_by: { position: asc }) {
+		categories(
+			order_by: { position: asc }
+			where: { slug: { _eq: "latest" } }
+		) {
 			emoji
 			id
 			slug
 			title
 			links(
-				limit: 5
+				limit: 10
 				order_by: { created_at: desc }
 				where: { source: { users_sources: { user_id: { _eq: $userId } } } }
 			) {
@@ -28,12 +31,15 @@ export const ALL_CATEGORIES_QUERY_WITH_USER = gql`
  */
 export const ALL_CATEGORIES_QUERY = gql`
 	query ALL_CATEGORIES_QUERY($userId: String) {
-		categories(order_by: { position: asc }) {
+		categories(
+			order_by: { position: asc }
+			where: { slug: { _eq: "latest" } }
+		) {
 			emoji
 			id
 			slug
 			title
-			links(limit: 5, order_by: { created_at: desc }) {
+			links(limit: 10, order_by: { created_at: desc }) {
 				...LinksAllFields
 			}
 		}

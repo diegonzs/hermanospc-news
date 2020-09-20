@@ -25,6 +25,8 @@ function MyApp({ Component, pageProps }) {
 	const router = useRouter();
 	const user = useFirebaseUser(setCurrentToken);
 	const apolloClient = useApollo(pageProps.initialApolloState, currentToken);
+	const [initializing, setInitializing] = React.useState(true);
+	const newsDetailRef = React.useRef(null);
 
 	const [selectedNews, setSelectedNews] = React.useState(null);
 	const [isOverlayActive, setIsOverlayActive] = React.useState(false);
@@ -32,6 +34,8 @@ function MyApp({ Component, pageProps }) {
 	React.useEffect(() => {
 		if (isOverlayActive) {
 			router.push(router.pathname);
+			console.log(newsDetailRef);
+			newsDetailRef.current.scrollTop = 0;
 		}
 		if (!!selectedNews) {
 			router.push(router.pathname, `/news-detail/${selectedNews.id}`);
@@ -43,14 +47,18 @@ function MyApp({ Component, pageProps }) {
 		if (user) {
 			setCurrentToken(user.token);
 		}
+		if (initializing) {
+			setInitializing(false);
+		}
 	}, [user]);
 
 	React.useEffect(() => {
 		renewToken();
 	}, []);
 
-	const hideOverlayHandler = React.useCallback(() => {
-		router.push(router.pathname);
+	const hideOverlayHandler = React.useCallback((url) => {
+		console.log(url);
+		router.push(url || '/');
 		setIsOverlayActive(false);
 		setTimeout(() => {
 			setSelectedNews(null);
@@ -58,8 +66,9 @@ function MyApp({ Component, pageProps }) {
 	}, []);
 
 	React.useEffect(() => {
-		router.beforePopState(() => {
-			hideOverlayHandler();
+		router.beforePopState(({ url, as }) => {
+			console.log({ url, as, isOverlayActive });
+			hideOverlayHandler(url);
 			return true;
 		});
 	}, [hideOverlayHandler]);
@@ -97,19 +106,24 @@ function MyApp({ Component, pageProps }) {
 					<div className="mainContainer">
 						<Header />
 						<div className="mainContent">
-							<Component {...pageProps} isServer={false} />
+							<Component
+								{...pageProps}
+								isServer={false}
+								initializing={initializing}
+							/>
 						</div>
 						<Footer />
 						<ToastContainer position="bottom-center" />
 						<OverlayPage
 							isActive={!!selectedNews && isOverlayActive}
 							hideOverlayHandler={hideOverlayHandler}
+							reference={newsDetailRef}
 						>
 							{!!selectedNews && (
 								<NewsDetail
 									news={selectedNews}
 									id={selectedNews.id}
-									onBack={hideOverlayHandler}
+									onBack={() => hideOverlayHandler(router.pathname)}
 								/>
 							)}
 						</OverlayPage>

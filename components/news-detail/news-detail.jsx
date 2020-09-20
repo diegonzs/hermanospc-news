@@ -94,6 +94,7 @@ export const NewsDetail = ({ news, id, onBack }) => {
 		links_saved,
 		cloudinary_id,
 	} = newsData;
+
 	if (loading && !news) return <LoadingPage />;
 
 	const share = () => {

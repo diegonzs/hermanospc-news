@@ -22,7 +22,7 @@ export const RelatedNewsView = ({ news, category }) => {
 			<Title text={`More on ${category}`} icon={newspaperIcon} />
 			<ul className={styles.listOfNews}>
 				{news.map((n) => (
-					<NewsCard news={n} key={n.id} />
+					<NewsCard news={n} key={`realated-${n.id}`} />
 				))}
 			</ul>
 		</div>

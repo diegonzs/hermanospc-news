@@ -167,5 +167,4 @@ MainNewsCardView.propTypes = {
 	}),
 	openModalHandler: PropTypes.func.isRequired,
 	onClickNewsHandler: PropTypes.func.isRequired,
-	saveLinkHandler: PropTypes.func.isRequired,
 };
