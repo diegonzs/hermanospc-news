@@ -3,10 +3,10 @@
 	max-width: 720px;
 	height: auto;
 	width: 100%;
-	div {
-		width: 100% !important;
-	}
-	figure {
+	div,
+	figure,
+	table,
+	iframe {
 		width: 100% !important;
 	}
 	img {
@@ -35,9 +35,6 @@
 	iframe,
 	img {
 		margin-top: 2rem;
-	}
-	iframe {
-		width: 100%;
 	}
 	p {
 		font-size: $font-size-medium;
