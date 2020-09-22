@@ -22,10 +22,10 @@ import 'react-toastify/dist/ReactToastify.min.css';
 
 function MyApp({ Component, pageProps }) {
 	const [currentToken, setCurrentToken] = React.useState();
-	const router = useRouter();
-	const user = useFirebaseUser(setCurrentToken);
-	const apolloClient = useApollo(pageProps.initialApolloState, currentToken);
 	const [initializing, setInitializing] = React.useState(true);
+	const router = useRouter();
+	const user = useFirebaseUser(setCurrentToken, setInitializing);
+	const apolloClient = useApollo(pageProps.initialApolloState, currentToken);
 	const newsDetailRef = React.useRef(null);
 
 	const [selectedNews, setSelectedNews] = React.useState(null);
@@ -47,9 +47,6 @@ function MyApp({ Component, pageProps }) {
 		if (user) {
 			setCurrentToken(user.token);
 		}
-		if (initializing) {
-			setInitializing(false);
-		}
 	}, [user]);
 
 	React.useEffect(() => {
@@ -59,6 +56,13 @@ function MyApp({ Component, pageProps }) {
 	const hideOverlayHandler = React.useCallback((url) => {
 		console.log(url);
 		router.push(url || '/');
+		setIsOverlayActive(false);
+		setTimeout(() => {
+			setSelectedNews(null);
+		}, 300);
+	}, []);
+
+	const justCloseOverlay = React.useCallback(() => {
 		setIsOverlayActive(false);
 		setTimeout(() => {
 			setSelectedNews(null);
@@ -76,7 +80,9 @@ function MyApp({ Component, pageProps }) {
 	return (
 		<ApolloProvider client={apolloClient}>
 			<UserContext.Provider value={user}>
-				<NewsContext.Provider value={{ selectedNews, setSelectedNews }}>
+				<NewsContext.Provider
+					value={{ selectedNews, setSelectedNews, justCloseOverlay }}
+				>
 					<Head>
 						<title>Hermanos PC News</title>
 						<meta name="robots" content="noindex, follow" />

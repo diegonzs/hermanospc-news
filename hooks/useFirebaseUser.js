@@ -7,7 +7,7 @@ import {
 	getUserFromCookie,
 } from 'lib/user-cookies';
 
-export const useFirebaseUser = (setToken) => {
+export const useFirebaseUser = (setToken, setInitializing) => {
 	const [finalUser, setFinalUser] = useState(getUserFromCookie());
 	useEffect(() => {
 		const cancelAuthListener = firebase
@@ -40,6 +40,9 @@ export const useFirebaseUser = (setToken) => {
 
 						// Set first time variable to true to show de onboarding
 						isFirstTimeVar(false);
+
+						// Set initializing to false
+						setInitializing(false);
 
 						// Create the user session in the backend.
 						setUserCookie(userData);
@@ -100,6 +103,8 @@ export const useFirebaseUser = (setToken) => {
 					setFinalUser(null);
 					// Set the current token to null
 					setToken(null);
+					// Set initializing to false
+					setInitializing(false);
 					// call log out on the backend to delete the session
 					removeUserCookie();
 				}

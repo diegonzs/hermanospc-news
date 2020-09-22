@@ -63,6 +63,7 @@ export const Button = ({
 				className={`${styles[`button-${size}`]} ${customClass}`}
 				onClick={() => onClickHandler()}
 				style={customStyles}
+				target="_blank"
 				onMouseEnter={() => setIsHover(true)}
 				onMouseLeave={() => setIsHover(false)}
 			>

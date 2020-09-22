@@ -12,9 +12,11 @@ export const FRAGMENT_LINKS_ALL_FIELDS = gql`
 		title
 		created_at
 		content
+		description
 		source {
 			name
 			favicon
+			is_allow
 		}
 		tags
 		category {

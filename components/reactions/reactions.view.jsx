@@ -1,7 +1,7 @@
 import React from 'react';
 import { Column } from 'components/column/column';
 import PropTypes from 'prop-types';
-import { UserContext } from 'context';
+import { NewsContext, UserContext } from 'context';
 import { useRouter } from 'next/router';
 
 //@ts-ignore
@@ -32,19 +32,23 @@ export const ReactionsView = ({
 	total,
 }) => {
 	const user = React.useContext(UserContext);
+	const { justCloseOverlay } = React.useContext(NewsContext);
 	const router = useRouter();
+	const noUserReaction = () => {
+		router.push('/signup');
+		justCloseOverlay();
+	};
 	if (isBig) {
 		return (
 			<div
 				className={`${styles.container} ${styles.containerBig} ${
 					isActive ? styles.active : ''
-				} ${isDisabled ? styles.disabled : ''}`}
+				} ${isDisabled && user ? styles.disabled : ''}`}
 				onClick={() => {
-					console.log('isDisabled', isDisabled);
 					isDisabled
 						? user
 							? null
-							: router.push('/signup')
+							: noUserReaction()
 						: createReactionHandler();
 				}}
 			>
@@ -61,10 +65,10 @@ export const ReactionsView = ({
 	return (
 		<div
 			className={`${styles.container} ${isActive ? styles.active : ''} ${
-				isDisabled ? styles.disabled : ''
+				isDisabled && user ? styles.disabled : ''
 			}`}
 			onClick={() =>
-				isDisabled ? (user ? null : router.push('/')) : createReactionHandler()
+				isDisabled ? (user ? null : noUserReaction()) : createReactionHandler()
 			}
 		>
 			<Column gap="8" justify="center" width="35px">

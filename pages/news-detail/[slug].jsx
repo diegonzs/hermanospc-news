@@ -15,6 +15,7 @@ const NewsDetailPage = ({ parseResponse }) => {
 					openGraph={{
 						url: `https://news.hermanospc.co/news-detail/${router.query.slug}`,
 						title: parseResponse.data.links_by_pk.title,
+						description: parseResponse.data.links_by_pk.description,
 						images: [{ url: parseResponse.data.links_by_pk.image }],
 					}}
 				/>

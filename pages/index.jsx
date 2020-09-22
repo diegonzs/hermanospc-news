@@ -3,14 +3,10 @@ import { UserContext } from '../context/user-context';
 import { NetworkStatus } from '@apollo/client';
 import { PageContainer } from 'components/page-container';
 import { HeadPage } from 'components/head-page/head-page';
-import { CategoryCard } from 'components/category-card';
 
 //@ts-ignore
 import styles from 'styles/pages/home.module.scss';
 import {
-	ALL_CATEGORIES_QUERY,
-	ALL_CATEGORIES_QUERY_VARIABLES,
-	ALL_CATEGORIES_QUERY_WITH_USER,
 	ALL_LINKS_BY_CATEGORY_VARIABLES,
 	ALL_LINKS_BY_CATEGORY_WITH_USER,
 	ALL_LINKS_BY_CATEGORY,
@@ -31,20 +27,6 @@ const fakeCategories = [
 		title: 'latest',
 		links: [],
 	},
-	// {
-	// 	emoji: '🛠️',
-	// 	id: 'hjkhgjkghjkghjkghjk',
-	// 	slug: 'hardware',
-	// 	title: 'hardware',
-	// 	links: [],
-	// },
-	// {
-	// 	emoji: '🕹️',
-	// 	id: 'asfaksdlfkjsadlkfjasdlkfj',
-	// 	slug: 'gaming',
-	// 	title: 'gaming',
-	// 	links: [],
-	// },
 ];
 
 const Home = ({ initializing }) => {

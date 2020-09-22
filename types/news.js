@@ -16,6 +16,7 @@
  * @typedef {Object} Source
  * @property {string} name
  * @property {string} favicon
+ * @property {boolean} is_allow
  */
 
 /**
@@ -43,6 +44,7 @@
  * @property {Source} source - Source.
  * @property {string} created_at - How logn since posted.
  * @property {string} original_link  - Where it sends the user when clicked.
+ * @property {string} [description] - News's description
  * @property {Category} category - News category
  * @property {string} [tags] - List of tags stringify
  * @property {string} [content] - News's content in HTML format

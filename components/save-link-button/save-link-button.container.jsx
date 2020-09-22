@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { UserContext } from 'context';
+import { NewsContext, UserContext } from 'context';
 import {
 	SAVE_LINK,
 	SAVE_LINK_VARIABLES,
@@ -31,6 +31,7 @@ import {
  */
 export const SaveLinkButtonContainer = (props) => {
 	const user = React.useContext(UserContext);
+	const { justCloseOverlay } = React.useContext(NewsContext);
 	const router = useRouter();
 
 	const [saveLink] = useMutation(SAVE_LINK, {
@@ -54,6 +55,7 @@ export const SaveLinkButtonContainer = (props) => {
 	const saveLinkHandler = () => {
 		if (props.isDisabled) {
 			router.push('/signup');
+			justCloseOverlay();
 			return;
 		}
 		if (props.isSaved) {

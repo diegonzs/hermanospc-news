@@ -10,10 +10,12 @@ export const GET_LINK_BY_ID_SEO = (id) => `
 			original_link
 			title
 			created_at
+			description
 			content
 			source {
 				name
 				favicon
+				is_allow
 			}
 			tags
 			category {

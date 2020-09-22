@@ -7,4 +7,6 @@ export const NewsContext = createContext({
 	setSelectedNews: (_value) => {
 		return;
 	},
+	/** @type {() => void} */
+	justCloseOverlay: () => null,
 });

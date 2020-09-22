@@ -28,14 +28,16 @@ import {
 import { useQuery } from '@apollo/client';
 import { LoadingPage } from 'components/loading-page';
 import { CloudinaryImage } from 'components/cloudinary-image';
+import { Button } from 'components/button';
 
 /** @type {News} */
 const fakeNews = {
 	id: 'asdasdasd',
 	title: '',
-	source: { favicon: '', name: '' },
+	source: { favicon: '', name: '', is_allow: false },
 	tags: '[]',
 	image: '',
+	description: '',
 	content: '',
 	category: { slug: '' },
 	original_link: '',
@@ -87,6 +89,7 @@ export const NewsDetail = ({ news, id, onBack }) => {
 		image,
 		content,
 		category,
+		description,
 		original_link,
 		likes,
 		dislikes,
@@ -152,15 +155,16 @@ export const NewsDetail = ({ news, id, onBack }) => {
 				<div className={styles.title}>
 					<h1>{title}</h1>
 				</div>
-				<ContentComponent content={content} />
-				{!content.includes('<p') && (
+				<ContentComponent content={source.is_allow ? content : description} />
+				{!source.is_allow && (
 					<div className={styles.noContent}>
-						<h2>
-							Check this new in{' '}
-							<a href={original_link} target="_blank" rel="noopener">
-								{source.name}
-							</a>
-						</h2>
+						<Button
+							text={`Continue reading in ${source.name}`}
+							isAnchor
+							isFilled={false}
+							href={original_link}
+							onClickHandler={() => null}
+						/>
 					</div>
 				)}
 			</div>
