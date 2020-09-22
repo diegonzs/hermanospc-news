@@ -4,9 +4,8 @@ import { NewsDetail } from 'components/news-detail';
 import { useRouter } from 'next/router';
 import { GET_LINK_BY_ID_SEO } from 'graphql/queries/links';
 import { NextSeo } from 'next-seo';
-import { LoadingPage } from 'components/loading-page';
 
-const NewsDetailPage = ({ parseResponse, initializing }) => {
+const NewsDetailPage = ({ parseResponse }) => {
 	const router = useRouter();
 	return (
 		<div>
@@ -20,7 +19,10 @@ const NewsDetailPage = ({ parseResponse, initializing }) => {
 					}}
 				/>
 			)}
-			{initializing ? <LoadingPage /> : <NewsDetail id={router.query.slug} />}
+			<NewsDetail
+				news={parseResponse.data.links_by_pk}
+				id={router.query.slug}
+			/>
 		</div>
 	);
 };

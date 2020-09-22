@@ -79,6 +79,7 @@ function MyApp({ Component, pageProps }) {
 				<NewsContext.Provider value={{ selectedNews, setSelectedNews }}>
 					<Head>
 						<title>Hermanos PC News</title>
+						<meta name="robots" content="noindex, follow" />
 						<meta
 							name="viewport"
 							content="width=device-width, initial-scale=1"
