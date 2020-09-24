@@ -1,10 +1,11 @@
+import Link from 'next/link';
 import React from 'react';
 // @ts-ignore
 import styles from './nav.module.scss';
 
 const navigationList = [
 	{
-		link: 'https://hermanospc.co/',
+		link: 'https://news.hermanospc.co/',
 		name: 'News',
 		id: 'news',
 	},
@@ -41,10 +42,16 @@ export const Nav = () => {
 			<ul className={styles.list}>
 				{navigationList.map((value) => (
 					<li className={styles.item} key={value.id}>
-						<a href={value.link}>
-							{value.name === 'PC Calculator' && <span>! </span>}
-							{value.name}
-						</a>
+						{value.id === 'news' ? (
+							<Link href="/">
+								<a>{value.name}</a>
+							</Link>
+						) : (
+							<a href={value.link}>
+								{value.name === 'PC Calculator' && <span>! </span>}
+								{value.name}
+							</a>
+						)}
 					</li>
 				))}
 			</ul>
