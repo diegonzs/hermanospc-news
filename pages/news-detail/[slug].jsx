@@ -42,6 +42,7 @@ NewsDetailPage.getInitialProps = async ({ req, query }) => {
 			parseResponse,
 		};
 	}
+	return {};
 };
 
 export default NewsDetailPage;
