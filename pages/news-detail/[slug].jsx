@@ -9,7 +9,7 @@ const NewsDetailPage = ({ parseResponse }) => {
 	const router = useRouter();
 	return (
 		<div>
-			{parseResponse && parseResponse.data && parseResponse.data.links_by_pk && (
+			{parseResponse?.data?.links_by_pk && (
 				<NextSeo
 					title={parseResponse.data.links_by_pk.title}
 					openGraph={{
@@ -21,7 +21,7 @@ const NewsDetailPage = ({ parseResponse }) => {
 				/>
 			)}
 			<NewsDetail
-				news={parseResponse.data.links_by_pk}
+				news={parseResponse?.data?.links_by_pk}
 				id={router.query.slug}
 			/>
 		</div>
@@ -29,6 +29,7 @@ const NewsDetailPage = ({ parseResponse }) => {
 };
 
 NewsDetailPage.getInitialProps = async ({ req, query }) => {
+	let parseResponse;
 	if (req) {
 		const response = await fetch(process.env.NEXT_PUBLIC_HASURA_ENDPOINT, {
 			method: 'POST',
@@ -37,12 +38,11 @@ NewsDetailPage.getInitialProps = async ({ req, query }) => {
 			},
 			body: JSON.stringify({ query: GET_LINK_BY_ID_SEO(query.slug) }),
 		});
-		const parseResponse = await response.json();
-		return {
-			parseResponse,
-		};
+		parseResponse = await response.json();
 	}
-	return {};
+	return {
+		parseResponse,
+	};
 };
 
 export default NewsDetailPage;
